@@ -1,55 +1,67 @@
 
-# SmartGen Docs - Zero-Configuration Auto-Docs Platform
+# <img src="https://raw.githubusercontent.com/bayzed123/SmartGenDocs/main/logo.png" width="48" align="center"> SmartGen Docs
 
-## 🚀 Instant Documentation for Any Public Repo
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
+[![Gemini 3.5 Flash](https://img.shields.io/badge/AI-Gemini%203.5%20Flash-orange.svg)](https://ai.google.dev/)
 
-**SmartGen Docs** একটি AI-চালিত প্ল্যাটফর্ম যা যেকোনো পাবলিক GitHub রিপোজিটরি স্ক্যান করে স্বয়ংক্রিয়ভাবে প্রফেশনাল ডক্যুমেন্টেশন তৈরি করে। এটি সরাসরি আপনার ওয়েবসাইটের জন্য আলাদা আলাদা লাইভ ইউআরএল (HTML পেজ) তৈরি করে দেয়।
-
----
-
-## 📖 ডক্যুমেন্টেশন যোগ করার নিয়ম (How to Add)
-
-নতুন কোনো রিপোজিটরির জন্য ডক্যুমেন্টেশন তৈরি করতে নিচের সহজ ধাপগুলো অনুসরণ করুন:
-
-### ১. সঠিক লিংক ফরম্যাট (Link Format)
-আপনার রিপোজিটরি লিংকটি অবশ্যই নিচের ফরম্যাটে হতে হবে:
-`https://github.com/username/repository-name`
-
-### ২. লিংক আপলোড করুন (Upload Link)
-১. এই রিপোজিটরির `input_links/` ফোল্ডারে যান।
-২. একটি নতুন টেক্সট ফাইল তৈরি করুন (যেমন: `my-project.txt`)।
-৩. ফাইলের ভেতরে শুধু আপনার GitHub রিপোজিটরি লিংকটি লিখে সেভ করুন।
-
-### ৩. অটোমেটিক জেনারেশন (Automatic Generation)
-আপনি ফাইলটি পুশ করার সাথে সাথে সিস্টেম নিচের কাজগুলো করবে:
-- **ভেরিফিকেশন**: লিংকটি সঠিক কিনা এবং আগে স্ক্যান করা হয়েছে কিনা তা চেক করবে।
-- **AI স্ক্যানিং**: Gemini 3.5 Flash রিপোজিটরির কোড এবং স্ট্রাকচার অ্যানালাইসিস করবে।
-- **লাইভ পেজ তৈরি**: আপনার জন্য আলাদা ৪টি লাইভ HTML পেজ তৈরি হবে (Overview, Architecture, Deploy Guide, How to Use)।
+**SmartGen Docs** is an autonomous, zero-configuration documentation platform that leverages AI to transform public GitHub repositories into professional documentation sites instantly. Built with a GitOps mindset, it automates the entire lifecycle from repository scanning to live deployment.
 
 ---
 
-## 🛠 সিস্টেমের বৈশিষ্ট্য (System Verification)
+## 🚀 How to Add Documentation
 
-| বৈশিষ্ট্য | বিবরণ |
+Generating high-quality docs for any public repository is as simple as uploading a link.
+
+### 1. Prepare the Repository Link
+The system expects a standard public GitHub URL:
+`https://github.com/owner/repository`
+
+### 2. Upload to `input_links/`
+- Navigate to the `input_links/` directory.
+- Create a new text file (e.g., `project-link.txt`).
+- Paste your GitHub URL into the file and commit the changes.
+
+### 3. Automated GitOps Pipeline
+Once you push your change, the **SmartGen Docs Engine** automatically:
+- **Validates** the URL and checks for duplicates.
+- **Scans** the repository using **Gemini 3.5 Flash**.
+- **Generates** 4 unique live HTML pages:
+  - **Overview**: Core value and project goals.
+  - **Architecture**: Technical design and components.
+  - **Deployment Guide**: Step-by-step hosting instructions.
+  - **How to Use**: Practical examples and CLI guides.
+- **Deploys** the updates directly to your live website.
+
+---
+
+## 🛠 System Features
+
+| Feature | Description |
 | :--- | :--- |
-| **URL ভেরিফিকেশন** | শুধুমাত্র সঠিক GitHub URL গ্রহণ করা হয়। |
-| **ডুপ্লিকেট প্রতিরোধ** | একই রিপোজিটরি বারবার স্ক্যান করে সময় নষ্ট করা হয় না। |
-| **লাইভ ইউআরএল** | প্রতিটি ডক্যুমেন্টেশনের জন্য আলাদা আলাদা লাইভ HTML পেজ তৈরি হয়। |
-| **ইনস্ট্যান্ট আপডেট** | স্ক্যান শেষ হওয়ার সাথে সাথে ওয়েবসাইট আপডেট হয়ে যায়। |
+| **Zero Configuration** | No setup files required in the target repository. |
+| **Instant Live** | Changes are committed directly to the `main` branch for immediate updates. |
+| **Separate URLs** | Each documentation category has its own unique, shareable URL. |
+| **Smart Validation** | Automatic deduplication and invalid link filtering. |
 
 ---
 
-## 📂 ফোল্ডার স্ট্রাকচার
+## 📂 Project Structure
 
 ```bash
 SmartGenDocs/
-├── input_links/      # 📥 এখানে আপনার রিপোজিটরি লিংক ফাইলটি দিন
-├── docs/             # 📄 এখানে আপনার লাইভ HTML ডক্যুমেন্টেশন থাকবে
-├── index.html        # 🌐 আপনার ওয়েবসাইটের মূল হোমপেজ
-├── generate_docs.py  # 🧠 AI ইঞ্জিন (Python Script)
-└── README.md         # 📘 এই গাইডলাইন ফাইল
+├── input_links/      # 📥 Upload repo links here to trigger scan
+├── docs/             # 📄 Auto-generated Live HTML & Markdown
+├── index.html        # 🌐 Premium Landing Page UI
+├── generate_docs.py  # 🧠 AI Engine (Python + Gemini 3.5 Flash)
+└── .github/          # ⚙️ GitOps Workflow (GitHub Actions)
 ```
 
 ---
 
-**SmartGen Docs** - *AI দিয়ে ডক্যুমেন্টেশন তৈরি করুন মুহূর্তেই!*
+## 👨‍💻 Developer
+Developed with ❤️ by **[Sayad Md Bayezid Hosan](https://www.sayadbayezid.com)**.
+
+---
+
+**SmartGen Docs** - *Empowering Open Source with AI-Driven Documentation.*
