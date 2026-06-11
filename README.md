@@ -8,7 +8,7 @@
 **SmartGen Docs** is an autonomous, zero-configuration documentation platform that leverages AI to transform public GitHub repositories into professional documentation sites instantly. Built with a GitOps mindset, it automates the entire lifecycle from repository scanning to live deployment.
 
 ---
-[](https://i.ibb.co/7tJwYzJ7/smartgen-compressed-15.jpg)
+
 ## 🚀 How to Add Documentation
 
 Generating high-quality docs for any public repository is as simple as uploading a link.
@@ -63,5 +63,5 @@ SmartGenDocs/
 Developed with ❤️ by **[Sayad Md Bayezid Hosan](https://www.sayadbayezid.com)**.
 
 ---
-
+![Home](https://i.ibb.co/7tJwYzJ7/smartgen-compressed-15.jpg)
 **SmartGen Docs** - *Empowering Open Source with AI-Driven Documentation.*
