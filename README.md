@@ -3,83 +3,53 @@
 
 ## 🚀 Instant Documentation for Any Public Repo
 
-**SmartGen Docs** is an AI-powered platform that automatically scans public GitHub repositories and generates comprehensive, high-quality documentation. Built with a GitOps workflow, it turns a simple repository link into a live documentation site instantly.
+**SmartGen Docs** একটি AI-চালিত প্ল্যাটফর্ম যা যেকোনো পাবলিক GitHub রিপোজিটরি স্ক্যান করে স্বয়ংক্রিয়ভাবে প্রফেশনাল ডক্যুমেন্টেশন তৈরি করে। এটি সরাসরি আপনার ওয়েবসাইটের জন্য আলাদা আলাদা লাইভ ইউআরএল (HTML পেজ) তৈরি করে দেয়।
 
 ---
 
-## 📖 How to Add New Documentation
+## 📖 ডক্যুমেন্টেশন যোগ করার নিয়ম (How to Add)
 
-The system is designed to be completely autonomous. To generate documentation for a new repository, follow these simple steps:
+নতুন কোনো রিপোজিটরির জন্য ডক্যুমেন্টেশন তৈরি করতে নিচের সহজ ধাপগুলো অনুসরণ করুন:
 
-### Step 1: Prepare Your Link
-Ensure you have the full URL of a **public** GitHub repository.
-Example: `https://github.com/facebook/react`
+### ১. সঠিক লিংক ফরম্যাট (Link Format)
+আপনার রিপোজিটরি লিংকটি অবশ্যই নিচের ফরম্যাটে হতে হবে:
+`https://github.com/username/repository-name`
 
-### Step 2: Upload to `input_links/`
-1.  Navigate to the `input_links/` folder in this repository.
-2.  Create a new text file (e.g., `my-repo.txt`).
-3.  Paste your GitHub link inside the file and save it.
-    *   *Note: You can also update the existing `config.json` if you prefer.*
+### ২. লিংক আপলোড করুন (Upload Link)
+১. এই রিপোজিটরির `input_links/` ফোল্ডারে যান।
+২. একটি নতুন টেক্সট ফাইল তৈরি করুন (যেমন: `my-project.txt`)।
+৩. ফাইলের ভেতরে শুধু আপনার GitHub রিপোজিটরি লিংকটি লিখে সেভ করুন।
 
-### Step 3: Automated Scan & Deploy
-Once you push your change, the following happens automatically:
-1.  **Validation**: The system checks if the URL is a valid GitHub link.
-2.  **Deduplication**: It ensures the same repository isn't scanned twice.
-3.  **AI Generation**: Google Gemini 3.5 Flash scans the repo's code, structure, and metadata.
-4.  **Live Update**: Four unique guides (Overview, Architecture, Deployment, and Usage) are generated and committed directly to the `docs/` folder.
-5.  **Instant Live**: The landing page updates immediately to reflect the new documentation.
+### ৩. অটোমেটিক জেনারেশন (Automatic Generation)
+আপনি ফাইলটি পুশ করার সাথে সাথে সিস্টেম নিচের কাজগুলো করবে:
+- **ভেরিফিকেশন**: লিংকটি সঠিক কিনা এবং আগে স্ক্যান করা হয়েছে কিনা তা চেক করবে।
+- **AI স্ক্যানিং**: Gemini 3.5 Flash রিপোজিটরির কোড এবং স্ট্রাকচার অ্যানালাইসিস করবে।
+- **লাইভ পেজ তৈরি**: আপনার জন্য আলাদা ৪টি লাইভ HTML পেজ তৈরি হবে (Overview, Architecture, Deploy Guide, How to Use)।
 
 ---
 
-## 🛠 System Behavior & Verification
+## 🛠 সিস্টেমের বৈশিষ্ট্য (System Verification)
 
-To ensure the highest quality of documentation, the system performs the following checks:
-
-| Feature | Description |
+| বৈশিষ্ট্য | বিবরণ |
 | :--- | :--- |
-| **URL Validation** | Only valid `https://github.com/owner/repo` formats are accepted. |
-| **Duplicate Prevention** | The system keeps track of scanned repositories and skips duplicates to save API quota. |
-| **Empty Link Handling** | Blank files or invalid strings are automatically ignored. |
-| **Public Access** | The system can only scan public repositories where code is accessible via the GitHub API. |
+| **URL ভেরিফিকেশন** | শুধুমাত্র সঠিক GitHub URL গ্রহণ করা হয়। |
+| **ডুপ্লিকেট প্রতিরোধ** | একই রিপোজিটরি বারবার স্ক্যান করে সময় নষ্ট করা হয় না। |
+| **লাইভ ইউআরএল** | প্রতিটি ডক্যুমেন্টেশনের জন্য আলাদা আলাদা লাইভ HTML পেজ তৈরি হয়। |
+| **ইনস্ট্যান্ট আপডেট** | স্ক্যান শেষ হওয়ার সাথে সাথে ওয়েবসাইট আপডেট হয়ে যায়। |
 
 ---
 
-## 📂 Project Structure
+## 📂 ফোল্ডার স্ট্রাকচার
 
 ```bash
 SmartGenDocs/
-├── input_links/      # 📥 UPLOAD LINKS HERE (Trigger Folder)
-├── docs/             # 📄 AUTO-GENERATED MARKDOWN (Live Content)
-├── index.html        # 🌐 PREMIUM LANDING PAGE (Live UI)
-├── generate_docs.py  # 🧠 AI ENGINE (Gemini 3.5 Flash)
-└── .github/          # ⚙️ GITOPS PIPELINE (GitHub Actions)
+├── input_links/      # 📥 এখানে আপনার রিপোজিটরি লিংক ফাইলটি দিন
+├── docs/             # 📄 এখানে আপনার লাইভ HTML ডক্যুমেন্টেশন থাকবে
+├── index.html        # 🌐 আপনার ওয়েবসাইটের মূল হোমপেজ
+├── generate_docs.py  # 🧠 AI ইঞ্জিন (Python Script)
+└── README.md         # 📘 এই গাইডলাইন ফাইল
 ```
 
 ---
 
-## 🛠 Technical Setup (For Developers)
-
-### Prerequisites
-- Python 3.x
-- Google Gemini API Key
-- GitHub Personal Access Token
-
-### Local Usage
-```bash
-# Install dependencies
-pip install PyGithub google-generativeai
-
-# Run manually
-export GITHUB_TOKEN="your_token"
-export GEMINI_API_KEY="your_key"
-python generate_docs.py
-```
-
----
-
-## 🤝 Contributing
-Feel free to fork this repository and add your own documentation links to the `input_links/` folder!
-
----
-
-**SmartGen Docs** - *Powered by AI, Delivered by GitOps.*
+**SmartGen Docs** - *AI দিয়ে ডক্যুমেন্টেশন তৈরি করুন মুহূর্তেই!*
