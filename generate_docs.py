@@ -77,7 +77,7 @@ def main():
     print(f"Fetching content for {repo_full_name}...")
     repo_data = get_repo_content(repo_full_name)
 
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("gemini-3.5-flash")
 
     # Define prompt templates
     overview_prompt = """
