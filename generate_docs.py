@@ -2,7 +2,7 @@
 import os
 import argparse
 import glob
-import json
+import re
 from github import Github
 import google.generativeai as genai
 
@@ -13,6 +13,11 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 
 # --- Helper Functions --- #
+def validate_github_url(url):
+    """Validates if the string is a valid GitHub repository URL."""
+    pattern = r"https?://github\.com/[\w\.-]+/[\w\.-]+"
+    return re.match(pattern, url)
+
 def get_repo_content(repo_full_name):
     g = Github(GITHUB_TOKEN)
     repo = g.get_repo(repo_full_name)
@@ -27,7 +32,7 @@ def get_repo_content(repo_full_name):
         readme = repo.get_contents("README.md")
         content["readme"] = readme.decoded_content.decode()
     except Exception:
-        print("No README.md found.")
+        print(f"No README.md found for {repo_full_name}.")
 
     package_file_names = ["package.json", "requirements.txt", "pom.xml", "build.gradle", "go.mod", "Cargo.toml"]
     for file_name in package_file_names:
@@ -43,7 +48,7 @@ def get_repo_content(repo_full_name):
             if file_content.type == "file":
                 content["workflow_files"][file_content.name] = file_content.decoded_content.decode()
     except Exception:
-        print("No .github/workflows directory found.")
+        pass
 
     return content
 
@@ -69,30 +74,43 @@ def create_pagination(current_doc, all_docs):
 # --- Main Logic --- #
 def main():
     parser = argparse.ArgumentParser(description="Generate documentation for GitHub repositories.")
-    parser.add_argument("--repo_link", help="Direct GitHub repository link")
     parser.add_argument("--input_folder", default="input_links", help="Folder containing text files with repo links")
     args = parser.parse_args()
 
-    repo_links = []
-    if args.repo_link:
-        repo_links.append(args.repo_link)
-    else:
-        # Scan input_folder for any .txt or .md files containing links
-        files = glob.glob(os.path.join(args.input_folder, "*"))
-        for file_path in files:
-            if os.path.isfile(file_path) and not file_path.endswith(".gitkeep"):
-                with open(file_path, "r") as f:
-                    content = f.read().strip()
-                    if "github.com/" in content:
-                        repo_links.append(content)
+    raw_links = []
+    # Scan input_folder for any .txt or .md files containing links
+    files = glob.glob(os.path.join(args.input_folder, "*"))
+    for file_path in files:
+        if os.path.isfile(file_path) and not file_path.endswith(".gitkeep"):
+            with open(file_path, "r") as f:
+                content = f.read().strip()
+                if content:
+                    # Split by lines or spaces in case multiple links are in one file
+                    raw_links.extend(re.split(r'\s+', content))
 
-    if not repo_links:
-        print("No repository links found to process.")
+    # URL Validation and Deduplication
+    valid_links = []
+    seen_repos = set()
+    
+    for link in raw_links:
+        link = link.strip().rstrip("/")
+        if validate_github_url(link):
+            repo_path = link.split("github.com/")[1].lower()
+            if repo_path not in seen_repos:
+                valid_links.append(link)
+                seen_repos.add(repo_path)
+            else:
+                print(f"Skipping duplicate repository: {link}")
+        elif link:
+            print(f"Skipping invalid GitHub URL: {link}")
+
+    if not valid_links:
+        print("No valid, unique repository links found to process.")
         return
 
     model = genai.GenerativeModel("gemini-3.5-flash")
 
-    for repo_link in repo_links:
+    for repo_link in valid_links:
         try:
             repo_full_name = repo_link.split("github.com/")[1].strip("/")
             print(f"Processing {repo_full_name}...")
