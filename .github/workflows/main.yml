@@ -1,3 +1,4 @@
+
 name: Generate Docs
 
 on:
@@ -5,16 +6,19 @@ on:
     branches:
       - main
     paths:
+      - 'input_links/**'
       - 'config.json'
 
 jobs:
   generate-and-commit-docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0 # Required to commit to the same branch
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -24,25 +28,18 @@ jobs:
     - name: Install dependencies
       run: pip install PyGithub google-generativeai
 
-    - name: Read repository link from config.json
-      id: get_repo_link
-      run: |
-        REPO_LINK=$(python -c "import json; print(json.load(open('config.json'))['repository_link'])")
-        echo "repo_link=$REPO_LINK" >> $GITHUB_OUTPUT
-
     - name: Generate documentation
-      run: python generate_docs.py ${{ steps.get_repo_link.outputs.repo_link }}
+      run: |
+        mkdir -p docs
+        python generate_docs.py
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v5
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: 'Docs: Auto-generated documentation'
-        title: 'Docs: Auto-generated documentation update'
-        body: 'This PR updates the documentation based on the latest changes in config.json.'
-        branch: 'auto-docs-update'
-        base: 'main'
-        delete-branch: true
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/
+        git commit -m "Docs: Auto-generated documentation update [skip ci]" || echo "No changes to commit"
+        git push origin main
