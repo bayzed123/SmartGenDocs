@@ -1,6 +1,8 @@
 
 import os
 import argparse
+import glob
+import json
 from github import Github
 import google.generativeai as genai
 
@@ -27,16 +29,14 @@ def get_repo_content(repo_full_name):
     except Exception:
         print("No README.md found.")
 
-    # Fetch package/dependency files (common ones)
     package_file_names = ["package.json", "requirements.txt", "pom.xml", "build.gradle", "go.mod", "Cargo.toml"]
     for file_name in package_file_names:
         try:
             file_content = repo.get_contents(file_name)
             content["package_files"][file_name] = file_content.decoded_content.decode()
         except Exception:
-            pass # File not found
+            pass
 
-    # Fetch workflow files
     try:
         workflow_dir = repo.get_contents(".github/workflows")
         for file_content in workflow_dir:
@@ -47,7 +47,7 @@ def get_repo_content(repo_full_name):
 
     return content
 
-def generate_markdown(model, prompt_template, repo_data, doc_type):
+def generate_markdown(model, prompt_template, repo_data):
     prompt = prompt_template.format(repo_data=repo_data)
     response = model.generate_content(prompt)
     return response.text
@@ -68,77 +68,59 @@ def create_pagination(current_doc, all_docs):
 
 # --- Main Logic --- #
 def main():
-    parser = argparse.ArgumentParser(description="Generate documentation for a GitHub repository using Gemini AI.")
-    parser.add_argument("repo_link", help="Public GitHub repository link (e.g., https://github.com/owner/repo)")
+    parser = argparse.ArgumentParser(description="Generate documentation for GitHub repositories.")
+    parser.add_argument("--repo_link", help="Direct GitHub repository link")
+    parser.add_argument("--input_folder", default="input_links", help="Folder containing text files with repo links")
     args = parser.parse_args()
 
-    repo_full_name = args.repo_link.split("github.com/")[1]
+    repo_links = []
+    if args.repo_link:
+        repo_links.append(args.repo_link)
+    else:
+        # Scan input_folder for any .txt or .md files containing links
+        files = glob.glob(os.path.join(args.input_folder, "*"))
+        for file_path in files:
+            if os.path.isfile(file_path) and not file_path.endswith(".gitkeep"):
+                with open(file_path, "r") as f:
+                    content = f.read().strip()
+                    if "github.com/" in content:
+                        repo_links.append(content)
 
-    print(f"Fetching content for {repo_full_name}...")
-    repo_data = get_repo_content(repo_full_name)
+    if not repo_links:
+        print("No repository links found to process.")
+        return
 
     model = genai.GenerativeModel("gemini-3.5-flash")
 
-    # Define prompt templates
-    overview_prompt = """
-    You are an expert technical writer. Based on the following GitHub repository data, generate a comprehensive 'Overview' of the project. 
-    Explain what the project is, its main purpose, and why it is useful. Focus on a high-level understanding for potential users and contributors.
+    for repo_link in repo_links:
+        try:
+            repo_full_name = repo_link.split("github.com/")[1].strip("/")
+            print(f"Processing {repo_full_name}...")
+            repo_data = get_repo_content(repo_full_name)
 
-    Repository Data:
-    {repo_data}
+            doc_prompts = {
+                "overview": "Generate a unique 'Overview' for this project. Explain its value and purpose.\n\nData: {repo_data}",
+                "architecture": "Generate an 'Architecture Guide'. Explain components and tech stack.\n\nData: {repo_data}",
+                "deploy_guide": "Generate a unique 'Deployment Guide'. Provide step-by-step hosting/deployment instructions.\n\nData: {repo_data}",
+                "how_to_use": "Generate a 'How to Use' guide. Provide clear usage examples and commands.\n\nData: {repo_data}"
+            }
 
-    Generate the overview in Markdown format.
-    """
+            doc_order = ["overview", "architecture", "deploy_guide", "how_to_use"]
+            
+            for doc_name in doc_order:
+                print(f"Generating {doc_name}...")
+                content = generate_markdown(model, doc_prompts[doc_name], repo_data)
+                pagination = create_pagination(doc_name, doc_order)
+                
+                final_content = content + (f"\n\n---\n\n{pagination}" if pagination else "")
+                
+                os.makedirs("docs", exist_ok=True)
+                with open(f"docs/{doc_name}.md", "w") as f:
+                    f.write(final_content)
+                print(f"Saved docs/{doc_name}.md")
 
-    architecture_prompt = """
-    You are an expert software architect. Based on the following GitHub repository data, generate a detailed 'Architecture/Components' document.
-    Explain how the project is built under the hood, its key components, technologies used, and their interactions. 
-    Assume the audience is technical developers.
-
-    Repository Data:
-    {repo_data}
-
-    Generate the architecture document in Markdown format.
-    """
-
-    setup_guidelines_prompt = """
-    You are an expert DevOps engineer. Based on the following GitHub repository data, generate 'Setup Guidelines' for the project.
-    Extract the exact installation and setup commands, but rewrite the explanations uniquely and clearly. 
-    Provide step-by-step instructions for getting the project up and running.
-
-    Repository Data:
-    {repo_data}
-
-    Generate the setup guidelines in Markdown format.
-    """
-
-    doc_types = {
-        "overview": overview_prompt,
-        "architecture_components": architecture_prompt,
-        "setup_guidelines": setup_guidelines_prompt
-    }
-
-    generated_docs = {}
-    for doc_name, prompt_template in doc_types.items():
-        print(f"Generating {doc_name.replace('_', ' ').title()}...")
-        generated_docs[doc_name] = generate_markdown(model, prompt_template, repo_data, doc_name)
-
-    # Save documents and add pagination
-    doc_order = ["overview", "architecture_components", "setup_guidelines"]
-    for doc_name in doc_order:
-        file_name = f"{doc_name}.md"
-        pagination = create_pagination(doc_name, doc_order)
-        
-        # Append pagination only if it's not empty
-        final_content = generated_docs[doc_name]
-        if pagination:
-            final_content += f"\n\n---\n\n{pagination}"
-
-        with open(f"docs/{file_name}", "w") as f:
-            f.write(final_content)
-        print(f"Saved docs/{file_name}")
-
-    # TODO: Auto-commit changes back to the repository (will be handled by GitHub Actions or a separate step)
+        except Exception as e:
+            print(f"Error processing {repo_link}: {e}")
 
 if __name__ == "__main__":
     main()
