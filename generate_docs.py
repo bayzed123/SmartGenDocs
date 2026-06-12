@@ -191,7 +191,7 @@ def main():
         print("GEMINI_API_KEY not set. Skipping generation.")
         return
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("Gemini 3.5 Flash")
     os.makedirs("docs", exist_ok=True)
 
     generated_docs_summary = {}
