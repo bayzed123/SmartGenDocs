@@ -1,97 +1,279 @@
+<!doctype html>
+<html lang="en"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartGen Docs</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Fira+Code:wght@400&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+    .glow { box-shadow: 0 0 60px rgba(99,102,241,0.15); }
+    code, pre { font-family: 'Fira Code', monospace; }
+    .hero-gradient { background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.12) 0%, transparent 60%); }
+    .template-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .template-content.open { max-height: 2000px; }
+  </style>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen text-gray-200" style="background: rgb(15, 15, 20);">
+  <nav class="glass fixed top-0 inset-x-0 z-50">
+   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <h1 data-template-id="nav-logo" class="canva-text text-xl font-bold text-white" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 32px;">SmartGen Docs</h1>
+    <div class="hidden md:flex gap-8 text-sm"><a href="#hero" data-template-id="nav-link-1" class="canva-link hover:text-indigo-400 transition" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Home</a> <a href="#updates" data-template-id="nav-link-2" class="canva-link hover:text-indigo-400 transition" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Updates</a> <a href="#templates" data-template-id="nav-link-4" class="canva-link hover:text-indigo-400 transition" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Issue Templates</a> <a href="#pipeline" data-template-id="nav-link-3" class="canva-link hover:text-indigo-400 transition" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Pipeline</a>
+    </div>
+   </div>
+  </nav>
+  <header id="hero" class="hero-gradient pt-32 pb-20 px-6">
+   <div class="max-w-3xl mx-auto text-center">
+    <h2 data-template-id="hero-headline" class="canva-text text-white font-bold leading-tight" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 42px;">Instant Open Source docs with zero configuration</h2>
+    <p data-template-id="hero-subtitle" class="canva-text mt-4 text-gray-400 text-lg" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Paste a GitHub repo link. Our AI pipeline generates polished documentation — overview, architecture, and setup — committed back automatically.</p>
+    <form id="repo-form" class="mt-10 flex flex-col sm:flex-row gap-3 max-w-xl mx-auto"><input data-template-id="hero-input" class="canva-input flex-1 px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" type="url" placeholder="https://github.com/owner/repo" style="background: rgb(31, 41, 55); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;"> <button data-template-id="hero-cta" class="canva-button px-6 py-3 rounded-lg font-medium transition hover:opacity-90" style="background: rgb(99, 102, 241); color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Generate Docs</button>
+    </form>
+    <p id="toast" class="mt-4 text-emerald-400 text-sm hidden">✓ Documentation generation triggered!</p>
+   </div>
+  </header>
+  <main><!-- Blog Section -->
+   <section id="updates" class="max-w-7xl mx-auto px-6 py-20">
+    <h3 data-template-id="blog-heading" class="canva-text text-white font-bold text-center mb-12" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 28px;">Latest Updates</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+     <article data-template-id="blog-card-1" class="canva-card rounded-xl overflow-hidden border border-gray-800" style="background: rgb(26, 26, 36);"><img data-template-id="blog-img-1" class="canva-image w-full h-44 object-cover" loading="lazy" src="https://images.pexels.com/photos/9858906/pexels-photo-9858906.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Colorful code on a dark screen">
+      <div class="p-5">
+       <span data-template-id="blog-cat-1" class="canva-tag text-xs font-medium px-2 py-1 rounded" style="background: rgb(49, 46, 129); color: rgb(165, 180, 252); font-weight: 400; font-style: normal; font-size: 16px;">Engineering</span>
+       <h4 data-template-id="blog-title-1" class="canva-text text-white font-semibold mt-3" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">How We Parse Any Repository Structure</h4>
+       <p data-template-id="blog-desc-1" class="canva-text text-gray-400 text-sm mt-2" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">A deep dive into our fetching strategy for READMEs, dependency manifests, and CI configs.</p>
+      </div>
+     </article>
+     <article data-template-id="blog-card-2" class="canva-card rounded-xl overflow-hidden border border-gray-800" style="background: rgb(26, 26, 36);"><img data-template-id="blog-img-2" class="canva-image w-full h-44 object-cover" loading="lazy" src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Programming code on a screen in dark environment">
+      <div class="p-5">
+       <span data-template-id="blog-cat-2" class="canva-tag text-xs font-medium px-2 py-1 rounded" style="background: rgb(30, 58, 58); color: rgb(110, 231, 183); font-weight: 400; font-style: normal; font-size: 16px;">AI / ML</span>
+       <h4 data-template-id="blog-title-2" class="canva-text text-white font-semibold mt-3" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Gemini-Powered Doc Generation</h4>
+       <p data-template-id="blog-desc-2" class="canva-text text-gray-400 text-sm mt-2" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">How we prompt Gemini to create unique, non-plagiarized documentation every time.</p>
+      </div>
+     </article>
+     <article data-template-id="blog-card-3" class="canva-card rounded-xl overflow-hidden border border-gray-800" style="background: rgb(26, 26, 36);"><img data-template-id="blog-img-3" class="canva-image w-full h-44 object-cover" loading="lazy" src="https://images.pexels.com/photos/14931463/pexels-photo-14931463.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Abstract dynamic light patterns on a dark backdrop">
+      <div class="p-5">
+       <span data-template-id="blog-cat-3" class="canva-tag text-xs font-medium px-2 py-1 rounded" style="background: rgb(59, 29, 29); color: rgb(252, 165, 165); font-weight: 400; font-style: normal; font-size: 16px;">DevOps</span>
+       <h4 data-template-id="blog-title-3" class="canva-text text-white font-semibold mt-3" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">GitOps: Commit-Driven Automation</h4>
+       <p data-template-id="blog-desc-3" class="canva-text text-gray-400 text-sm mt-2" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Push a config change, get full docs committed back. No manual steps required.</p>
+      </div>
+     </article>
+    </div>
+   </section><!-- Issue Templates Section -->
+   <section id="templates" class="max-w-5xl mx-auto px-6 py-20">
+    <h3 data-template-id="templates-heading" class="canva-text text-white font-bold text-center mb-12" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 28px;">Issue Templates</h3>
+    <div class="space-y-6"><!-- Bug Report -->
+     <div data-template-id="tpl-bug-card" class="canva-card glass rounded-xl border border-gray-800 overflow-hidden" style="background: rgba(255, 255, 255, 0.03);"><button type="button" class="tpl-toggle w-full p-6 flex items-center justify-between text-left">
+       <div>
+        <h4 data-template-id="tpl-bug-title" class="canva-text text-white font-semibold" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Bug Report</h4>
+        <p data-template-id="tpl-bug-about" class="canva-text text-gray-400 text-sm mt-1" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Create a report to help us improve</p>
+       </div><i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform tpl-chevron"></i> </button>
+      <div class="template-content px-6 pb-6">
+       <pre class="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed bg-gray-900/50 rounded-lg p-4">**Describe the bug**
+A clear and concise description of what the bug is.
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartGen Docs - Zero-Configuration Auto-Docs Platform</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #0f172a; color: #e2e8f0; }
-        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .hero-gradient { background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); }
-    </style>
-</head>
-<body class="font-sans antialiased">
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-    <!-- Top Navbar -->
-    <nav class="glassmorphism p-4 fixed w-full z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">SmartGen Docs</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#" class="hover:text-blue-400 transition">Home</a>
-                <a href="#docs" class="hover:text-blue-400 transition">Documentation</a>
-                <a href="https://github.com/bayzed123/SmartGenDocs" class="hover:text-blue-400 transition">GitHub</a>
-            </div>
-        </div>
-    </nav>
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-    <!-- Hero Section -->
-    <header class="hero-gradient min-h-screen flex items-center justify-center pt-20">
-        <div class="text-center px-4 max-w-4xl">
-            <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight">
-                Instant Docs for <span class="text-blue-500">Any Repo</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-400 mb-10 leading-relaxed">
-                আপনার রিপোজিটরি লিংকটি <code>input_links</code> ফোল্ডারে আপলোড করুন। আমাদের AI স্বয়ংক্রিয়ভাবে ডক্যুমেন্টেশন তৈরি করে লাইভ করে দেবে।
-            </p>
-            <div class="glassmorphism px-8 py-4 rounded-2xl inline-flex items-center gap-3">
-                <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                <span class="font-mono text-sm">Monitoring <code>/input_links</code> folder...</span>
-            </div>
-        </div>
-    </header>
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-    <!-- Live Docs Section -->
-    <section id="docs" class="py-32 bg-slate-900">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl font-bold mb-4">Live Documentation</h2>
-                <p class="text-gray-400">সর্বশেষ স্ক্যান করা রিপোজিটরি থেকে তৈরি করা ডক্যুমেন্টেশন।</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Overview -->
-                <a href="docs/overview.html" class="glassmorphism p-8 rounded-3xl hover:border-blue-500/50 transition group">
-                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Overview</h3>
-                    <p class="text-gray-400 text-sm">প্রকল্পের উদ্দেশ্য এবং মূল বৈশিষ্ট্য।</p>
-                </a>
-                <!-- Architecture -->
-                <a href="docs/architecture.html" class="glassmorphism p-8 rounded-3xl hover:border-green-500/50 transition group">
-                    <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Architecture</h3>
-                    <p class="text-gray-400 text-sm">প্রকল্পের প্রযুক্তিগত গঠন এবং ডিজাইন।</p>
-                </a>
-                <!-- Deploy Guide -->
-                <a href="docs/deploy_guide.html" class="glassmorphism p-8 rounded-3xl hover:border-purple-500/50 transition group">
-                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-7 0V4"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Deploy Guide</h3>
-                    <p class="text-gray-400 text-sm">ধাপে ধাপে ডেপ্লয়মেন্ট নির্দেশাবলী।</p>
-                </a>
-                <!-- How to Use -->
-                <a href="docs/how_to_use.html" class="glassmorphism p-8 rounded-3xl hover:border-orange-500/50 transition group">
-                    <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">How to Use</h3>
-                    <p class="text-gray-400 text-sm">ব্যবহারিক উদাহরণ এবং কমান্ড গাইড।</p>
-                </a>
-            </div>
-        </div>
-    </section>
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
 
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/10">
-        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
-            <p>&copy; 2026 SmartGen Docs. Built with Gemini 3.5 Flash & GitHub Actions.</p>
-        </div>
-    </footer>
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
 
-</body>
-</html>
+**Additional context**
+Add any other context about the problem here.</pre>
+      </div>
+     </div><!-- Custom Issue Template -->
+     <div data-template-id="tpl-custom-card" class="canva-card glass rounded-xl border border-gray-800 overflow-hidden" style="background: rgba(255, 255, 255, 0.03);"><button type="button" class="tpl-toggle w-full p-6 flex items-center justify-between text-left">
+       <div>
+        <h4 data-template-id="tpl-custom-title" class="canva-text text-white font-semibold" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Custom Issue Template</h4>
+        <p data-template-id="tpl-custom-about" class="canva-text text-gray-400 text-sm mt-1" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Describe this issue template's purpose here.</p>
+       </div><i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform tpl-chevron"></i> </button>
+      <div class="template-content px-6 pb-6">
+       <pre class="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed bg-gray-900/50 rounded-lg p-4">Describe this issue template's purpose here.</pre>
+      </div>
+     </div><!-- Feature Request -->
+     <div data-template-id="tpl-feature-card" class="canva-card glass rounded-xl border border-gray-800 overflow-hidden" style="background: rgba(255, 255, 255, 0.03);"><button type="button" class="tpl-toggle w-full p-6 flex items-center justify-between text-left">
+       <div>
+        <h4 data-template-id="tpl-feature-title" class="canva-text text-white font-semibold" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Feature Request</h4>
+        <p data-template-id="tpl-feature-about" class="canva-text text-gray-400 text-sm mt-1" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Suggest an idea for this project</p>
+       </div><i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform tpl-chevron"></i> </button>
+      <div class="template-content px-6 pb-6">
+       <pre class="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed bg-gray-900/50 rounded-lg p-4">**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.</pre>
+      </div>
+     </div>
+    </div>
+   </section><!-- Pipeline Section -->
+   <section id="pipeline" class="max-w-5xl mx-auto px-6 py-20">
+    <h3 data-template-id="pipeline-heading" class="canva-text text-white font-bold text-center mb-8" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 28px;">The Automation Pipeline</h3>
+    <div class="flex gap-2 mb-4"><button id="tab-python" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium" onclick="showTab('python')">generate_docs.py</button> <button id="tab-yaml" class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-sm font-medium" onclick="showTab('yaml')">actions.yml</button>
+    </div>
+    <div class="glass rounded-xl p-6 overflow-x-auto glow">
+     <pre id="code-python" class="text-sm text-gray-300 whitespace-pre leading-relaxed">import os, requests, google.generativeai as genai
+
+REPO = open("config.txt").read().strip()
+OWNER, NAME = REPO.split("/")[-2], REPO.split("/")[-1]
+HEADERS = {"Authorization": f"token {os.environ['GH_TOKEN']}"}
+
+def fetch(path):
+    r = requests.get(f"https://api.github.com/repos/{OWNER}/{NAME}/contents/{path}", headers=HEADERS)
+    return r.json().get("content","") if r.ok else ""
+
+readme = fetch("README.md")
+pkg = fetch("package.json") or fetch("requirements.txt")
+workflow = fetch(".github/workflows")
+
+genai.configure(api_key=os.environ["GEMINI_KEY"])
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+prompts = {
+    "overview.md": f"Write a project overview based on:\\n{readme}",
+    "architecture.md": f"Describe the architecture from:\\n{readme}\\n{pkg}",
+    "setup.md": f"Rewrite setup instructions uniquely from:\\n{readme}\\n{pkg}"
+}
+
+for fname, prompt in prompts.items():
+    resp = model.generate_content(prompt)
+    with open(f"docs/{fname}", "w") as f:
+        f.write(resp.text)
+
+links = {"overview.md":"architecture.md","architecture.md":"setup.md","setup.md":"overview.md"}
+for src, dst in links.items():
+    with open(f"docs/{src}","a") as f:
+        f.write(f"\\n\\n---\\n[Next → {dst}](/{dst})")
+
+os.system('git add docs/ &amp;&amp; git commit -m "Auto-generate docs" &amp;&amp; git push')</pre>
+     <pre id="code-yaml" class="text-sm text-gray-300 whitespace-pre leading-relaxed hidden">name: SmartGen Docs Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths: ['config.txt']
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install requests google-generativeai
+
+      - name: Generate documentation
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+        run: |
+          mkdir -p docs
+          python scripts/generate_docs.py
+
+      - name: Commit &amp; push
+        run: |
+          git config user.name "SmartGen Bot"
+          git config user.email "bot@smartgen.dev"
+          git add docs/
+          git commit -m "docs: auto-generated" || exit 0
+          git push</pre>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer border-t border-gray-800 mt-10" style="background: rgb(10, 10, 15);">
+   <div class="max-w-7xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-10">
+    <div>
+     <h5 data-template-id="footer-col1-title" class="canva-text text-white font-semibold mb-4" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 13px;">SmartGen Docs</h5>
+     <p data-template-id="footer-col1-desc" class="canva-text text-gray-500 text-sm leading-relaxed" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Zero-config documentation for any open source project. Powered by AI and GitOps.</p>
+     <div class="flex gap-3 mt-4"><i data-lucide="github" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer"></i> <i data-lucide="twitter" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer"></i> <i data-lucide="linkedin" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer"></i>
+     </div>
+    </div>
+    <div>
+     <h5 data-template-id="footer-col2-title" class="canva-text text-white font-semibold mb-4" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 13px;">Services</h5>
+     <ul class="space-y-2 text-sm text-gray-400">
+      <li data-template-id="footer-svc-1" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Auto Documentation</li>
+      <li data-template-id="footer-svc-2" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">API Reference Gen</li>
+      <li data-template-id="footer-svc-3" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Changelog Builder</li>
+     </ul>
+    </div>
+    <div>
+     <h5 data-template-id="footer-col3-title" class="canva-text text-white font-semibold mb-4" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 13px;">Resources</h5>
+     <ul class="space-y-2 text-sm text-gray-400">
+      <li data-template-id="footer-res-1" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Documentation</li>
+      <li data-template-id="footer-res-2" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Blog</li>
+      <li data-template-id="footer-res-3" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">GitHub Repo</li>
+      <li><a href="https://github.com/bayzed123/SmartGenDocs/discussions/1" target="_blank" rel="noopener noreferrer" data-template-id="footer-res-4" class="canva-link hover:text-indigo-400 transition" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Discussion</a></li>
+     </ul>
+    </div>
+    <div>
+     <h5 data-template-id="footer-col4-title" class="canva-text text-white font-semibold mb-4" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 13px;">Company</h5>
+     <ul class="space-y-2 text-sm text-gray-400">
+      <li data-template-id="footer-co-1" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">About Us</li>
+      <li data-template-id="footer-co-2" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Careers</li>
+      <li data-template-id="footer-co-3" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Contact</li>
+     </ul>
+    </div>
+   </div>
+   <div class="border-t border-gray-800 py-5 text-center">
+    <p data-template-id="footer-copyright" class="canva-text text-gray-500 text-xs" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 SmartGen Docs. All rights reserved.</p>
+   </div>
+  </footer>
+  <script>
+    lucide.createIcons();
+
+    document.getElementById('repo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const toast = document.getElementById('toast');
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    });
+
+    function showTab(tab) {
+      document.getElementById('code-python').classList.toggle('hidden', tab !== 'python');
+      document.getElementById('code-yaml').classList.toggle('hidden', tab !== 'yaml');
+      document.getElementById('tab-python').className = tab === 'python' ? 'px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium' : 'px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-sm font-medium';
+      document.getElementById('tab-yaml').className = tab === 'yaml' ? 'px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium' : 'px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-sm font-medium';
+    }
+
+    document.querySelectorAll('.tpl-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const chevron = btn.querySelector('.tpl-chevron');
+        content.classList.toggle('open');
+        chevron.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0a4b7cd02e55853',t:'MTc4MTIyMzkyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>
