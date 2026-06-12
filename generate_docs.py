@@ -4,7 +4,13 @@ import argparse
 import glob
 import re
 import json
-import markdown
+try:
+    import markdown
+except ImportError:
+    import subprocess
+    import sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "markdown"])
+    import markdown
 from github import Github
 import google.generativeai as genai
 
