@@ -25,169 +25,166 @@
     </nav>
     <main class="container mx-auto px-4 py-12 max-w-4xl">
         <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
-            <h1>Architecture Guide: SmartGen Docs</h1>
-<p>This document provides a comprehensive technical overview of the <strong>SmartGen Docs</strong> architecture. It details how the platform integrates GitOps automation, GitHub APIs, and generative AI to deliver autonomous, zero-configuration documentation portals.</p>
+            <h1>SmartGen Docs — System Architecture Guide</h1>
+<p>SmartGen Docs is an autonomous, zero-configuration, GitOps-driven documentation platform. It leverages Google Gemini 3.5 Flash to transform public GitHub repositories into rich, production-ready, multi-page documentation sites. </p>
+<p>This guide outlines the system architecture, component design, data flow, and underlying technology stack of the SmartGen Docs platform.</p>
 <hr />
-<h2>1. Architectural Overview</h2>
-<p>SmartGen Docs is built on a <strong>GitOps-driven, Event-Based architecture</strong>. It does not require a running server or dynamic backend database. Instead, it relies on GitHub's infrastructure (GitHub Actions, GitHub Pages) coupled with an external LLM execution layer (Google Gemini API via Python) to construct static resources dynamically.</p>
-<h3>System Topography</h3>
-<pre><code>+--------------------------------------------------------------------------+
-|                             USER INTERACTION                             |
-|  1. Commits URL to /input_links/   ====&gt;   2. Pushes to remote main      |
-+----------------------------------+---------------------------------------+
-                                   |
-                                   v
-+--------------------------------------------------------------------------+
-|                        GITHUB GITOPS PIPELINE                           |
-|  - Triggers on Push to input_links/                                      |
-|  - Executes runner environment with secret access tokens                 |
-+----------------------------------+---------------------------------------+
-                                   |
-                                   v
-+--------------------------------------------------------------------------+
-|                         PROCESSING &amp; AI ENGINE                           |
-|  - Runs generate_docs.py                                                 |
-|  - Scrapes target repository (PyGithub)                                  |
-|  - Generates docs with LLM (google-generativeai)                          |
-|  - Parses output structure to static HTML/Markdown (markdown)            |
-+----------------------------------+---------------------------------------+
-                                   |
-                                   v
-+--------------------------------------------------------------------------+
-|                           DEPLOYMENT LAYER                               |
-|  - Automatically commits output files to /docs/                          |
-|  - Deploys static updates instantly to GitHub Pages                      |
-+--------------------------------------------------------------------------+
+<h2>1. High-Level Architectural Diagram</h2>
+<p>Below is the conceptual architecture of the automated documentation pipeline, visualizing how a Git commit initiates an isolated documentation build:</p>
+<pre><code>┌─────────────────┐       1. Push Link       ┌──────────────────────┐
+│  Developer/User │ ───────────────────────&gt; │  GitHub Repository   │
+│                 │ &lt;─────────────────────── │ (input_links/*.txt)  │
+└─────────────────┘      6. Live Site        └──────────────────────┘
+         ▲                                              │
+         │                                              │ 2. Trigger Workflow
+         │                                              ▼
+┌─────────────────┐                          ┌──────────────────────┐
+│  GitHub Pages   │ &lt;─────────────────────── │    GitHub Actions    │
+│  Static Hosting │     5. Commit Docs       │ (Runner / Env Setup) │
+└─────────────────┘                          └──────────────────────┘
+                                                        │
+                                                        │ 3. Execute
+                                                        ▼
+                                             ┌──────────────────────┐
+                                             │   generate_docs.py   │
+                                             └──────────────────────┘
+                                                 │            ▲
+                               PyGithub API Scan │            │ AI-Generated MD
+                                                 ▼            │
+                                       ┌──────────────┐  ┌──────────────┐
+                                       │ Target Repo  │  │ Google Gemini│
+                                       │ (Public Git) │  │  3.5 Flash   │
+                                       └──────────────┘  └──────────────┘
+                                                4. Synthesize Context
 </code></pre>
 <hr />
-<h2>2. Component Deep Dive</h2>
-<p>The architecture consists of four distinct structural layers working in sequence:</p>
-<h3>A. The Ingestion Layer (<code>input_links/</code>)</h3>
+<h2>2. Component Breakdown</h2>
+<p>The system is organized into decoupled layers, utilizing a file-based trigger mechanism to coordinate pipeline executions.</p>
+<h3>A. The GitOps Trigger (<code>input_links/</code>)</h3>
 <ul>
-<li><strong>Mechanism</strong>: A decentralized repository intake system. Users initiate documentation requests using standard Git operations (creates/edits/deletes) inside the <code>input_links/</code> folder.</li>
-<li><strong>Properties</strong>:<ul>
-<li><strong>Stateless</strong>: File contents act as the single source of truth.</li>
-<li><strong>Auditability</strong>: Every change is tracked through Git history, providing full lineage of what was compiled and when.</li>
+<li><strong>Role</strong>: Serves as the system interface and scheduling mechanism.</li>
+<li><strong>Mechanism</strong>: A text file (e.g., <code>project-link.txt</code>) is placed inside <code>input_links/</code> containing a public GitHub URL. A push event to this directory signals the GitHub Actions continuous integration (CI) workflow.</li>
 </ul>
-</li>
-</ul>
-<h3>B. The Orchestration Layer (<code>.github/workflows/</code>)</h3>
+<h3>B. CI/CD Orchestration (<code>.github/workflows/</code>)</h3>
 <ul>
-<li><strong>Mechanism</strong>: GitHub Actions runner orchestrates the environment setup and execution.</li>
-<li><strong>Key Tasks</strong>:<ol>
-<li>Listens for file changes inside <code>input_links/</code>.</li>
-<li>Installs Python 3.x and project dependencies (<code>requirements.txt</code>).</li>
-<li>Injects secrets (e.g., Gemini API keys, GitHub Tokens) securely into the runner environment.</li>
-<li>Triggers the generation script (<code>generate_docs.py</code>).</li>
-<li>Commits the generated outputs back to the base repository and deploys to hosting (GitHub Pages).</li>
+<li><strong>Role</strong>: Automates environment creation, dependency resolution, execution scripts, and Git deployment.</li>
+<li><strong>Workflow Actions</strong>:<ol>
+<li>Listens for file changes in the <code>input_links/</code> directory.</li>
+<li>Sets up Python 3.x environment.</li>
+<li>Installs dependencies from <code>requirements.txt</code>.</li>
+<li>Executes <code>generate_docs.py</code> using repository-scoped environment secrets (e.g., <code>GEMINI_API_KEY</code> and <code>GITHUB_TOKEN</code>).</li>
+<li>Commits and pushes generated outputs back to the target branch.</li>
 </ol>
 </li>
 </ul>
-<h3>C. The Core Engine Layer (<code>generate_docs.py</code>)</h3>
-<p>This Python application forms the brain of SmartGen Docs. It uses three key dependencies defined in <code>requirements.txt</code>:</p>
-<ol>
-<li><strong>Repository Parser (<code>PyGithub</code>)</strong>:<ul>
-<li>Takes the target GitHub URL.</li>
-<li>Connects to the GitHub API.</li>
-<li>Crawls the directory structure, file names, existing <code>README.md</code>, config files, and relevant source code to build a comprehensive contextual mapping of the target project.</li>
-</ul>
-</li>
-<li><strong>AI Engine (<code>google-generativeai</code>)</strong>:<ul>
-<li>Builds specialized prompt contexts containing the target project's metadata.</li>
-<li>Communicates with the Gemini Flash model to systematically generate high-fidelity, professional technical content across four standard domains:<ul>
-<li><strong>Overview</strong>: Executive summary, value proposition, and functional scopes.</li>
-<li><strong>Architecture</strong>: Deep design principles, component diagrams, and logic flows.</li>
-<li><strong>Deployment</strong>: Environmental dependencies, hosting, and production pipeline configuration.</li>
-<li><strong>How to Use</strong>: Command line guides, SDK examples, and API structures.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Document Compiler (<code>markdown</code>)</strong>:<ul>
-<li>Converts synthesized Markdown templates generated by the AI engine into web-ready static HTML segments.</li>
-</ul>
-</li>
-</ol>
-<h3>D. The Presentation Layer (<code>docs/</code> &amp; <code>index.html</code>)</h3>
+<h3>C. The Core Engine (<code>generate_docs.py</code>)</h3>
+<p>This is the central execution file containing the core platform logic. It is structured into three main phases:
+1.  <strong>Validator</strong>: Parses input files, filters out duplicates, and validates that target repository URLs match the standard pattern (<code>https://github.com/owner/repository</code>).
+2.  <strong>Repository Parser</strong>: Uses <code>PyGithub</code> to scan the codebase structure, directory hierarchy, config files (e.g., <code>package.json</code>, <code>cargo.toml</code>, <code>go.mod</code>), and the default <code>README.md</code> to compile a contextual digest of the target project.
+3.  <strong>Markdown-to-HTML Compiler</strong>: Uses the <code>markdown</code> Python library to process the generated markdown files into standard, responsive HTML structures, updating the static site folder (<code>docs/</code>) and generating landing pages (<code>index.html</code>).</p>
+<h3>D. AI Ingestion Layer (Google Gemini 3.5 Flash)</h3>
 <ul>
-<li><strong>Static Assets</strong>: Contains structured HTML and Markdown files representing distinct URLs for specific documentation categories.</li>
-<li><strong>Client Interface (<code>index.html</code>)</strong>: A unified, responsive, and performance-optimized landing hub hosting the rendered static pages. </li>
-<li><strong>Hosting</strong>: Serves directly from GitHub Pages, yielding near-zero latencies, built-in global CDN support, and high availability.</li>
+<li><strong>Role</strong>: Performs source code analysis and synthesizes specialized developer documentation.</li>
+<li><strong>Integration</strong>: Powered by the official <code>google-generativeai</code> client.</li>
+<li><strong>Why Gemini 3.5 Flash?</strong><ul>
+<li><strong>Extremely Low Latency</strong>: Fast response times keep documentation builds under the GitHub Actions execution limit.</li>
+<li><strong>Generous Context Window</strong>: Allows the engine to ingest larger file structures and configuration files directly.</li>
+<li><strong>Code Understanding</strong>: Excellent native capabilities for parsing directory trees, config files, and standard code architecture.</li>
+</ul>
+</li>
 </ul>
 <hr />
-<h2>3. Detailed Data Flow</h2>
-<p>The diagram below tracks the life of a request from an added URL to a live website refresh:</p>
-<pre><code>[ User ] --(Commits GitHub Link)--&gt; [ /input_links/repo.txt ]
-                                             |
-                                    (Trigger Action)
-                                             v
-                                  [ GitHub Actions Runner ]
-                                             |
-                                  (Run generate_docs.py)
-                                             v
-[ Target Repository ] &lt;--(Query Metadata)-- [ PyGithub ] 
-                                             |
-                                     (Extract Context)
-                                             v
-[ Google Gemini Flash ] &lt;---(Prompt API)--- [ Core AI Compiler ]
-                                             |
-                                    (Generate Content)
-                                             v
-[ Local Workspace ] &lt;---(Compile HTML)--- [ Markdown Parser ]
-                                             |
-                                     (Write Output)
-                                             v
-                                  [ /docs/ &amp; index.html ]
-                                             |
-                                   (Push &amp; Deploy)
-                                             v
-                                  [ Live Pages Website ]
+<h2>3. Data Processing Pipeline &amp; Sequence</h2>
+<p>The following sequence diagram details how user inputs are processed, analyzed, generated, and deployed:</p>
+<pre><code>User          input_links/   GitHub Actions    generate_docs.py    PyGithub API    Gemini API       docs/
+ │                 │               │                  │                  │              │             │
+ │─(Commit Link)──&gt;│               │                  │                  │              │             │
+ │                 │──(Git Push)──&gt;│                  │                  │              │             │
+ │                 │               │──(Trigger Job)──&gt;│                  │              │             │
+ │                 │               │                  │─(Query Repo)────&gt;│              │             │
+ │                 │               │                  │&lt;─(Repo Tree/MD)──│              │             │
+ │                 │               │                  │                                 │             │
+ │                 │               │                  │─(Construct Prompt &amp; Send)──────&gt;│             │
+ │                 │               │                  │&lt;─(Return 4 Docs in Markdown)────│             │
+ │                 │               │                  │                                               │
+ │                 │               │                  │─(Convert MD to HTML with markdown lib)───────&gt;│
+ │                 │               │                  │                                               │
+ │                 │               │&lt;─(Execution OK)──│                                               │
+ │                 │               │                                                                  │
+ │                 │               │──(Git Commit &amp; Publish Changes to Pages Branch)─────────────────&gt;│
 </code></pre>
+<h3>Detailed Execution Steps</h3>
+<h4>Step 1: Input &amp; Ingestion</h4>
+<p>The process begins when a developer writes a plain-text file into <code>input_links/</code>:</p>
+<pre><code class="language-text">https://github.com/bayzed123/SmartGenDocs
+</code></pre>
+<p>A GitHub Action trigger detects this update and passes execution to <code>generate_docs.py</code>.</p>
+<h4>Step 2: Context Extraction</h4>
+<p>The engine utilizes <code>PyGithub</code> to construct a project topology footprint:
+*   It reads <code>README.md</code> to extract the primary mission statement.
+*   It crawls the root structure to find configuration files (<code>package.json</code>, <code>requirements.txt</code>, etc.).
+*   It constructs a representation of the file tree to determine the framework and language patterns.</p>
+<h4>Step 3: LLM Inference</h4>
+<p>The collected project metadata is formatted into specialized system prompts sent to Gemini 3.5 Flash. The engine requests 4 distinct functional deliverables:
+1.  <strong>Overview</strong>: High-level value propositions, goals, and architectural summaries.
+2.  <strong>Architecture</strong>: Technical structure, framework analysis, and directory breakdowns.
+3.  <strong>Deployment Guide</strong>: Targeted steps to host, configure, and package the application.
+4.  <strong>How to Use</strong>: Practical instructions, API commands, and CLI examples.</p>
+<h4>Step 4: Page Building &amp; Compilation</h4>
+<p>The incoming markdown payloads are parsed through the Python <code>markdown</code> library and wrapped in an HTML layout wrapper (featuring clean typography, responsive mobile grids, and side-navigation matching the main <code>index.html</code> UI scheme).</p>
+<h4>Step 5: Version Controlled Deployment</h4>
+<p>The workflow commits the resulting assets (<code>docs/*.html</code>, updated index, and static assets) back to the GitHub Repository. This triggers GitHub Pages to deploy the updated documentation instantly.</p>
 <hr />
-<h2>4. Technical Specifications &amp; Dependencies</h2>
-<p>The engine leverages highly lightweight, performance-focused packages:</p>
+<h2>4. Technical Stack</h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Package</th>
+<th style="text-align: left;">Technology / Library</th>
 <th style="text-align: left;">Version</th>
 <th style="text-align: left;">Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align: left;"><strong>Python</strong></td>
+<td style="text-align: left;"><code>3.x</code></td>
+<td style="text-align: left;">Base runtime environment for the engine scripts.</td>
+</tr>
+<tr>
 <td style="text-align: left;"><strong>PyGithub</strong></td>
 <td style="text-align: left;"><code>2.1.1</code></td>
-<td style="text-align: left;">Facilitates secure, structured calls to GitHub's REST and GraphQL APIs to fetch target repositories.</td>
+<td style="text-align: left;">Authentication and interaction with GitHub's REST v3 API to fetch repository structures.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>google-generativeai</strong></td>
 <td style="text-align: left;"><code>0.8.6</code></td>
-<td style="text-align: left;">Directly accesses Google’s highly scalable Gemini Flash endpoint to process code structures and synthesize structured copy.</td>
+<td style="text-align: left;">Client interface for communication with the Gemini 3.5 Flash Model.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>markdown</strong></td>
 <td style="text-align: left;"><code>3.5.1</code></td>
-<td style="text-align: left;">Converts rich Markdown pages generated by Gemini into semantic, browser-ready HTML blocks.</td>
+<td style="text-align: left;">Native Python parser converting raw AI markdown output to clean HTML structures.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GitHub Actions</strong></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">CI/CD runner orchestrating environmental dependencies and automated cron/push jobs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GitHub Pages</strong></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">Native static web server to host and serve generated documentation.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2>5. Architectural Trade-offs &amp; Benefits</h2>
-<h3>Zero-Configuration Integration</h3>
+<h2>5. Security, Validation &amp; Resiliency</h2>
+<p>To prevent infinite loops, API overruns, and broken links, the SmartGen Docs architecture implements several guardrails:</p>
 <ul>
-<li><strong>The Design</strong>: Unlike legacy systems (Sphinx, MkDocs, Docusaurus) which require local config files (<code>docusaurus.config.js</code>, <code>mkdocs.yml</code>), SmartGen Docs operates externally.</li>
-<li><strong>The Benefit</strong>: Target repositories require <strong>zero system modifications</strong>. Legacy software can remain untouched while obtaining fresh, updated documentation.</li>
-</ul>
-<h3>Fully Decoupled &amp; Serverless</h3>
-<ul>
-<li><strong>The Design</strong>: No running microservices or persistent database queries.</li>
-<li><strong>The Benefit</strong>: Near-zero operational overhead, infinite horizontal scalability, absolute safety against SQL injection, and rapid client load times via Edge CDN compilation.</li>
-</ul>
-<h3>Deterministic State Management</h3>
-<ul>
-<li><strong>The Design</strong>: Git serves as the database. The state of generated files matches the committed states of URLs inside <code>input_links/</code>.</li>
-<li><strong>The Benefit</strong>: Rollbacks are as simple as running <code>git revert</code>. If a generation pipeline crashes or yields bad results, Git history permits instantaneous recovery to previous states.</li>
+<li><strong>Idempotency &amp; Deduplication</strong>: The engine compares incoming URLs against a log of already processed repositories. If a link has already been built and no upstream changes have occurred, the build pipeline exits early.</li>
+<li><strong>Strict Pattern Matching</strong>: Validates target links via regular expressions, filtering out malformed, private, or invalid URL schemes before making external network calls.</li>
+<li><strong>Secret Masking</strong>: The <code>GEMINI_API_KEY</code> and <code>GITHUB_TOKEN</code> are injected as repository secrets, ensuring they are never exposed in build logs or committed metadata.</li>
+<li><strong>Graceful API Rate-Limiting</strong>: Uses chunked read operations via <code>PyGithub</code> and processes LLM operations with structured error handling to manage Gemini API rate limits gracefully.</li>
 </ul>
         </article>
         <div class="mt-12 flex justify-between items-center text-sm text-gray-500">

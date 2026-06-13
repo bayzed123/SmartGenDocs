@@ -25,16 +25,15 @@
     </nav>
     <main class="container mx-auto px-4 py-12 max-w-4xl">
         <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
-            <h3>Overview</h3>
-<p>The <strong>SmartGen Documentation Hub</strong> serves as the centralized knowledge base, API reference platform, and developer user guide for the <strong>SmartGen</strong> QR code generation tool ecosystem built by <strong>Connect With Bayezid</strong>. </p>
-<p>Far from a standard static site repository, this project implements a modern, <strong>GitOps-driven workflow</strong> that abstracts away deployment complexities. It bridges the gap between technical writing and automated publishing, allowing contributors to write raw Markdown and let a robust automation engine handle the rest.</p>
-<hr />
-<h3>Key Architectural Pillars</h3>
+            <p>The <strong>SmartGen Documentation Hub</strong> is the centralized, automated knowledge ecosystem for <strong>SmartGen</strong>—an advanced QR code generation platform developed by <em>Connect With Bayezid</em>. Designed to bypass the overhead of traditional static site maintenance, this repository functions as a living API reference, user guide, and architectural knowledge base. </p>
+<p>Rather than serving as a standard static document repository, the hub operates on a modern, zero-touch <strong>GitOps workflow</strong>. Any contribution pushed to the main branch triggers automated CI/CD pipelines that build, bundle, and deploy the documentation instantly.</p>
+<h3>Core Pillars of the Platform</h3>
 <ul>
-<li><strong>Continuous Deployment (GitOps):</strong> Powered by an automated GitHub Actions pipeline. Any changes merged into the production branch automatically trigger a rebuild, validation, and instantaneous deployment.</li>
-<li><strong>Dynamic Data Aggregation:</strong> Utilizes custom Python scripts within the <code>/scripts</code> directory to dynamically pull and aggregate documentation guidelines and API definitions from external codebases, ensuring content never falls out of sync.</li>
-<li><strong>Programmatic Branding &amp; Media:</strong> Features dynamic Open Graph (OG) card generation. Using Python styling libraries (<code>pillow</code> and <code>cairosvg</code>), the pipeline automatically builds custom, high-resolution social sharing images for every individual page on the fly.</li>
-<li><strong>Tailored User Experience:</strong> Built on the cutting-edge <strong>MkDocs Material</strong> framework, enhanced with bespoke HTML/CSS overrides and layouts to deliver a highly readable, responsive, and professional documentation portal.</li>
+<li><strong>GitOps-Driven Continuous Deployment:</strong> Powered by GitHub Actions, the deployment pipeline automates builds and publishes updates within seconds, removing manual deployment bottlenecks.</li>
+<li><strong>Modern Documentation Engine:</strong> Utilizing <strong>MkDocs Material</strong>, the hub delivers a responsive, searchable, and aesthetically refined reading experience out of the box.</li>
+<li><strong>Dynamic Social Asset Creation:</strong> Integrated Python-driven graphics pipelines automatically generate tailored Open Graph (OG) social sharing cards using SVG rendering engines (<code>cairosvg</code>, <code>pillow</code>).</li>
+<li><strong>Automated Data Ingestion:</strong> Custom Python aggregation scripts pull live development guidelines and specs from external repositories, ensuring the documentation stays synchronized with the active codebase without manual copying.</li>
+<li><strong>Tailored UI Extensibility:</strong> Features customized HTML/CSS overrides to align the documentation portal with SmartGen's distinct brand identity.</li>
 </ul>
         </article>
         <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
