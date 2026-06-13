@@ -34,7 +34,10 @@ Once you push your change, the **SmartGen Docs Engine** automatically:
 - **Deploys** the updates directly to your live website.
 
 ---
+## 🔍 Health Check
 
+<!-- START_LINK_CHECKER -->
+<!-- END_LINK_CHECKER -->
 ## 🛠 System Features
 
 | Feature | Description |
