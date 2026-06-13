@@ -70,6 +70,7 @@
        <p class="text-gray-400 text-sm mt-2">A deep dive into our fetching strategy for READMEs, dependency manifests, and CI configs.</p>
       </div>
      </article>
+
      <article class="rounded-xl overflow-hidden border border-gray-800 bg-[#1a1a24]">
       <img class="w-full h-44 object-cover" loading="lazy" src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Programming code on a screen in dark environment">
       <div class="p-5">
@@ -78,6 +79,7 @@
        <p class="text-gray-400 text-sm mt-2">How we prompt Gemini to create unique, non-plagiarized documentation every time.</p>
       </div>
      </article>
+
      <article class="rounded-xl overflow-hidden border border-gray-800 bg-[#1a1a24]">
       <img class="w-full h-44 object-cover" loading="lazy" src="https://images.pexels.com/photos/14931463/pexels-photo-14931463.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Abstract dynamic light patterns on a dark backdrop">
       <div class="p-5">
@@ -101,121 +103,45 @@
        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform tpl-chevron"></i> 
       </button>
       <div class="template-content px-6 pb-6">
-       <pre class="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed bg-gray-900/50 rounded-lg p-4">**Describe the bug**
+       <pre class="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed bg-gray-900/50 rounded-lg p-4">
+**Describe the bug**
 A clear and concise description of what the bug is.
-
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.</pre>
-      </div>
-     </div>
-     
-     <div class="glass rounded-xl border border-gray-800 overflow-hidden bg-white/5">
-      <button type="button" class="tpl-toggle w-full p-6 flex items-center justify-between text-left">
-       <div>
-        <h4 class="text-white font-semibold text-lg">Feature Request</h4>
-        <p class="text-gray-400 text-sm mt-1">Suggest an idea for this project</p>
-       </div>
-       <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform tpl-chevron"></i> 
-      </button>
-      <div class="template-content px-6 pb-6">
-       <pre class="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed bg-gray-900/50 rounded-lg p-4">**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
-
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.</pre>
+       </pre>
       </div>
      </div>
     </div>
    </section>
 
+   <!-- FIXED SECTION -->
    <section id="generated-docs" class="max-w-7xl mx-auto px-6 py-20 text-center">
        <h3 class="text-white font-bold text-3xl mb-4">Generated Documentations</h3>
        <p class="text-gray-500">Run the SmartGen Docs Python pipeline to populate this section with your repositories.</p>
+
+       <!-- DOCS_INJECTION_START -->
+       <!-- DOCS_INJECTION_END -->
+
    </section>
-   </main>
-  <section id="generated-docs" class="max-w-7xl mx-auto px-6 py-20 text-center">
-    <h3 class="text-white font-bold text-3xl mb-4">Generated Documentations</h3>
-    <p class="text-gray-500">Run the SmartGen Docs Python pipeline to populate this section with your repositories.</p>
-
-    <!-- DOCS_INJECTION_START -->
-    <!-- DOCS_INJECTION_END -->
-
-</section>
+  </main>
 
   <footer class="border-t border-gray-800 mt-10 bg-[#0a0a0f]">
    <div class="max-w-7xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-10">
     <div>
      <h5 class="text-white font-semibold mb-4 text-lg">SmartGen Docs</h5>
      <p class="text-gray-500 text-sm leading-relaxed">Zero-config documentation for any open source project. Powered by AI and GitOps.</p>
-     <div class="flex gap-4 mt-6">
-        <i data-lucide="github" class="w-5 h-5 text-gray-400 hover:text-white transition cursor-pointer"></i> 
-        <i data-lucide="twitter" class="w-5 h-5 text-gray-400 hover:text-white transition cursor-pointer"></i> 
-        <i data-lucide="linkedin" class="w-5 h-5 text-gray-400 hover:text-white transition cursor-pointer"></i>
-     </div>
     </div>
-    <div>
-     <h5 class="text-white font-semibold mb-4 text-lg">Services</h5>
-     <ul class="space-y-3 text-sm text-gray-400">
-      <li class="hover:text-white transition cursor-pointer">Auto Documentation</li>
-      <li class="hover:text-white transition cursor-pointer">API Reference Gen</li>
-      <li class="hover:text-white transition cursor-pointer">Changelog Builder</li>
-     </ul>
-    </div>
-    <div>
-     <h5 class="text-white font-semibold mb-4 text-lg">Resources</h5>
-     <ul class="space-y-3 text-sm text-gray-400">
-      <li class="hover:text-white transition cursor-pointer">Documentation</li>
-      <li class="hover:text-white transition cursor-pointer">Blog</li>
-      <li class="hover:text-white transition cursor-pointer">GitHub Repo</li>
-      <li><a href="https://github.com/bayzed123/SmartGenDocs/discussions/1" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-400 transition">Discussion</a></li>
-     </ul>
-    </div>
-    <div>
-     <h5 class="text-white font-semibold mb-4 text-lg">Company</h5>
-     <ul class="space-y-3 text-sm text-gray-400">
-      <li class="hover:text-white transition cursor-pointer">About Us</li>
-      <li class="hover:text-white transition cursor-pointer">Careers</li>
-      <li class="hover:text-white transition cursor-pointer">Contact</li>
-     </ul>
-    </div>
-   </div>
-   <div class="border-t border-gray-800 py-6 text-center">
-    <p class="text-gray-500 text-sm">© 2026 SmartGen Docs. All rights reserved.</p>
    </div>
   </footer>
 
   <script>
-    // Initialize Icons
     lucide.createIcons();
 
-    // Search Bar Logic
     document.getElementById('search-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const toast = document.getElementById('toast');
       toast.classList.remove('hidden');
       setTimeout(() => toast.classList.add('hidden'), 3000);
-      // Future implementation: Add search query logic here
     });
 
-    // Accordion Logic for Templates
     document.querySelectorAll('.tpl-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const content = btn.nextElementSibling;
@@ -225,5 +151,6 @@ A clear and concise description of what you want to happen.</pre>
       });
     });
   </script>
+
 </body>
 </html>
