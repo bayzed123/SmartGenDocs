@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartGenDocs - Deploy Guide - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">SmartGenDocs - Deploy Guide</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>SmartGen Docs: Deployment Guide</h1>
+<p>This guide provides step-by-step instructions to deploy your own instance of <strong>SmartGen Docs</strong>—the autonomous, AI-powered documentation generation platform. By the end of this guide, you will have a fully functioning GitOps pipeline that scans target repositories using <strong>Gemini 3.5 Flash</strong>, generates responsive documentation, and hosts it automatically via <strong>GitHub Pages</strong>.</p>
+<hr />
+<h2>Architecture &amp; Deployment Flow</h2>
+<pre><code>[ User Uploads Link ] ──&gt; [ Commit to input_links/ ]
+                                  │
+                                  ▼
+                     [ GitHub Actions Workflow ]
+                                  │ (Triggered by commit)
+                                  ▼
+                      [ Run generate_docs.py ]
+                        ├── Read GitHub link
+                        ├── Analyze via Gemini 3.5 Flash
+                        └── Generate HTML/MD in docs/
+                                  │
+                                  ▼
+                     [ Commit Changes &amp; Deploy ] ──&gt; [ Live on GitHub Pages ]
+</code></pre>
+<hr />
+<h2>Prerequisites</h2>
+<p>Before starting, ensure you have the following:</p>
+<ol>
+<li><strong>GitHub Account</strong>: To host the repository, execute GitHub Actions, and serve the UI via GitHub Pages.</li>
+<li><strong>Google AI Studio API Key</strong>: Required to access the <strong>Gemini 3.5 Flash</strong> model. </li>
+<li>Obtain an API key from <a href="https://aistudio.google.com/">Google AI Studio</a>.</li>
+<li><strong>GitHub Personal Access Token (PAT)</strong> (Optional/Recommended): If you plan to run local tests or interact with private repositories, a PAT with <code>repo</code> scope is useful. Otherwise, the default GitHub Actions token will suffice.</li>
+</ol>
+<hr />
+<h2>Step-by-Step Deployment</h2>
+<h3>1. Fork or Clone the Repository</h3>
+<p>Create your own copy of the repository to establish your GitOps workspace:</p>
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/bayzed123/SmartGenDocs.git
+cd SmartGenDocs
+</code></pre>
+<h3>2. Configure Local Environment (Optional: For Local Testing)</h3>
+<p>To test the generation engine locally before deploying it to GitHub Actions:</p>
+<ol>
+<li>
+<p><strong>Install Python Dependencies</strong>:
+   Ensure you have Python 3.8+ installed, then run:
+   <code>bash
+   pip install -r requirements.txt</code></p>
+</li>
+<li>
+<p><strong>Set Environment Variables</strong>:
+   Configure your Gemini API key:</p>
+</li>
+<li><strong>Linux/macOS</strong>:
+     <code>bash
+     export GEMINI_API_KEY="your-gemini-api-key-here"</code></li>
+<li>
+<p><strong>Windows (PowerShell)</strong>:
+     <code>powershell
+     $env:GEMINI_API_KEY="your-gemini-api-key-here"</code></p>
+</li>
+<li>
+<p><strong>Run the Script</strong>:
+   <code>bash
+   python generate_docs.py</code></p>
+</li>
+</ol>
+<hr />
+<h3>3. Configure GitHub Repository Secrets</h3>
+<p>To run the generation process automatically inside GitHub Actions, you must store your API keys securely.</p>
+<ol>
+<li>On your GitHub repository page, navigate to <strong>Settings</strong> &gt; <strong>Secrets and variables</strong> &gt; <strong>Actions</strong>.</li>
+<li>Click <strong>New repository secret</strong>.</li>
+<li>Add the following secret:</li>
+<li><strong>Name</strong>: <code>GEMINI_API_KEY</code></li>
+<li><strong>Value</strong>: <em>Your Google AI Studio API key</em></li>
+</ol>
+<hr />
+<h3>4. Enable Read and Write Permissions for Workflows</h3>
+<p>The automation pipeline needs permission to commit the newly generated HTML files back to your repository.</p>
+<ol>
+<li>Navigate to your repository's <strong>Settings</strong> &gt; <strong>Actions</strong> &gt; <strong>General</strong>.</li>
+<li>Scroll down to <strong>Workflow permissions</strong>.</li>
+<li>Select <strong>Read and write permissions</strong>.</li>
+<li>Check <strong>Allow GitHub Actions to create and approve pull requests</strong> (if prompted/desired).</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<hr />
+<h3>5. Configure GitHub Pages</h3>
+<p>The web portal and the generated documentation will be hosted for free via GitHub Pages.</p>
+<ol>
+<li>Navigate to <strong>Settings</strong> &gt; <strong>Pages</strong>.</li>
+<li>Under <strong>Build and deployment</strong>:</li>
+<li><strong>Source</strong>: Select <strong>Deploy from a branch</strong>.</li>
+<li><strong>Branch</strong>: Select <code>main</code> (or your default branch) and the folder <code>/ (root)</code>.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Once configured, your documentation portal will be live at:
+   <code>https://&lt;your-username&gt;.github.io/SmartGenDocs/</code></li>
+</ol>
+<hr />
+<h2>Verifying the Deployment</h2>
+<p>Let's test the automated GitOps workflow to ensure everything is connected properly.</p>
+<ol>
+<li>Navigate to the <code>input_links/</code> directory in your repo.</li>
+<li>Create a new text file named <code>test-repo.txt</code>.</li>
+<li>Paste a public GitHub repository link inside it (e.g., <code>https://github.com/octocat/Spoon-Knife</code>).</li>
+<li>Commit and push the changes to your <code>main</code> branch.</li>
+<li>Click on the <strong>Actions</strong> tab in your repository. You should see a workflow run start automatically.</li>
+<li>Once the workflow successfully completes:</li>
+<li>Check the <code>docs/</code> folder to ensure the HTML files (Overview, Architecture, Deployment Guide, How to Use) have been generated.</li>
+<li>Visit <code>https://&lt;your-username&gt;.github.io/SmartGenDocs/</code> to see your live documentation site updated with the newly scanned repository.</li>
+</ol>
+<hr />
+<h2>Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Issue</th>
+<th style="text-align: left;">Cause</th>
+<th style="text-align: left;">Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Workflow fails on write/commit step</strong></td>
+<td style="text-align: left;">Incorrect workflow permissions.</td>
+<td style="text-align: left;">Ensure <strong>Workflow permissions</strong> in Actions settings is set to <strong>Read and write permissions</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>API Authentication Error (401/403)</strong></td>
+<td style="text-align: left;">Missing or invalid <code>GEMINI_API_KEY</code>.</td>
+<td style="text-align: left;">Verify that the secret is correctly named <code>GEMINI_API_KEY</code> and contains the correct API token from Google AI Studio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>No documentation output</strong></td>
+<td style="text-align: left;">Target repository is private or link is malformed.</td>
+<td style="text-align: left;">Ensure target URLs are public and follow the <code>https://github.com/owner/repository</code> structure.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GitHub Pages returns 404</strong></td>
+<td style="text-align: left;">Site not yet built or wrong branch selected.</td>
+<td style="text-align: left;">Ensure GitHub Pages source is configured to the <code>main</code> branch and the root directory. Allow 1-2 minutes for the initial build to complete.</td>
+</tr>
+</tbody>
+</table>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="SmartGenDocs_architecture.html" class="text-blue-400 hover:underline">← Previous</a> | <a href="SmartGenDocs_how_to_use.html" class="text-blue-400 hover:underline">Next →</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

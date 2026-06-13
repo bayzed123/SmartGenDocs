@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SitemapGenerator - Deploy Guide - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">SitemapGenerator - Deploy Guide</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>Deployment Guide: Auto Sitemap Generator</h1>
+<p>This deployment guide provides comprehensive, step-by-step instructions for deploying and automating the <strong>Auto Sitemap Generator</strong> (<code>sitemap-generator-saas</code> v2.0.0).</p>
+<p>Because this application contains a static frontend (<code>frontend/</code>) and a Node.js-based crawling backend (<code>backend/</code>) powered by <strong>Puppeteer</strong>, deployment is divided into hosting the frontend interface and running/scheduling the crawler backend.</p>
+<hr />
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#1-prerequisites">Prerequisites</a></li>
+<li><a href="#2-deployment-option-a-automated-github-actions--github-pages-recommended">Deployment Option A: Automated GitHub Actions &amp; GitHub Pages (Recommended)</a></li>
+<li><a href="#3-deployment-option-b-self-hosted-linux-server-ubuntudebian">Deployment Option B: Self-Hosted Linux Server (Ubuntu/Debian)</a></li>
+<li><a href="#4-deployment-option-c-platform-as-a-service-render--railway">Deployment Option C: Platform-as-a-Service (Render / Railway)</a></li>
+<li><a href="#5-puppeteer-troubleshooting--performance-tuning">Puppeteer Troubleshooting &amp; Performance Tuning</a></li>
+</ol>
+<hr />
+<h2>1. Prerequisites</h2>
+<p>Before deploying to any platform, ensure your environment meets the minimum requirements:</p>
+<ul>
+<li><strong>Node.js</strong>: v14.0.0 or higher (v18+ recommended)</li>
+<li><strong>npm</strong>: v6.x or higher</li>
+<li><strong>Operating System</strong>: Linux (Ubuntu/Debian recommended for headless Chrome), macOS, or Windows.</li>
+<li><strong>Puppeteer System Dependencies</strong>: Puppeteer requires a browser engine (Chromium) and several underlying OS-level libraries to run in headless mode.</li>
+</ul>
+<hr />
+<h2>2. Deployment Option A: Automated GitHub Actions &amp; GitHub Pages (Recommended)</h2>
+<p>This hybrid approach allows you to host the user-facing dashboard on <strong>GitHub Pages</strong> for free, while executing the backend crawler automatically using <strong>GitHub Actions</strong> on a schedule (e.g., daily or weekly).</p>
+<h3>Step 1: Deploy the Frontend to GitHub Pages</h3>
+<ol>
+<li>Go to your cloned repository on GitHub.</li>
+<li>Navigate to <strong>Settings</strong> &gt; <strong>Pages</strong>.</li>
+<li>Under <strong>Build and deployment</strong>, select:</li>
+<li><strong>Source</strong>: <code>Deploy from a branch</code></li>
+<li><strong>Branch</strong>: <code>main</code> (or your default branch)</li>
+<li><strong>Folder</strong>: <code>/frontend</code> (If you want to serve only the frontend folder. Alternatively, keep root <code>/</code> and configure path redirection).</li>
+<li>Click <strong>Save</strong>. Your frontend will be live at <code>https://&lt;your-username&gt;.github.io/SitemapGenerator/</code>.</li>
+</ol>
+<h3>Step 2: Configure the GitHub Actions Workflow (<code>crawler.yml</code>)</h3>
+<p>Create a workflow file at <code>.github/workflows/crawler.yml</code> to run the crawler, generate the sitemap, and commit the outputs back to your repository.</p>
+<pre><code class="language-yaml">name: Run Auto Sitemap Crawler
+
+on:
+  schedule:
+    # Runs at 00:00 every Sunday (Modify as needed)
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allows manual trigger via GitHub Actions tab
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-level: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Crawler
+      run: npm start
+
+    - name: Commit and Push generated Sitemap
+      run: |
+        git config --local user.email &quot;github-actions[bot]@users.noreply.github.com&quot;
+        git config --local user.name &quot;github-actions[bot]&quot;
+        git add output/sitemap.xml output/links.json output/progress.json
+        git commit -m &quot;chore: auto-update sitemap [skip ci]&quot; || echo &quot;No changes to commit&quot;
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+</code></pre>
+<hr />
+<h2>3. Deployment Option B: Self-Hosted Linux Server (Ubuntu/Debian)</h2>
+<p>Use this method if you want to host the crawler backend on your own Virtual Private Server (VPS) like DigitalOcean, Linode, or AWS EC2, and trigger runs using a local cron utility.</p>
+<h3>Step 1: Update Packages and Install Git &amp; Node.js</h3>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs git build-essential
+</code></pre>
+<h3>Step 2: Install Puppeteer Chromium Dependencies</h3>
+<p>Headless Chrome requires several GUI libraries to run on headless Linux environments. Install them with the following command:</p>
+<pre><code class="language-bash">sudo apt-get install -y \
+  ca-certificates \
+  fonts-liberation \
+  libasound2 \
+  libatk-bridge2.0-0 \
+  libatk1.0-0 \
+  libc6 \
+  libcairo2 \
+  libcups2 \
+  libdbus-1-3 \
+  libexpat1 \
+  libfontconfig1 \
+  libgbm1 \
+  libgcc1 \
+  libgconf-2-4 \
+  libgdk-pixbuf2.0-0 \
+  libglib2.0-0 \
+  libgtk-3-0 \
+  libnspr4 \
+  libpango-1.0-0 \
+  libpangocairo-1.0-0 \
+  libstdc++6 \
+  libx11-6 \
+  libx11-xcb1 \
+  libxcb1 \
+  libxcomposite1 \
+  libxcursor1 \
+  libxdamage1 \
+  libxext6 \
+  libxfixes3 \
+  libxi6 \
+  libxrandr2 \
+  libxrender1 \
+  libxss1 \
+  libxtst6 \
+  lsb-release \
+  wget \
+  xdg-utils
+</code></pre>
+<h3>Step 3: Clone Repository and Install Application</h3>
+<pre><code class="language-bash">git clone https://github.com/bayzed123/SitemapGenerator.git
+cd SitemapGenerator
+npm install
+</code></pre>
+<h3>Step 4: Configure Output Directory Permissions</h3>
+<p>Ensure the application has read/write permissions for the <code>output/</code> directory:</p>
+<pre><code class="language-bash">mkdir -p output
+chmod -R 755 output
+</code></pre>
+<h3>Step 5: Automate with PM2 or Cron</h3>
+<p>To set up a cron job that runs the crawler every night at midnight:
+1. Open the crontab manager:
+   <code>bash
+   crontab -e</code>
+2. Add the following line (adjust path to your project directory):
+   <code>text
+   0 0 * * * cd /path/to/SitemapGenerator &amp;&amp; /usr/bin/npm start &gt;&gt; /path/to/SitemapGenerator/output/cron.log 2&gt;&amp;1</code></p>
+<hr />
+<h2>4. Deployment Option C: Platform-as-a-Service (Render / Railway)</h2>
+<p>If you wish to wrap this crawler backend in an API server (e.g., using Express) and host it in the cloud, you can deploy it to <strong>Render</strong> or <strong>Railway</strong>.</p>
+<h3>Deploying to Render</h3>
+<ol>
+<li>Create a new <strong>Web Service</strong> on Render and link your repository.</li>
+<li>Set the following Build and Start settings:</li>
+<li><strong>Environment</strong>: <code>Node</code></li>
+<li><strong>Build Command</strong>: <code>npm install</code></li>
+<li><strong>Start Command</strong>: <code>npm start</code> (Make sure your code implements an HTTP listener if running as a persistent Web Service).</li>
+<li><strong>Puppeteer Configuration</strong>:
+   Render supports Puppeteer out of the box, but you must add the <strong>Render Puppeteer Buildpack</strong> or use a custom Dockerfile to ensure Chromium system dependencies are present. </li>
+<li>In your Render dashboard, navigate to <strong>Settings</strong> &gt; <strong>Buildpacks</strong>.</li>
+<li>Add the following buildpack URL:
+     <code>https://github.com/jontewks/puppeteer-heroku-buildpack.git</code></li>
+</ol>
+<hr />
+<h2>5. Puppeteer Troubleshooting &amp; Performance Tuning</h2>
+<p>When running the crawler in production environments, standard headless browser limitations apply.</p>
+<h3>1. "Failed to launch the browser process!" Error</h3>
+<p>If you encounter launching issues on Linux, modify the Puppeteer launch arguments in <code>backend/crawler.js</code> to run in <strong>no-sandbox</strong> mode:</p>
+<pre><code class="language-javascript">// Inside backend/crawler.js (browser initialization)
+const browser = await puppeteer.launch({
+  headless: 'new',
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-gpu'
+  ]
+});
+</code></pre>
+<h3>2. High Memory Usage / Crashing</h3>
+<ul>
+<li><strong>The Problem</strong>: Puppeteer spawns a Chromium process that consumes significant memory during long crawls.</li>
+<li><strong>The Fix</strong>: Limit concurrency or implement paging limits inside your Breadth-First Search (BFS) logic. Utilize <code>progress.json</code> to keep track of state, allowing the crawler to save its progress, exit periodically to free up system memory, and resume safely.</li>
+</ul>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="SitemapGenerator_architecture.html" class="text-blue-400 hover:underline">← Previous</a> | <a href="SitemapGenerator_how_to_use.html" class="text-blue-400 hover:underline">Next →</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

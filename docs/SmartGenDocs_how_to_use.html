@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartGenDocs - How To Use - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">SmartGenDocs - How To Use</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>How to Use SmartGen Docs</h1>
+<p>Welcome to the <strong>SmartGen Docs</strong> user guide! SmartGen Docs is an autonomous, AI-driven documentation platform that transforms any public GitHub repository into a fully deployed, professional documentation site with zero configuration. </p>
+<p>This guide will walk you through generating documentation using the automated <strong>GitOps workflow</strong> (recommended) or running the generator <strong>locally</strong>.</p>
+<hr />
+<h2>Method 1: The GitOps Way (Automated &amp; Recommended)</h2>
+<p>The easiest way to use SmartGen Docs is by utilizing its automated pipeline. You don’t need to install anything locally; you just need to commit a text file containing your target repository link.</p>
+<h3>Step 1: Copy Your Target Repository Link</h3>
+<p>Locate the public GitHub repository you want to document. Copy its standard URL:</p>
+<pre><code class="language-text">https://github.com/owner/repository-name
+</code></pre>
+<h3>Step 2: Add the Link to <code>input_links/</code></h3>
+<ol>
+<li>Navigate to your cloned or forked instance of the <strong>SmartGenDocs</strong> repository.</li>
+<li>Open the <code>input_links/</code> directory.</li>
+<li>Create a new text file with a descriptive name (e.g., <code>my-project-link.txt</code>).</li>
+<li>Paste your target GitHub URL directly into the file. Save the file.</li>
+</ol>
+<p><em>Example file content:</em></p>
+<pre><code class="language-text">https://github.com/bayzed123/SmartGenDocs
+</code></pre>
+<h3>Step 3: Commit and Push Changes</h3>
+<p>Commit the newly created file and push the changes to your <code>main</code> branch:</p>
+<pre><code class="language-bash">git add input_links/my-project-link.txt
+git commit -m &quot;docs: add new project link for doc generation&quot;
+git push origin main
+</code></pre>
+<h3>Step 4: Let the GitOps Pipeline Do the Work</h3>
+<p>Once pushed, the GitHub Actions workflow triggers automatically. The <strong>SmartGen Docs Engine</strong> will:
+1. <strong>Validate</strong>: Check the URL structure and verify it is not a duplicate.
+2. <strong>Scan</strong>: Analyze the target repository using <strong>Gemini 3.5 Flash</strong>.
+3. <strong>Generate</strong>: Create 4 distinct documentation pages in the <code>docs/</code> folder:
+   * <strong>Overview</strong>: Highlights core features, value proposition, and goals.
+   * <strong>Architecture</strong>: Focuses on system architecture, code flow, and components.
+   * <strong>Deployment Guide</strong>: Comprehensive installation and deployment steps.
+   * <strong>How to Use</strong>: Practical implementation examples and CLI commands.
+4. <strong>Deploy</strong>: Automatically push the rendered HTML pages directly to your live documentation website.</p>
+<hr />
+<h2>Method 2: Local Generation (For Developers)</h2>
+<p>If you want to run the generation engine on your local machine to test modifications or run manual scans, follow these steps.</p>
+<h3>Prerequisites</h3>
+<p>Make sure you have <strong>Python 3.x</strong> installed.</p>
+<h3>Step 1: Clone and Set Up Dependencies</h3>
+<p>Clone your repository and install the required Python packages:</p>
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/your-username/SmartGenDocs.git
+cd SmartGenDocs
+
+# Install dependencies
+pip install -r requirements.txt
+</code></pre>
+<h3>Step 2: Set Environment Variables</h3>
+<p>The script relies on GitHub and Google Gemini APIs. Set the environment variables in your terminal (or add them to a local <code>.env</code> file):</p>
+<pre><code class="language-bash"># On Linux/macOS
+export GITHUB_TOKEN=&quot;your_github_personal_access_token&quot;
+export GEMINI_API_KEY=&quot;your_google_gemini_api_key&quot;
+
+# On Windows (Command Prompt)
+set GITHUB_TOKEN=&quot;your_github_personal_access_token&quot;
+set GEMINI_API_KEY=&quot;your_google_gemini_api_key&quot;
+
+# On Windows (PowerShell)
+$env:GITHUB_TOKEN=&quot;your_github_personal_access_token&quot;
+$env:GEMINI_API_KEY=&quot;your_google_gemini_api_key&quot;
+</code></pre>
+<h3>Step 3: Run the Script</h3>
+<p>Manually place your target links in the <code>input_links/</code> folder as text files, then execute the Python engine:</p>
+<pre><code class="language-bash">python generate_docs.py
+</code></pre>
+<p>The script will process the text files in <code>input_links/</code>, generate Markdown and HTML assets, and output them to the <code>docs/</code> directory.</p>
+<hr />
+<h2>Accessing Your Generated Documentation</h2>
+<p>Once the deployment pipeline or local execution finishes, your documents will be organized under the following structured layouts:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Page</th>
+<th style="text-align: left;">File Destination</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Overview</strong></td>
+<td style="text-align: left;"><code>docs/overview.html</code></td>
+<td style="text-align: left;">Highlights project goals and high-level features.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Architecture</strong></td>
+<td style="text-align: left;"><code>docs/architecture.html</code></td>
+<td style="text-align: left;">Provides details on codebase layout and design.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Deployment Guide</strong></td>
+<td style="text-align: left;"><code>docs/deployment.html</code></td>
+<td style="text-align: left;">Easy-to-follow setup, hosting, and configuration guides.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>How to Use</strong></td>
+<td style="text-align: left;"><code>docs/how_to_use.html</code></td>
+<td style="text-align: left;">Code examples, syntax guides, and runtime configurations.</td>
+</tr>
+</tbody>
+</table>
+<p>If you have GitHub Pages enabled on your repository, these documents will immediately display live on your site's domain (e.g., <code>https://&lt;owner&gt;.github.io/SmartGenDocs/</code>).</p>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="SmartGenDocs_deploy_guide.html" class="text-blue-400 hover:underline">← Previous</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

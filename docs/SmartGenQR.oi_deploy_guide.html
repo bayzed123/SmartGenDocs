@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartGenQR.oi - Deploy Guide - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">SmartGenQR.oi - Deploy Guide</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>🚀 Deployment &amp; Hosting Guide: SmartGen</h1>
+<p>This guide provides comprehensive, step-by-step instructions for deploying, hosting, and maintaining the <strong>SmartGen All-in-One Digital &amp; Web Utility Platform</strong>. </p>
+<p>Since SmartGen is built on a <strong>100% Client-Side Architecture</strong>, hosting is highly cost-effective and extremely fast. It does not require database setups or server-side runtimes (like Node.js, Python, or PHP) on the production server.</p>
+<hr />
+<h2>📋 Table of Contents</h2>
+<ol>
+<li><a href="#1-system-architecture-overview">System Architecture Overview</a></li>
+<li><a href="#2-prerequisites">Prerequisites</a></li>
+<li><a href="#3-local-development--pre-deployment-build">Local Development &amp; Pre-Deployment Build</a></li>
+<li><a href="#4-deployment-target-options">Deployment Target Options</a></li>
+<li><a href="#option-a-github-pages-recommended--automated">Option A: GitHub Pages (Recommended / Automated)</a></li>
+<li><a href="#option-b-cloudflare-pages--vercel--netlify">Option B: Cloudflare Pages / Vercel / Netlify</a></li>
+<li><a href="#option-c-standard-nginx--apache-server">Option C: Standard Nginx / Apache Server</a></li>
+<li><a href="#5-configuring-custom-domains--ssl">Configuring Custom Domains &amp; SSL</a></li>
+<li><a href="#6-post-deployment-validation--troubleshooting">Post-Deployment Validation &amp; Troubleshooting</a></li>
+</ol>
+<hr />
+<h2>1. System Architecture Overview</h2>
+<p>SmartGen runs entirely on the browser. However, it contains a static compilation step for its Markdown-based blog.</p>
+<pre><code>[Markdown Posts] ──(pnpm build)──&gt; [Static Blog Pages] 
+                                            │
+[Tool Directories (HTML/JS)] ────────────────┼──&gt; [Distribution Target / Web Host]
+                                            │
+[Global Assets (CSS/Shared JS)] ────────────┘
+</code></pre>
+<ul>
+<li><strong>Frontend Stack:</strong> HTML5, Tailwind CSS/Vanilla CSS, Vanilla JavaScript.</li>
+<li><strong>Blog Engine:</strong> Static node-based build system using Markdown, <code>marked</code>, <code>front-matter</code>, and <code>slugify</code>.</li>
+<li><strong>Execution Environment:</strong> Modern web browsers (No backend/database required).</li>
+</ul>
+<hr />
+<h2>2. Prerequisites</h2>
+<p>Ensure you have the following installed on your local machine or build agent:
+*   <strong>Node.js</strong>: <code>v18.x</code> or higher (Required only for the blog compilation script).
+*   <strong>Package Manager</strong>: <code>pnpm</code> (Highly recommended, used in the original project setup).
+*   <strong>Git</strong>: For version control and deployment hooks.</p>
+<hr />
+<h2>3. Local Development &amp; Pre-Deployment Build</h2>
+<p>Before deploying to any platform, run a local build to generate the updated static blog pages, search index, and metadata files.</p>
+<h3>Step 1: Clone the Repository</h3>
+<pre><code class="language-bash">git clone https://github.com/bayzed123/SmartGenQR.oi.git
+cd SmartGenQR.oi
+</code></pre>
+<h3>Step 2: Install Dependencies</h3>
+<pre><code class="language-bash">pnpm install
+</code></pre>
+<h3>Step 3: Run the Compilation Script</h3>
+<p>If you have written new blog posts under <code>/blog-posts/</code>, generate the static pages and the index file (<code>blog.json</code>) by running:</p>
+<pre><code class="language-bash">pnpm build
+</code></pre>
+<p><em>(This triggers <code>node scripts/build-blog.js</code> as defined in <code>package.json</code>)</em>.</p>
+<h3>Step 4: Verify the Registry Update</h3>
+<p>Ensure any newly deployed tools are added to the search index registry so users can access them:
+*   Open <code>assets/js/search-data.js</code> and ensure the <code>TOOLS_INDEX</code> array contains your new directory.</p>
+<h3>Step 5: Test Locally</h3>
+<p>You can run a quick local HTTP server to verify the build output:</p>
+<pre><code class="language-bash">npx serve .
+</code></pre>
+<p>Access the application at <code>http://localhost:3000</code>.</p>
+<hr />
+<h2>4. Deployment Target Options</h2>
+<p>Choose the hosting option that best matches your infrastructure.</p>
+<h3>Option A: GitHub Pages (Recommended / Automated)</h3>
+<p>SmartGen is fully integrated with GitHub Actions. Any push to the <code>main</code> branch will automatically trigger a build and publish to GitHub Pages.</p>
+<h4>Setup Instructions:</h4>
+<ol>
+<li>Push your cloned code to your GitHub repository.</li>
+<li>Go to your repository on GitHub.</li>
+<li>Navigate to <strong>Settings</strong> &gt; <strong>Pages</strong>.</li>
+<li>Under <strong>Build and deployment</strong>:</li>
+<li><strong>Source</strong>: Select <code>Deploy from a branch</code> (Or select <code>GitHub Actions</code> if you want to use custom action-based compilation).</li>
+<li><strong>Branch</strong>: Select <code>main</code> and set folder to <code>/</code> (root).</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>Your deployment workflow status can be viewed directly under the <strong>Actions</strong> tab of your repository.</p>
+<hr />
+<h3>Option B: Cloudflare Pages / Vercel / Netlify</h3>
+<p>These modern edge environments offer global CDN distribution, automatic SSL, and instant rollbacks.</p>
+<h4>Configuration Reference:</h4>
+<ul>
+<li><strong>Build Command:</strong> <code>pnpm build</code></li>
+<li><strong>Publish Directory:</strong> <code>.</code> (or root directory)</li>
+<li><strong>Node.js Version:</strong> <code>18</code> or <code>20</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Platform</th>
+<th style="text-align: left;">Build Setting: Build Command</th>
+<th style="text-align: left;">Build Setting: Output Directory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Cloudflare Pages</strong></td>
+<td style="text-align: left;"><code>pnpm build</code></td>
+<td style="text-align: left;"><code>.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Vercel</strong></td>
+<td style="text-align: left;"><code>pnpm build</code></td>
+<td style="text-align: left;"><code>.</code> (Override setting to use Root <code>/</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Netlify</strong></td>
+<td style="text-align: left;"><code>pnpm build</code></td>
+<td style="text-align: left;"><code>.</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Option C: Standard Nginx / Apache Server</h3>
+<p>For self-hosting on virtual private servers (VPS) or shared hosting.</p>
+<h4>Configuration Checklist:</h4>
+<ol>
+<li>Run <code>pnpm build</code> locally.</li>
+<li>Upload the entire project root directory to your web server’s document root (e.g., <code>/var/www/html/</code> or <code>public_html/</code>).</li>
+<li><strong>Nginx Configuration:</strong> Ensure Nginx handles routing correctly. Use the following block configuration:</li>
+</ol>
+<pre><code class="language-nginx">server {
+    listen 80;
+    server_name smartgentools.com www.smartgentools.com;
+    root /var/www/html;
+    index index.html;
+
+    # Dynamic search friendly routing (Clean URLs)
+    location / {
+        try_files $uri $uri/ $uri.html =404;
+    }
+
+    # Cache static assets aggressively
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control &quot;public, no-transform&quot;;
+    }
+
+    # Ensure system files / .git are secure
+    location ~ /\. {
+        deny all;
+    }
+}
+</code></pre>
+<hr />
+<h2>5. Configuring Custom Domains &amp; SSL</h2>
+<p>To configure your own branding (e.g., <code>smartgentools.com</code>):</p>
+<h3>1. DNS Records Setup</h3>
+<p>Add the following DNS records at your domain registrar:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Record Type</th>
+<th style="text-align: left;">Host</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">TTL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A</strong></td>
+<td style="text-align: left;"><code>@</code></td>
+<td style="text-align: left;">Points to your hosting provider's IP</td>
+<td style="text-align: left;">Automatic</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CNAME</strong></td>
+<td style="text-align: left;"><code>www</code></td>
+<td style="text-align: left;">Points to your hosting provider's default alias</td>
+<td style="text-align: left;">Automatic</td>
+</tr>
+</tbody>
+</table>
+<h3>2. Force SSL (HTTPS)</h3>
+<ul>
+<li><strong>GitHub Pages:</strong> Check the "Enforce HTTPS" box under the Pages Settings panel.</li>
+<li><strong>Cloudflare Pages/Vercel:</strong> SSL is provisioned and enforced automatically by default.</li>
+<li><strong>Nginx Server:</strong> Utilize <a href="https://certbot.eff.org/">Let's Encrypt Certbot</a> to obtain a free SSL certificate:
+    <code>bash
+    sudo apt install certbot python3-certbot-nginx
+    sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com</code></li>
+</ul>
+<hr />
+<h2>6. Post-Deployment Validation &amp; Troubleshooting</h2>
+<p>Once deployed, execute these sanity checks to ensure the application is functioning correctly:</p>
+<h3>🔍 Validation Checklist</h3>
+<ul>
+<li>[ ] <strong>Functional Search Engine:</strong> Type a tool name (e.g., "QR") into the search bar. If no suggestions appear, verify that <code>assets/js/search-data.js</code> has been correctly updated and loaded.</li>
+<li>[ ] <strong>Blog Posts Loading:</strong> Navigate to <code>/blog</code> and verify that latest blog posts are visible. If posts return a 404, verify that <code>pnpm build</code> successfully created the HTML files in the output directory.</li>
+<li>[ ] <strong>HTTPS Redirection:</strong> Verify that attempts to access <code>http://</code> redirect automatically to <code>https://</code>.</li>
+<li>[ ] <strong>Sitemap and SEO Assets:</strong> Ensure <code>sitemap.xml</code> exists in the root directory and contains links pointing to your custom domain instead of the default GitHub Pages subpath.</li>
+</ul>
+<h3>🛠️ Common Issues &amp; Resolutions</h3>
+<ul>
+<li><strong>Issue: "Failed to load module / JS files return 404 in sub-pages"</strong><ul>
+<li><em>Fix:</em> SmartGen uses relative directory trees. Avoid hardcoded absolute root-slashes (<code>/assets/js/...</code>) in individual tool directories. Ensure the paths are configured as relative (<code>../assets/js/...</code>) to maintain compatibility with subfolders.</li>
+</ul>
+</li>
+<li><strong>Issue: "Blog updates aren't showing up on production"</strong><ul>
+<li><em>Fix:</em> Make sure <code>scripts/build-blog.js</code> ran successfully before git push. Ensure <code>data/blog.json</code> has been updated with your new post's metadata.</li>
+</ul>
+</li>
+</ul>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="SmartGenQR.oi_architecture.html" class="text-blue-400 hover:underline">← Previous</a> | <a href="SmartGenQR.oi_how_to_use.html" class="text-blue-400 hover:underline">Next →</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

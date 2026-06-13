@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>docslab - How To Use - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">docslab - How To Use</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>SmartGen Documentation Hub: User &amp; Contributor Guide</h1>
+<p>Welcome to the <strong>SmartGen Documentation Hub</strong>! This guide will walk you through setting up the documentation environment locally, writing or updating content, and publishing your changes.</p>
+<p>The SmartGen documentation is built using <strong>MkDocs Material</strong> and powered by a GitOps pipeline. Any updates you push to the repository are automatically built and deployed live.</p>
+<hr />
+<h2>📋 Prerequisites</h2>
+<p>Before you begin, ensure you have the following installed on your local machine:
+* <strong>Python 3.8 or higher</strong>
+* <strong>Git</strong></p>
+<hr />
+<h2>🛠️ Step 1: Local Development Setup</h2>
+<p>To preview changes on your local machine before pushing them to the live site, follow these setup steps:</p>
+<h3>1. Clone the Repository</h3>
+<p>Open your terminal and clone the repository, then navigate into the project directory:</p>
+<pre><code class="language-bash">git clone https://github.com/bayzed123/docslab.git
+cd docslab
+</code></pre>
+<h3>2. Install Dependencies</h3>
+<p>Install MkDocs Material and the required libraries for processing images and dynamic social cards:</p>
+<p>Using the manual pip command:</p>
+<pre><code class="language-bash">pip install mkdocs-material pillow cairosvg
+</code></pre>
+<p><em>(Alternative)</em> Or install via the provided <code>requirements.txt</code> file:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<h3>3. Launch the Local Server</h3>
+<p>Run the built-in live-reload server to preview your site locally:</p>
+<pre><code class="language-bash">mkdocs serve
+</code></pre>
+<h3>4. Preview the Site</h3>
+<p>Once the server starts, open your web browser and navigate to:
+👉 <strong><a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a></strong></p>
+<p><em>Note: The local server features </em><em>live-reload</em><em>. Any saving of markdown files will instantly update in your browser.</em></p>
+<hr />
+<h2>✍️ Step 2: How to Edit and Update Content</h2>
+<p>All documentation content is stored in the <code>docs/</code> directory as Markdown (<code>.md</code>) files.</p>
+<ol>
+<li>Navigate to the <code>docs/</code> folder in your preferred text editor.</li>
+<li><strong>To Edit Existing Pages:</strong> Locate and open the relevant <code>.md</code> file, make your changes, and save.</li>
+<li><strong>To Create New Pages:</strong> Create a new Markdown file (e.g., <code>features.md</code>) within the <code>docs/</code> directory. Remember to register new files in the navigation section of the <code>mkdocs.yml</code> configuration file if structure modifications are required.</li>
+</ol>
+<hr />
+<h2>🚀 Step 3: Publishing Your Changes</h2>
+<p>The documentation site uses a <strong>Zero-Touch GitOps deployment flow</strong>. Once you are happy with your local changes, publish them by following these steps:</p>
+<ol>
+<li>
+<p><strong>Stage and commit your changes:</strong>
+   <code>bash
+   git add .
+   git commit -m "docs: update SmartGen user guide"</code></p>
+</li>
+<li>
+<p><strong>Push to the main branch:</strong>
+   <code>bash
+   git push origin main</code></p>
+</li>
+<li>
+<p><strong>Automatic Deployment:</strong> 
+   Upon pushing, a <strong>GitHub Actions workflow</strong> is automatically triggered. It will:</p>
+</li>
+<li>Build the production static site.</li>
+<li>Generate dynamic Open Graph social cards.</li>
+<li>Deploy the updated build to your hosting server within seconds.</li>
+</ol>
+<hr />
+<h2>📁 Repository Structure Overview</h2>
+<p>To help you navigate the codebase, here is the directory layout:</p>
+<ul>
+<li><strong><code>docs/</code></strong>: Holds the Markdown files containing the actual documentation text.</li>
+<li><strong><code>mkdocs.yml</code></strong>: The main configuration file (controls theme, navigation, and plugins).</li>
+<li><strong><code>overrides/</code></strong>: Custom HTML/CSS templates to override default MkDocs Material layouts.</li>
+<li><strong><code>layouts/</code></strong>: Source assets and background images for dynamic social cards.</li>
+<li><strong><code>scripts/</code></strong>: Python utility scripts that aggregate external API data or guidelines.</li>
+</ul>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="docslab_deploy_guide.html" class="text-blue-400 hover:underline">← Previous</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

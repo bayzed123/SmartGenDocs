@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SitemapGenerator - How To Use - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">SitemapGenerator - How To Use</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>How to Use: Auto Sitemap Generator</h1>
+<p>The <strong>Auto Sitemap Generator</strong> is an automated crawler and backend service that systematically maps web properties, respects <code>robots.txt</code> exclusion rules, and generates valid, SEO-compliant XML sitemaps using a Breadth-First Search (BFS) engine.</p>
+<p>You can use this tool in two ways: <strong>via the Web-Based Live Demo</strong> (no installation required) or <strong>locally on your machine</strong> (for developers/custom crawls).</p>
+<hr />
+<h2>Method 1: Using the Web-Based Dashboard (Quick &amp; Easy)</h2>
+<p>If you don't want to run any code locally, you can use the pre-built web interface.</p>
+<ol>
+<li><strong>Access the Tool:</strong> Go to the <a href="https://bayzed123.github.io/SitemapGenerator/">Sitemap Generator Live Demo</a>.</li>
+<li><strong>Enter the Target URL:</strong> Input the homepage URL of the website you want to map (e.g., <code>https://example.com</code>).</li>
+<li><strong>Start the Process:</strong> Click the initiate/start button to let the crawler run. </li>
+<li><strong>Monitor Progress:</strong> Watch the real-time visual progress updates on the dashboard.</li>
+<li><strong>Download the Sitemap:</strong> Once complete, download the generated <code>sitemap.xml</code> directly to your computer.</li>
+</ol>
+<hr />
+<h2>Method 2: Running Locally (For Developers)</h2>
+<p>If you want to customize crawl behavior, run crawls on local development environments, or integrate the process into your own pipelines, run it locally.</p>
+<h3>1. Prerequisites</h3>
+<p>Ensure you have the following installed:
+* <a href="https://nodejs.org/">Node.js</a> (v14 or higher recommended)
+* Git</p>
+<h3>2. Setup &amp; Installation</h3>
+<p>Open your terminal and run the following commands:</p>
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/bayzed123/SitemapGenerator.git
+cd SitemapGenerator
+
+# Install dependencies (This will also install Puppeteer)
+npm install
+</code></pre>
+<h3>3. Configure the Crawler</h3>
+<p>Before running the crawler, you must set your target (seed) URL:
+1. Open the project folder in your code editor.
+2. Open <code>backend/crawler.js</code>.
+3. Locate the target seed URL configuration variable (usually at the top or inside the initialization function of the script) and replace it with your desired domain:
+   <code>javascript
+   // Example configuration inside backend/crawler.js
+   const SEED_URL = "https://yourwebsite.com";</code></p>
+<h3>4. Run the Crawler</h3>
+<p>Execute the application using either of the following commands:</p>
+<pre><code class="language-bash"># Using the npm start script
+npm start
+
+# OR running the file directly
+node backend/crawler.js
+</code></pre>
+<h3>5. Accessing the Output</h3>
+<p>Once the process is complete, look inside the generated <code>output/</code> directory:</p>
+<ul>
+<li><strong><code>sitemap.xml</code></strong>: Your production-ready SEO sitemap. Upload this to your website's root directory and submit it to Google Search Console.</li>
+<li><strong><code>links.json</code></strong>: A raw list of all discovered and processed links.</li>
+<li><strong><code>progress.json</code></strong>: A log file tracking the status of the crawl state.</li>
+</ul>
+<hr />
+<h2>Key Features to Keep in Mind</h2>
+<ul>
+<li><strong>Robots.txt Compliance:</strong> The crawler automatically fetches and parses the target website's <code>robots.txt</code> file. If a path is blocked in <code>robots.txt</code>, the crawler will skip it to comply with SEO best practices.</li>
+<li><strong>Avoids Infinite Loops:</strong> Using in-memory visited-state tracking, the BFS engine guarantees that no page is crawled or logged twice.</li>
+<li><strong>JavaScript Support:</strong> Because the project relies on <strong>Puppeteer</strong>, the crawler can successfully navigate modern, JavaScript-rendered single-page applications (SPAs).</li>
+</ul>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="SitemapGenerator_deploy_guide.html" class="text-blue-400 hover:underline">← Previous</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

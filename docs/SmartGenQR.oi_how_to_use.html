@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartGenQR.oi - How To Use - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">SmartGenQR.oi - How To Use</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>How to Use SmartGen: Comprehensive Platform Guide</h1>
+<p>Welcome to the <strong>SmartGen</strong> user and developer guide. SmartGen is a premier, open-source web utility ecosystem featuring over 45+ high-performance tools designed for developers, marketers, and SEO experts. </p>
+<p>Because SmartGen operates on a <strong>100% Client-Side</strong> architecture, all processes run locally in your web browser. This ensures absolute privacy—your data is never sent to or stored on any server.</p>
+<hr />
+<h2>📖 Table of Contents</h2>
+<ol>
+<li><a href="#1-for-end-users-accessing--using-the-tools">For End-Users: Accessing &amp; Using the Tools</a></li>
+<li><a href="#2-for-developers-local-setup--installation">For Developers: Local Setup &amp; Installation</a></li>
+<li><a href="#3-for-content-managers-writing--building-blog-posts">For Content Managers: Writing &amp; Building Blog Posts</a></li>
+<li><a href="#4-for-contributors-creating--registering-a-new-tool">For Contributors: Creating &amp; Registering a New Tool</a></li>
+</ol>
+<hr />
+<h2>1. For End-Users: Accessing &amp; Using the Tools</h2>
+<p>You can access the hosted, live platform instantly without any installation or registration.</p>
+<ul>
+<li><strong>Official Live Platform:</strong> <a href="https://smartgentools.com">smartgentools.com</a></li>
+<li><strong>Privacy Assurance:</strong> All processing occurs inside your web browser. You can safely input sensitive keys, JSON payloads, or UUID requests without fear of data leakage.</li>
+</ul>
+<h3>Tool Category Quick-Links</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Popular Tools</th>
+<th style="text-align: left;">Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>💻 Developer &amp; Technical</strong></td>
+<td style="text-align: left;"><a href="https://smartgentools.com/qr-generator/">QR Generator</a>, <a href="https://smartgentools.com/json-formatter-validator/">JSON Formatter</a>, <a href="https://smartgentools.com/uuid-generator/">UUID Generator</a>, <a href="https://smartgentools.com/base64-to-image/">Base64 to Image</a></td>
+<td style="text-align: left;">Debugging, structuring data, and quick technical conversions.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>📈 Marketing &amp; Social</strong></td>
+<td style="text-align: left;"><a href="https://smartgentools.com/utm-builder/">UTM Builder</a>, <a href="https://smartgentools.com/whatsapp-link/">WhatsApp Link Generator</a>, <a href="https://smartgentools.com/youtube-thumbnail-downloader/">YouTube Thumbnail Downloader</a></td>
+<td style="text-align: left;">Campaign tracking, user acquisition, and visual asset extraction.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>🔍 SEO &amp; Content</strong></td>
+<td style="text-align: left;"><a href="https://smartgentools.com/keyword-density-checker/">Keyword Density Checker</a>, <a href="https://smartgentools.com/serp-preview-tool/">SERP Preview Tool</a>, <a href="https://smartgentools.com/word-counter/">Word Counter</a></td>
+<td style="text-align: left;">Optimizing metadata, checking text length, and structural copy auditing.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. For Developers: Local Setup &amp; Installation</h2>
+<p>If you want to run SmartGen locally, customize the web utilities, or test your modifications locally, follow these steps.</p>
+<h3>Prerequisites</h3>
+<ul>
+<li><a href="https://nodejs.org/">Node.js</a> installed on your machine.</li>
+<li><a href="https://pnpm.io/">pnpm</a> package manager (preferred).</li>
+</ul>
+<h3>Step-by-Step Installation</h3>
+<ol>
+<li>
+<p><strong>Clone the Repository:</strong>
+    <code>bash
+    git clone https://github.com/bayzed123/SmartGenQR.oi.git
+    cd SmartGenQR.oi</code></p>
+</li>
+<li>
+<p><strong>Install Dependencies:</strong>
+    <code>bash
+    pnpm install</code></p>
+</li>
+<li>
+<p><strong>Run Locally:</strong>
+    Since the platform is 100% client-side, you can open any <code>index.html</code> file directly in your browser. However, to experience the full routing environment, run a local development server:
+    <code>bash
+    npx serve</code>
+    <em>Access the local site at the URL output by the terminal (typically <code>http://localhost:3000</code> or <code>http://localhost:5000</code>).</em></p>
+</li>
+</ol>
+<hr />
+<h2>3. For Content Managers: Writing &amp; Building Blog Posts</h2>
+<p>SmartGen uses an automated, static blog builder that converts Markdown files into static, highly optimized web pages.</p>
+<h3>Step 1: Write your Blog Post</h3>
+<p>Create a new Markdown (<code>.md</code>) file inside the <code>/blog-posts/</code> directory. Be sure to use YAML front matter at the top of the file to declare metadata:</p>
+<pre><code class="language-markdown">---
+title: &quot;10 Essential SEO Strategies for 2026&quot;
+date: &quot;2026-03-30&quot;
+description: &quot;Discover the top tips and tricks to optimize your client-side web utility performance.&quot;
+author: &quot;Sayad Md Bayezid Hosan&quot;
+---
+
+# 10 Essential SEO Strategies for 2026
+Your blog content goes here in standard Markdown...
+</code></pre>
+<h3>Step 2: Build the Blog</h3>
+<p>Generate static pages and compile the global blog index JSON by running the build script:</p>
+<pre><code class="language-bash">pnpm build
+</code></pre>
+<p><em>(This triggers <code>node scripts/build-blog.js</code> using <code>marked</code>, <code>front-matter</code>, and <code>slugify</code> to render the changes).</em></p>
+<hr />
+<h2>4. For Contributors: Creating &amp; Registering a New Tool</h2>
+<p>To scale the catalog of 45+ utilities while maintaining performance, please adhere strictly to our development standards:</p>
+<h3>Standard Checklist</h3>
+<ol>
+<li><strong>Directory Structure:</strong> Every tool must reside in its own isolated sub-folder containing its entry point file:
+    <code>text
+    /my-new-utility-tool/index.html</code></li>
+<li><strong>Logic Separation:</strong> Keep the UI clean. Write your operational code inside pure vanilla JavaScript. No external server frameworks (Node, Express, etc.) are allowed for tool execution.</li>
+<li><strong>SEO Skyscraper Rule:</strong> Each tool's <code>index.html</code> must contain 1200+ words of helpful documentation, instructional steps, FAQ Schema markup, and meta tags for search engine optimization.</li>
+<li><strong>Registration in Search Index (Crucial!):</strong>
+    For your tool to be discoverable via the platform search bar and recommended widgets, open <code>assets/js/search-data.js</code> and add your tool's details to the global <code>TOOLS_INDEX</code> array:
+    <code>javascript
+    // Example Entry
+    {
+      name: "My New Utility Tool",
+      path: "/my-new-utility-tool/",
+      category: "Developer", // Technical, Marketing, or SEO
+      tags: ["conversion", "parser", "format"]
+    }</code></li>
+<li><strong>Test Locally:</strong> Run <code>npx serve</code> to verify that your tool functions perfectly and displays correctly in the dynamic recommendation system managed by <code>assets/js/related-tools.js</code>.</li>
+</ol>
+<hr />
+<h2>⚖️ Legal, Security, &amp; Support</h2>
+<ul>
+<li><strong>Trust &amp; Terms:</strong> Read our <a href="WIKI_Trust_Center.md">Trust Center Documentation</a> regarding client-side data safety policies.</li>
+<li><strong>Contribute:</strong> For detailed collaboration workflow guidelines, consult the <a href="WIKI_About_Team_Contribution.md">Contribution Guide</a>.</li>
+<li><strong>Donate:</strong> Support the project maintenance via <a href="https://www.paypal.me/connectwithbayezid">PayPal</a>.</li>
+</ul>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="SmartGenQR.oi_deploy_guide.html" class="text-blue-400 hover:underline">← Previous</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

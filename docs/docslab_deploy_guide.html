@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>docslab - Deploy Guide - SmartGen Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glassmorphism { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .prose h1 { color: #60a5fa; font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .prose h2 { color: #9333ea; font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+        .prose code { background-color: #1e293b; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; }
+        .prose pre { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen">
+    <nav class="glassmorphism p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-blue-400">← Back to Home</a>
+            <span class="text-gray-400">docslab - Deploy Guide</span>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <article class="glassmorphism p-8 md:p-12 rounded-3xl prose prose-invert lg:prose-xl max-w-none">
+            <h1>SmartGen Documentation Hub: Deployment Guide</h1>
+<p>This guide provides comprehensive instructions for deploying, hosting, and maintaining the <strong>SmartGen Documentation Hub</strong>—a GitOps-powered documentation site built with <strong>MkDocs Material</strong>.</p>
+<hr />
+<h2>1. System Architecture Overview</h2>
+<p>The SmartGen Documentation Hub uses a <strong>Zero-Touch GitOps</strong> deployment pipeline. The architecture is decoupled into three distinct phases:</p>
+<pre><code>[ Local Development ] ────( Push to main )────&gt; [ GitHub Repository ]
+                                                       │
+                                            (GitHub Actions Triggered)
+                                                       ▼
+[ GitHub Pages / Web Server ] &lt;───( Deploy )─── [ Build &amp; Artifacts ]
+</code></pre>
+<ul>
+<li><strong>Static Site Generator (SSG):</strong> MkDocs Material.</li>
+<li><strong>Asset Pipeline:</strong> Custom Python scripts executing dynamic social card generation (Open Graph images) using PIL (Pillow) and CairoSVG.</li>
+<li><strong>CI/CD Pipeline:</strong> GitHub Actions automation compiling Markdown source files into optimized HTML/CSS/JS and deploying them automatically.</li>
+</ul>
+<hr />
+<h2>2. Environment Prerequisites</h2>
+<p>Ensure the target environments (local development and runner/production) meet the following requirements:</p>
+<h3>System Requirements</h3>
+<ul>
+<li><strong>Operating System:</strong> Linux, macOS, or Windows 10/11.</li>
+<li><strong>Runtime Environment:</strong> Python 3.8 or higher.</li>
+<li><strong>System Dependencies (for Social Cards):</strong><ul>
+<li><code>libcairo2</code> (Required by CairoSVG for rendering vector graphics to PNG).</li>
+</ul>
+</li>
+</ul>
+<h4>Installing System Dependencies</h4>
+<ul>
+<li><strong>macOS (via Homebrew):</strong>
+    <code>bash
+    brew install cairo pango gdk-pixbuf libffi</code></li>
+<li><strong>Ubuntu/Debian:</strong>
+    <code>bash
+    sudo apt-get update
+    sudo apt-get install -y libcairo2 libpango-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info</code></li>
+<li><strong>Windows:</strong>
+    Download the appropriate GTK/Cairo binaries or use MSYS2.</li>
+</ul>
+<hr />
+<h2>3. Local Development &amp; Verification</h2>
+<p>Before deploying changes to production, verify your modifications locally.</p>
+<h3>Step 1: Clone the Repository</h3>
+<pre><code class="language-bash">git clone https://github.com/bayzed123/docslab.git
+cd docslab
+</code></pre>
+<h3>Step 2: Establish a Virtual Environment (Recommended)</h3>
+<pre><code class="language-bash"># Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source venv/bin/activate
+# On Windows (Command Prompt):
+venv\Scripts\activate.bat
+</code></pre>
+<h3>Step 3: Install Dependencies</h3>
+<p>Install the package requirements alongside the optional graphics rendering engines:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+pip install pillow cairosvg
+</code></pre>
+<h3>Step 4: Run the Local Live-Reload Server</h3>
+<pre><code class="language-bash">mkdocs serve
+</code></pre>
+<ul>
+<li><strong>Local Access URL:</strong> <code>http://127.0.0.1:8000</code></li>
+<li><em>Note: Any changes made to the Markdown files (<code>.md</code>) inside the <code>docs/</code> directory will compile and reload in the browser instantly.</em></li>
+</ul>
+<hr />
+<h2>4. Continuous Integration &amp; Deployment (CI/CD)</h2>
+<p>The project utilizes <strong>GitHub Actions</strong> to automate production deployment. When a pull request is merged or a direct commit is pushed to the <code>main</code> branch, the deployment workflow triggers automatically.</p>
+<h3>Configuring the GitHub Actions Workflow</h3>
+<p>Create or verify the deployment workflow file under <code>.github/workflows/deploy.yml</code>:</p>
+<pre><code class="language-yaml">name: Deploy SmartGen Documentation Hub
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger of deployments
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: &quot;pages&quot;
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Important for Git revision dates inside MkDocs
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-name: '3.10'
+          cache: 'pip'
+
+      - name: Install System Dependencies for CairoSVG
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcairo2-dev libpango1.0-dev libgdk-pixbuf2.0-dev libffi-dev shared-mime-info
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pillow cairosvg
+
+      - name: Execute Custom Data Aggregation Scripts
+        run: |
+          if [ -d &quot;./scripts&quot; ]; then
+            python scripts/aggregate.py || echo &quot;No scripts or execution failed, continuing build...&quot;
+          fi
+
+      - name: Build MkDocs Site
+        run: |
+          mkdocs build --clean
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+</code></pre>
+<hr />
+<h2>5. Deployment Checklist &amp; Verification</h2>
+<h3>Initial GitHub Repository Setup</h3>
+<ol>
+<li>Go to your GitHub repository: <code>https://github.com/bayzed123/docslab</code>.</li>
+<li>Navigate to <strong>Settings</strong> &gt; <strong>Pages</strong>.</li>
+<li>Under <strong>Build and deployment</strong>, set the <strong>Source</strong> to <strong>Deploy from a branch</strong> (typically configured automatically by the actions runner using the <code>gh-pages</code> branch).</li>
+<li>Verify that the <strong>Custom Domain</strong> (if any) is configured and SSL is forced.</li>
+</ol>
+<h3>Post-Deployment Validation</h3>
+<p>Once a pipeline run completes successfully:
+*   [ ] Verify the SSL certificate of the deployed website is valid.
+*   [ ] Test dynamic Open Graph social share images by running an inspection tool like the <a href="https://developers.facebook.com/tools/debug/">Facebook Sharing Debugger</a> or <a href="https://richpreview.com/">Rich Preview</a>.
+*   [ ] Confirm that files generated dynamically via scripts inside the <code>/scripts</code> directory have aggregated correctly into the production site layout.</p>
+<hr />
+<h2>6. Troubleshooting Deployment Failures</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Symptom</th>
+<th style="text-align: left;">Probable Cause</th>
+<th style="text-align: left;">Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Workflow failure at CairoSVG/Pillow step</strong></td>
+<td style="text-align: left;">Missing OS-level shared system library binaries on the build agent.</td>
+<td style="text-align: left;">Ensure the <code>Install System Dependencies for CairoSVG</code> step in <code>.github/workflows/deploy.yml</code> runs successfully before executing Python commands.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>404 Page Not Found on live URL</strong></td>
+<td style="text-align: left;">Custom domain configuration issue or GitHub Pages is pointed to the wrong branch.</td>
+<td style="text-align: left;">Check repository <strong>Settings</strong> &gt; <strong>Pages</strong> and ensure the deployment source is mapped to the <code>gh-pages</code> branch.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Build passes but styling/theme is broken</strong></td>
+<td style="text-align: left;">Incorrect configuration of the <code>site_url</code> property in <code>mkdocs.yml</code>.</td>
+<td style="text-align: left;">Open <code>mkdocs.yml</code> and verify that the <code>site_url</code> key reflects the absolute base URL of your deployed domain (e.g., <code>https://bayzed123.github.io/docslab/</code>).</td>
+</tr>
+</tbody>
+</table>
+        </article>
+        <div class="mt-12 flex justify-between items-center text-sm text-gray-500">
+            <span>Generated by SmartGen Docs AI</span>
+            <div class="space-x-4">
+                <a href="docslab_architecture.html" class="text-blue-400 hover:underline">← Previous</a> | <a href="docslab_how_to_use.html" class="text-blue-400 hover:underline">Next →</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
