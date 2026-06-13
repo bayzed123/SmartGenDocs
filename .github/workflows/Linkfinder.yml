@@ -1,0 +1,33 @@
+name: Generate Docs and Resources
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with: {python-version: '3.11'}
+    
+    - name: Run Generators
+      run: |
+        python generate_docs.py
+        python resourceslink.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+    - name: Commit and push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/
+        git commit -m "Docs: Auto-generate docs and SmartGen resources [skip ci]" || echo "No changes to commit"
+        git pull --rebase origin main
+        git push origin main
