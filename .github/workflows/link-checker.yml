@@ -1,13 +1,25 @@
-name: Automated HTML Link Checker (Docs Scanner)
+name: Docs Resource Home Builder
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**/*.html"
+
   schedule:
-    - cron: '0 12 * * *'  # 6 PM Bangladesh Time
+    - cron: "0 */12 * * *"
+
   workflow_dispatch:
 
+concurrency:
+  group: docs-home-builder
+  cancel-in-progress: false
+
 jobs:
-  check-links:
+  build-home:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
@@ -18,111 +30,134 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
-      - name: Run HTML Link Scanner
+      - name: Generate SmartGen Home Page
         run: |
-          python -c "
+          python << 'EOF'
 import os
 import re
-import urllib.request
-import urllib.error
 from html.parser import HTMLParser
 
-DOCS_DIR = 'docs'
-broken_links = []
-valid_links = []
+DOCS_DIR = "docs"
+OUTPUT_FILE = "docs/Smartgen/home.html"
 
-class LinkParser(HTMLParser):
+class TitleParser(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.links = []
+        self.in_title = False
+        self.title = ""
 
     def handle_starttag(self, tag, attrs):
-        if tag == 'a':
-            for attr in attrs:
-                if attr[0] == 'href':
-                    self.links.append(attr[1])
+        if tag == "title":
+            self.in_title = True
 
-def is_external(url):
-    return url.startswith('http://') or url.startswith('https://')
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self.in_title = False
 
-def check_url(url):
-    try:
-        req = urllib.request.Request(
-            url,
-            method='HEAD',
-            headers={'User-Agent': 'Mozilla/5.0'}
-        )
-        urllib.request.urlopen(req, timeout=10)
-        return True
-    except:
-        return False
+    def handle_data(self, data):
+        if self.in_title:
+            self.title += data
 
-# Scan HTML files
-for root, _, files in os.walk(DOCS_DIR):
+resources = []
+
+# Scan docs folder
+for root, dirs, files in os.walk(DOCS_DIR):
+    dirs[:] = [d for d in dirs if d != "Smartgen"]
+
     for file in files:
-        if file.endswith('.html'):
+        if file.endswith(".html"):
             path = os.path.join(root, file)
 
-            with open(path, 'r', encoding='utf-8') as f:
+            # Skip generated file
+            if "Smartgen/home.html" in path.replace("\\", "/"):
+                continue
+
+            with open(path, "r", encoding="utf-8") as f:
                 content = f.read()
 
-            parser = LinkParser()
+            parser = TitleParser()
             parser.feed(content)
 
-            for link in parser.links:
-                if not link:
-                    continue
+            title = parser.title.strip() or file.replace(".html", "")
 
-                if is_external(link):
-                    if check_url(link):
-                        valid_links.append(link)
-                    else:
-                        broken_links.append((link, 'External Failed'))
-                else:
-                    # Internal link check (file existence)
-                    resolved = os.path.join(DOCS_DIR, link.split('#')[0])
-                    if os.path.exists(resolved):
-                        valid_links.append(link)
-                    else:
-                        broken_links.append((link, 'Missing File'))
+            relative_path = path.replace("\\", "/").replace("docs/", "/docs/")
 
-# Build report
-if broken_links:
-    report = '### ⚠️ Broken Links Detected\\n\\n| URL | Status |\\n|---|---|\\n'
-    for url, status in broken_links:
-        report += f'| {url} | {status} |\\n'
-else:
-    report = '### ✅ All Links Valid\\n\\nNo broken links detected.'
+            resources.append({
+                "title": title,
+                "path": relative_path
+            })
 
-# Update README
-with open('README.md', 'r', encoding='utf-8') as f:
-    readme = f.read()
+# Build HTML Home Page
+cards = ""
+for item in sorted(resources, key=lambda x: x["title"].lower()):
+    cards += f'''
+    <div style="padding:12px;margin:10px;border:1px solid #ddd;border-radius:8px;">
+        <a href="{item['path']}" style="text-decoration:none;font-size:16px;">
+            {item['title']}
+        </a>
+    </div>
+    '''
 
-pattern = r'<!-- START_LINK_CHECKER -->.*?<!-- END_LINK_CHECKER -->'
-replacement = f'<!-- START_LINK_CHECKER -->\\n\\n{report}\\n<!-- END_LINK_CHECKER -->'
+html_output = f'''<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartGen Docs Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-updated = re.sub(pattern, replacement, readme, flags=re.DOTALL)
+    <!-- Open Graph -->
+    <meta property="og:title" content="SmartGen Docs Home">
+    <meta property="og:description" content="Auto generated documentation portal">
+    <meta property="og:type" content="website">
 
-with open('README.md', 'w', encoding='utf-8') as f:
-    f.write(updated)
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SmartGen Docs Home">
 
-# Optional: write valid links file
-with open('valid-links.md', 'w', encoding='utf-8') as f:
-    f.write('# Valid Links\\n\\n')
-    for link in sorted(set(valid_links)):
-        f.write(f'- {link}\\n')
-"
+    <style>
+        body {{
+            font-family: Arial;
+            background: #f8f9fa;
+            padding: 20px;
+        }}
+        .container {{
+            max-width: 900px;
+            margin: auto;
+        }}
+        h1 {{
+            text-align: center;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 SmartGen Docs Resources</h1>
+        {cards}
+    </div>
+</body>
+</html>
+'''
 
-      - name: Commit and Push changes
+os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
+
+with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+    f.write(html_output)
+
+print(f"Generated: {OUTPUT_FILE} with {len(resources)} pages")
+EOF
+
+      - name: Commit and Push Changes
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "action@github.com"
 
-          git add README.md valid-links.md || true
+          git add docs/Smartgen/home.html
 
-          git diff --quiet && git diff --staged --quiet || (
-            git commit -m "chore: automated docs link validation report [skip ci]" &&
-            git push
-          )
+          if git diff --cached --quiet; then
+            echo "No changes detected"
+            exit 0
+          fi
+
+          git commit -m "auto: update SmartGen docs home resource page"
+          git push
