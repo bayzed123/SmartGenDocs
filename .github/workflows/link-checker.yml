@@ -1,0 +1,128 @@
+name: Automated HTML Link Checker (Docs Scanner)
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # 6 PM Bangladesh Time
+  workflow_dispatch:
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run HTML Link Scanner
+        run: |
+          python -c "
+import os
+import re
+import urllib.request
+import urllib.error
+from html.parser import HTMLParser
+
+DOCS_DIR = 'docs'
+broken_links = []
+valid_links = []
+
+class LinkParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            for attr in attrs:
+                if attr[0] == 'href':
+                    self.links.append(attr[1])
+
+def is_external(url):
+    return url.startswith('http://') or url.startswith('https://')
+
+def check_url(url):
+    try:
+        req = urllib.request.Request(
+            url,
+            method='HEAD',
+            headers={'User-Agent': 'Mozilla/5.0'}
+        )
+        urllib.request.urlopen(req, timeout=10)
+        return True
+    except:
+        return False
+
+# Scan HTML files
+for root, _, files in os.walk(DOCS_DIR):
+    for file in files:
+        if file.endswith('.html'):
+            path = os.path.join(root, file)
+
+            with open(path, 'r', encoding='utf-8') as f:
+                content = f.read()
+
+            parser = LinkParser()
+            parser.feed(content)
+
+            for link in parser.links:
+                if not link:
+                    continue
+
+                if is_external(link):
+                    if check_url(link):
+                        valid_links.append(link)
+                    else:
+                        broken_links.append((link, 'External Failed'))
+                else:
+                    # Internal link check (file existence)
+                    resolved = os.path.join(DOCS_DIR, link.split('#')[0])
+                    if os.path.exists(resolved):
+                        valid_links.append(link)
+                    else:
+                        broken_links.append((link, 'Missing File'))
+
+# Build report
+if broken_links:
+    report = '### ⚠️ Broken Links Detected\\n\\n| URL | Status |\\n|---|---|\\n'
+    for url, status in broken_links:
+        report += f'| {url} | {status} |\\n'
+else:
+    report = '### ✅ All Links Valid\\n\\nNo broken links detected.'
+
+# Update README
+with open('README.md', 'r', encoding='utf-8') as f:
+    readme = f.read()
+
+pattern = r'<!-- START_LINK_CHECKER -->.*?<!-- END_LINK_CHECKER -->'
+replacement = f'<!-- START_LINK_CHECKER -->\\n\\n{report}\\n<!-- END_LINK_CHECKER -->'
+
+updated = re.sub(pattern, replacement, readme, flags=re.DOTALL)
+
+with open('README.md', 'w', encoding='utf-8') as f:
+    f.write(updated)
+
+# Optional: write valid links file
+with open('valid-links.md', 'w', encoding='utf-8') as f:
+    f.write('# Valid Links\\n\\n')
+    for link in sorted(set(valid_links)):
+        f.write(f'- {link}\\n')
+"
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+
+          git add README.md valid-links.md || true
+
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "chore: automated docs link validation report [skip ci]" &&
+            git push
+          )
