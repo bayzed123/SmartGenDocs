@@ -19,11 +19,11 @@ default-theme = "light"
 preferred-dark-theme = "navy"
 
 # GitHub integration
-git-repository-url = "https://github.com/bayzed123/SmartGenQR.oi"
+git-repository-url = "https://github.com/bayzed123/SmartGenDocs"
 git-repository-icon = "github"
 
 # Edit button (important for docs workflow)
-edit-url-template = "https://github.com/bayzed123/SmartGenQR.oi/edit/main/src/{path}"
+edit-url-template = "https://github.com/bayzed123/SmartGenDocs/edit/main/src/{path}"
 
 [output.html.print]
 enable = true
