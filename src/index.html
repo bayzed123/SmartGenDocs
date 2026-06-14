@@ -1,0 +1,139 @@
+ Look for a place to inject the documentation links
+    # We'll create a section if it doesn't exist or update it
+    injection_marker_start = "<!-- DOCS_INJECTION_START -->"
+    injection_marker_end = "<!-- DOCS_INJECTION_END -->"
+    
+    docs_html = f"\n{injection_marker_start}\n"
+    docs_html += '<section id="generated-docs" class="max-w-7xl mx-auto px-6 py-10">\n'
+    docs_html += '  <h3 class="text-white font-bold text-2xl mb-6">Generated Documentations</h3>\n'
+    docs_html += '  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">\n'
+    
+    for repo_name, files in generated_docs.items():
+        docs_html += f'    <div class="glass p-6 rounded-xl border border-gray-800">\n'
+        docs_html += f'      <h4 class="text-indigo-400 font-semibold mb-3">{repo_name}</h4>\n'
+        docs_html += '      <ul class="space-y-2 text-sm">\n'
+        for file_info in files:
+            docs_html += f'        <li><a href="docs/{file_info["filename"]}" class="text-gray-300 hover:text-white transition">→ {file_info["title"]}</a></li>\n'
+        docs_html += '      </ul>\n'
+        docs_html += '    </div>\n'
+    
+    docs_html += '  </div>\n'
+    docs_html += '</section>\n'
+    docs_html += f"{injection_marker_end}\n"
+
+    if injection_marker_start in content and injection_marker_end in content:
+        new_content = re.sub(
+            f"{injection_marker_start}.*?{injection_marker_end}",
+            docs_html,
+            content,
+            flags=re.DOTALL
+        )
+    else:
+        # Inject before the footer or at the end of main
+        if "</main>" in content:
+            new_content = content.replace("</main>", f"{docs_html}</main>")
+        else:
+            new_content = content.replace("</body>", f"{docs_html}</body>")
+
+    with open("index.html", "w") as f:
+        f.write(new_content)
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input_folder", default="input_links")
+    args = parser.parse_args()
+
+    raw_links = []
+    # Read from input_links folder
+    files = glob.glob(os.path.join(args.input_folder, "*"))
+    for file_path in files:
+        if os.path.isfile(file_path) and not file_path.endswith(".gitkeep"):
+            with open(file_path, "r") as f:
+                content = f.read().strip()
+                if content: raw_links.extend(re.split(r'\s+', content))
+    
+    # Also read from config.json if it exists
+    if os.path.exists("config.json"):
+        try:
+            with open("config.json", "r") as f:
+                # Handle multiple JSON objects in one file if necessary
+                raw_content = f.read()
+                # Simple regex to find URLs in JSON-like structure
+                links_in_config = re.findall(r'"repository_link":\s*"([^"]+)"', raw_content)
+                raw_links.extend(links_in_config)
+        except Exception as e:
+            print(f"Error reading config.json: {e}")
+
+    valid_links = []
+    seen_repos = set()
+    for link in raw_links:
+        link = link.strip().rstrip("/")
+        if validate_github_url(link):
+            repo_path = link.split("github.com/")[1].lower()
+            if repo_path not in seen_repos:
+                valid_links.append(link)
+                seen_repos.add(repo_path)
+
+    if not valid_links:
+        print("No valid GitHub links found.")
+        return
+
+    if not GEMINI_API_KEY:
+        print("GEMINI_API_KEY not set. Skipping generation.")
+        return
+
+    model = genai.GenerativeModel("gemini-3.5-flash")
+    os.makedirs("docs", exist_ok=True)
+
+    generated_docs_summary = {}
+
+    for repo_link in valid_links:
+        repo_full_name = repo_link.split("github.com/")[1].strip("/")
+        repo_name_only = repo_full_name.split("/")[-1]
+        
+        print(f"Processing {repo_full_name}...")
+        repo_data = get_repo_content(repo_full_name)
+        
+        if not repo_data:
+            print(f"Skipping {repo_full_name} due to fetch error.")
+            continue
+
+        doc_prompts = {
+            "overview": "Generate a unique 'Overview' for this project. Data: {repo_data}",
+            "architecture": "Generate an 'Architecture Guide'. Data: {repo_data}",
+            "deploy_guide": "Generate a 'Deployment Guide'. Data: {repo_data}",
+            "how_to_use": "Generate a 'How to Use' guide. Data: {repo_data}"
+        }
+        doc_order = ["overview", "architecture", "deploy_guide", "how_to_use"]
+        
+        repo_files = []
+        for doc_name in doc_order:
+            try:
+                md_content = generate_markdown(model, doc_prompts[doc_name], repo_data)
+                html_content = markdown.markdown(md_content, extensions=['fenced_code', 'tables'])
+                pagination = create_pagination_html(doc_name, doc_order, repo_name_only)
+                
+                title = doc_name.replace("_", " ").title()
+                final_html = HTML_TEMPLATE.format(
+                    title=f"{repo_name_only} - {title}",
+                    content=html_content,
+                    pagination=pagination
+                )
+                
+                filename = f"{repo_name_only}_{doc_name}.html"
+                with open(f"docs/{filename}", "w") as f:
+                    f.write(final_html)
+                
+                repo_files.append({"title": title, "filename": filename})
+            except Exception as e:
+                print(f"Error generating {doc_name} for {repo_name_only}: {e}")
+        
+        if repo_files:
+            generated_docs_summary[repo_name_only] = repo_files
+
+    if generated_docs_summary:
+        update_index_html(generated_docs_summary)
+        print("Successfully updated index.html with new documentation links.")
+
+if __name__ == "__main__":
+    main()
