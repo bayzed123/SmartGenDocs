@@ -1,19 +1,40 @@
-# API Overview
+# API
 
-This section provides an overview of the SmartGen API system.
+Welcome to the SmartGen API documentation.
 
 ## Modules
 
-- Authentication API → handles login, token verification
-- User API → manages user accounts (CRUD operations)
+### Authentication API
 
-## Base Design
+Authentication and authorization endpoints.
 
-- REST-based architecture
-- JSON request/response format
-- Token-based authentication system
+Features:
 
-## Related Docs
+- User login
+- Token validation
+- Session verification
+- Logout
 
-- Authentication → `api/auth.md`
-- Users → `api/users.md`
+### Users API
+
+User account management endpoints.
+
+Features:
+
+- Create user
+- Get user
+- Update user
+- Delete user
+
+## API Standards
+
+- REST API design
+- JSON request and response
+- Authentication protected endpoints
+- Consistent error handling
+- Scalable architecture
+
+## References
+
+- Authentication API
+- Users API
