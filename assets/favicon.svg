@@ -1,0 +1,5 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SmartGen NexusLeads">
+  <rect width="64" height="64" rx="20" fill="#0E1530"/>
+  <path d="M12 32C12 20 19 12 32 12h10c7 0 12 5 12 12v6H42v-5c0-3-2-5-6-5h-4c-7 0-10 4-10 12s3 12 10 12h4c4 0 6-2 6-5v-3h12v6c0 8-5 12-12 12H32C19 44 12 44 12 32Z" fill="#5A7CFF"/>
+  <path d="m31 16 13 16H34l5 16-14-18h10z" fill="#FF9A3D"/>
+</svg>
