@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://github.com/bayzed123/SmartGenDocs/sitemap.xml

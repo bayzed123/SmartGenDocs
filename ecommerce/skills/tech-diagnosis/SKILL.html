@@ -1,0 +1,2479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+<script>
+(function () {
+    try {
+        var THEME_KEY = 'smartgen-theme';
+        var VALID = ["light", "dark"];
+        var DEFAULT_MODE = VALID[0];
+        var saved = localStorage.getItem(THEME_KEY);
+        var theme = VALID.indexOf(saved) !== -1
+            ? saved
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && VALID.indexOf('dark') !== -1
+                ? 'dark'
+                : DEFAULT_MODE);
+        if (theme !== DEFAULT_MODE) {
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+    } catch (e) { /* localStorage unavailable (e.g. privacy mode) -- fall back to default */ }
+})();
+</script>
+    <meta name="description" content="Skill For Every Devloper Open source project">
+    
+    <link rel="canonical" href="https://github.com/bayzed123/SmartGenDocs/ecommerce/skills/tech-diagnosis/SKILL.html">
+    <meta property="og:title" content="Tech Diagnosis SKILL - Smartgen Developer Docs">
+    <meta property="og:description" content="Skill For Every Devloper Open source project">
+    <meta property="og:url" content="https://github.com/bayzed123/SmartGenDocs/ecommerce/skills/tech-diagnosis/SKILL.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <title>Tech Diagnosis SKILL - Smartgen Developer Docs</title>
+    <link rel="stylesheet" href="../../../static/apiplay/css/apiplay.css">
+    <noscript><style>.api-content > * { opacity: 1 !important; transform: none !important; }</style></noscript>
+    
+    <style>
+        :root, :root[data-theme] {
+            --api-primary: #22C55E;
+            --api-accent: #F59E0B;
+        }
+    </style>
+    
+</head>
+<body class="api-body-root">
+    <div class="api-progress-rail"><div class="api-progress-fill" id="api-progress-fill"></div></div>
+
+    <!-- HEADER: terminal-window chrome bar -->
+    <header class="api-header" id="api-header">
+        <div class="api-chrome">
+            <span class="api-dot api-dot-r" aria-hidden="true"></span>
+            <span class="api-dot api-dot-y" aria-hidden="true"></span>
+            <span class="api-dot api-dot-g" aria-hidden="true"></span>
+            <span class="api-chrome-path">smartgen-developer-docs — ecommerce/skills/tech-diagnosis/SKILL.html</span>
+        </div>
+        <div class="api-container">
+            <button class="api-menu-toggle" id="menu-toggle" type="button" aria-label="Toggle file tree">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+            <a class="api-brand" href="../../../index.html">
+                <span class="api-brand-mark" aria-hidden="true">&gt;_</span>
+                <span class="api-brand-name">Smartgen Developer Docs</span>
+            </a>
+
+            <div class="api-search">
+                <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></svg>
+                <input type="text" id="search-input" placeholder="grep docs…">
+                <div class="api-search-results" id="search-results"></div>
+            </div>
+
+            <div class="api-header-right">
+                <a href="https://github.com/bayeziddev/smartGenDocs" target="_blank" rel="noopener" class="api-icon-btn" aria-label="View source on GitHub">
+                    <svg class="icon filled" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                
+<div class="theme-switcher" id="theme-switcher">
+    <button class="icon-btn" id="theme-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" aria-label="Choose theme">
+        <svg class="icon icon-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
+        <svg class="icon icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+    </button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-label="Theme" hidden></div>
+</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="api-sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="api-shell">
+        <aside class="api-sidebar" id="sidebar">
+            <div class="api-sidebar-header">
+                <span>/ docs</span>
+                <button class="api-sidebar-close" id="sidebar-close" type="button" aria-label="Close file tree">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg>
+                </button>
+            </div>
+            <nav class="api-nav">
+                <ul>
+                
+                    
+                        
+                            
+                                
+                                
+                                <li class="api-nav-item" style="--stagger:0">
+                                    <a href="../../../index.html" data-nav-link data-api-page="index.html" class="api-nav-link">
+                                        <span class="api-nav-glyph" aria-hidden="true">#</span>home
+                                    </a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                            <li class="api-section" data-nav-section style="--stagger:0">
+                                <button class="api-section-toggle" type="button" data-section="getting-started">
+                                    <svg class="icon api-section-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                                    <span class="api-section-label">getting-started/</span>
+                                </button>
+                                <ul class="api-section-pages" data-nav-submenu>
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../getting-started/index.html" data-nav-link data-api-page="getting-started/index.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>overview
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../getting-started/quick-start.html" data-nav-link data-api-page="getting-started/quick-start.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>quick-start
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../getting-started/local-development.html" data-nav-link data-api-page="getting-started/local-development.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>local-development
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../getting-started/deployment.html" data-nav-link data-api-page="getting-started/deployment.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>deployment
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                            <li class="api-section" data-nav-section style="--stagger:0">
+                                <button class="api-section-toggle" type="button" data-section="platform">
+                                    <svg class="icon api-section-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                                    <span class="api-section-label">platform/</span>
+                                </button>
+                                <ul class="api-section-pages" data-nav-submenu>
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../platform/architecture.html" data-nav-link data-api-page="platform/architecture.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>architecture
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../platform/lead-lifecycle.html" data-nav-link data-api-page="platform/lead-lifecycle.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>lead-lifecycle
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../platform/plans-and-modes.html" data-nav-link data-api-page="platform/plans-and-modes.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>plans-and-modes
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../platform/security.html" data-nav-link data-api-page="platform/security.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>security
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                            <li class="api-section" data-nav-section style="--stagger:0">
+                                <button class="api-section-toggle" type="button" data-section="api-reference">
+                                    <svg class="icon api-section-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                                    <span class="api-section-label">api-reference/</span>
+                                </button>
+                                <ul class="api-section-pages" data-nav-submenu>
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../api/index.html" data-nav-link data-api-page="api/index.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>overview
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../api/authentication.html" data-nav-link data-api-page="api/authentication.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>authentication
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../api/account.html" data-nav-link data-api-page="api/account.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>account-and-byok
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../api/discovery.html" data-nav-link data-api-page="api/discovery.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>lead-discovery
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../api/data-pipeline.html" data-nav-link data-api-page="api/data-pipeline.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>enrichment-and-export
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../api/usage-pricing.html" data-nav-link data-api-page="api/usage-pricing.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>usage-and-pricing
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../api/errors.html" data-nav-link data-api-page="api/errors.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>errors
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                        
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                            <li class="api-section expanded" data-nav-section style="--stagger:0">
+                                <button class="api-section-toggle" type="button" data-section="ecommerce">
+                                    <svg class="icon api-section-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                                    <span class="api-section-label">ecommerce/</span>
+                                </button>
+                                <ul class="api-section-pages" data-nav-submenu>
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/build-business-context/SKILL.html" data-nav-link data-api-page="ecommerce/skills/build-business-context/SKILL.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>build-context-skill
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/build-business-context/references/interview-questions.html" data-nav-link data-api-page="ecommerce/skills/build-business-context/references/interview-questions.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>build-context-interview-qs
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/build-business-context/references/md-template.html" data-nav-link data-api-page="ecommerce/skills/build-business-context/references/md-template.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>build-context-md-template
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/checkout-analysis/SKILL.html" data-nav-link data-api-page="ecommerce/skills/checkout-analysis/SKILL.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>checkout-skill
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/checkout-analysis/references/export-pdf.html" data-nav-link data-api-page="ecommerce/skills/checkout-analysis/references/export-pdf.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>checkout-export-pdf
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/checkout-analysis/references/live-dashboard.html" data-nav-link data-api-page="ecommerce/skills/checkout-analysis/references/live-dashboard.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>checkout-live-dashboard
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/checkout-analysis/references/queries.html" data-nav-link data-api-page="ecommerce/skills/checkout-analysis/references/queries.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>checkout-queries
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/checkout-analysis/references/schedule-widget.html" data-nav-link data-api-page="ecommerce/skills/checkout-analysis/references/schedule-widget.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>checkout-schedule-widget
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/checkout-analysis/references/triage-board.html" data-nav-link data-api-page="ecommerce/skills/checkout-analysis/references/triage-board.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>checkout-triage-board
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/product-analysis/SKILL.html" data-nav-link data-api-page="ecommerce/skills/product-analysis/SKILL.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>product-skill
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/product-analysis/references/export-pdf.html" data-nav-link data-api-page="ecommerce/skills/product-analysis/references/export-pdf.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>product-export-pdf
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/product-analysis/references/live-dashboard.html" data-nav-link data-api-page="ecommerce/skills/product-analysis/references/live-dashboard.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>product-live-dashboard
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/product-analysis/references/queries.html" data-nav-link data-api-page="ecommerce/skills/product-analysis/references/queries.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>product-queries
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/product-analysis/references/schedule-widget.html" data-nav-link data-api-page="ecommerce/skills/product-analysis/references/schedule-widget.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>product-schedule-widget
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/product-analysis/references/triage-board.html" data-nav-link data-api-page="ecommerce/skills/product-analysis/references/triage-board.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>product-triage-board
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/SKILL.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/SKILL.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-skill
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/console-urls.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/console-urls.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-console-urls
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/errors.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/errors.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-errors
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/funnel-template.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/funnel-template.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-funnel-template
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/funnel-visualization.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/funnel-visualization.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-funnel-visualization
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/integrations.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/integrations.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-integrations
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/journeys-and-replay.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/journeys-and-replay.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-journeys-&-replay
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/page-visits.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/page-visits.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-page-visits
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/querying-noibu-data/references/sessions.html" data-nav-link data-api-page="ecommerce/skills/querying-noibu-data/references/sessions.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>noibu-sessions
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/segment-analysis/SKILL.html" data-nav-link data-api-page="ecommerce/skills/segment-analysis/SKILL.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>segment-skill
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/segment-analysis/references/export-pdf.html" data-nav-link data-api-page="ecommerce/skills/segment-analysis/references/export-pdf.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>segment-export-pdf
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/segment-analysis/references/live-dashboard.html" data-nav-link data-api-page="ecommerce/skills/segment-analysis/references/live-dashboard.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>segment-live-dashboard
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/segment-analysis/references/queries.html" data-nav-link data-api-page="ecommerce/skills/segment-analysis/references/queries.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>segment-queries
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/segment-analysis/references/schedule-widget.html" data-nav-link data-api-page="ecommerce/skills/segment-analysis/references/schedule-widget.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>segment-schedule-widget
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/segment-analysis/references/triage-board.html" data-nav-link data-api-page="ecommerce/skills/segment-analysis/references/triage-board.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>segment-triage-board
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/SKILL.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/SKILL.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>store-pulse-skill
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/inline-snapshot.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/inline-snapshot.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-inline-snapshot
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/live-dashboard.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/live-dashboard.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-live-dashboard
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/schedule.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/schedule.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-schedule
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/blocks/channel-performance.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/blocks/channel-performance.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-channel-performance
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/blocks/core-kpis.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/blocks/core-kpis.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-core-kpis
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/blocks/paid-performance.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/blocks/paid-performance.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-paid-performance
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/blocks/purchase-funnel.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/blocks/purchase-funnel.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-purchase-funnel
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/store-pulse/references/blocks/top-products.html" data-nav-link data-api-page="ecommerce/skills/store-pulse/references/blocks/top-products.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pulse-top-products
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/SKILL.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/SKILL.html" class="api-nav-link active">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>tech-diagnosis-skill
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/errors.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/errors.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>tech-errors
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/first-run-setup.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/first-run-setup.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>tech-first-run-setup
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/performance.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/performance.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>tech-performance
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/schedule-widget.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/schedule-widget.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>tech-schedule-widget
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/share.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/share.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>tech-share
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/ticket.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/ticket.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>tech-ticket
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/platforms/bigcommerce.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/platforms/bigcommerce.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>platform-bigcommerce
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/platforms/generic.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/platforms/generic.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>platform-generic
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/platforms/magento.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/platforms/magento.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>platform-magento
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/platforms/shopify.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/platforms/shopify.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>platform-shopify
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../ecommerce/skills/tech-diagnosis/references/platforms/woocommerce.html" data-nav-link data-api-page="ecommerce/skills/tech-diagnosis/references/platforms/woocommerce.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>platform-woocommerce
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                            <li class="api-section" data-nav-section style="--stagger:0">
+                                <button class="api-section-toggle" type="button" data-section="barcode-tools">
+                                    <svg class="icon api-section-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                                    <span class="api-section-label">barcode-tools/</span>
+                                </button>
+                                <ul class="api-section-pages" data-nav-submenu>
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/index.html" data-nav-link data-api-page="barcodetools/index.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>overview
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/docomation.html" data-nav-link data-api-page="barcodetools/docomation.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>documentation
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/installation.html" data-nav-link data-api-page="barcodetools/installation.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>installation
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/how-to-use.html" data-nav-link data-api-page="barcodetools/how-to-use.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>how-to-use
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/api.html" data-nav-link data-api-page="barcodetools/api.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>api
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/Pricing.html" data-nav-link data-api-page="barcodetools/Pricing.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>pricing
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/about.html" data-nav-link data-api-page="barcodetools/about.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>about
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/who-use-barcode.html" data-nav-link data-api-page="barcodetools/who-use-barcode.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>who-uses-barcode
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/how-benifit.html" data-nav-link data-api-page="barcodetools/how-benifit.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>how-barcode-tools-benefit-teams
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../barcodetools/call-to-action.html" data-nav-link data-api-page="barcodetools/call-to-action.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>call-to-action
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                            <li class="api-section" data-nav-section style="--stagger:0">
+                                <button class="api-section-toggle" type="button" data-section="guides">
+                                    <svg class="icon api-section-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                                    <span class="api-section-label">guides/</span>
+                                </button>
+                                <ul class="api-section-pages" data-nav-submenu>
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../guides/google-sheets.html" data-nav-link data-api-page="guides/google-sheets.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>google-sheets-setup
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../guides/byok.html" data-nav-link data-api-page="guides/byok.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>byok-configuration
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../guides/paid-activation.html" data-nav-link data-api-page="guides/paid-activation.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>github-paid-activation
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../guides/troubleshooting.html" data-nav-link data-api-page="guides/troubleshooting.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>troubleshooting
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                                
+                                    
+                                
+                            
+                            <li class="api-section" data-nav-section style="--stagger:0">
+                                <button class="api-section-toggle" type="button" data-section="reference">
+                                    <svg class="icon api-section-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                                    <span class="api-section-label">reference/</span>
+                                </button>
+                                <ul class="api-section-pages" data-nav-submenu>
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../reference/environment.html" data-nav-link data-api-page="reference/environment.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>environment-bindings
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../reference/data-model.html" data-nav-link data-api-page="reference/data-model.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>data-model
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                <li class="api-nav-item api-nav-item-sub">
+                                                    <a href="../../../reference/changelog.html" data-nav-link data-api-page="reference/changelog.html" class="api-nav-link">
+                                                        <span class="api-nav-glyph" aria-hidden="true">#</span>changelog
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                                
+                                
+                                <li class="api-nav-item" style="--stagger:0">
+                                    <a href="../../../contributing.html" data-nav-link data-api-page="contributing.html" class="api-nav-link">
+                                        <span class="api-nav-glyph" aria-hidden="true">#</span>community
+                                    </a>
+                                </li>
+                            
+                        
+                    
+                
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="api-main">
+            <div class="api-page">
+                <p class="api-path-line">
+                    <span class="api-prompt">$</span> cat
+                    <span class="api-path-dim">56/85</span>
+                    ecommerce/skills/tech-diagnosis/SKILL.html
+                </p>
+                <h1 class="api-title">Tech Diagnosis SKILL<span class="api-cursor" aria-hidden="true"></span></h1>
+
+                <div class="api-content" data-current-path="ecommerce/skills/tech-diagnosis/SKILL.html">
+                    
+<div class="api-body">
+    <h1 id="tech-diagnosis">Tech Diagnosis</h1>
+
+<ul>
+<li><strong>Proactive</strong> — no specific issue. Scans for highest-value errors and CWV problems, surfaces a prioritized list.</li>
+<li><strong>Reactive</strong> — a specific signal is named. Produces a self-contained finding (Summary → Cause → Fix).</li>
+</ul>
+
+<hr />
+
+<h2 id="setup-always-runs-first">Setup (always runs first)</h2>
+
+<ol>
+<li><strong>Noibu MCP</strong> — confirm connected. If not, stop.</li>
+<li><strong>Domain</strong> — UUID → use it. Name only → resolve. Nothing → list and ask. Capture <strong>platform</strong> (Shopify, Magento, etc.).</li>
+<li><strong>Mode + window</strong> — detect mode (see below). Default window: 30 days.</li>
+<li><strong>TodoList</strong> — create with mode-appropriate tasks.</li>
+</ol>
+
+<p>There is no config file. Connector status is detected at runtime by checking tool availability. Preferences are asked per session.</p>
+
+<h2 id="mode-detection">Mode detection</h2>
+
+<ul>
+<li><strong>Proactive</strong> — no specific issue given. Domain name alone is proactive. Examples: "run tech diagnosis", "what's broken", "scan for issues".</li>
+<li><strong>Share with vendor</strong> — message starts with "Share with vendor:". Skip setup and diagnosis → go to Step P4 Share with vendor.</li>
+<li><strong>Ignore issue</strong> — message starts with "Ignore issue #". Skip setup and diagnosis → go to Ignore issue flow.</li>
+<li><strong>Reactive</strong> — specific issue named alongside domain: error name, metric + page, Noibu issue ID, page URL, or structured handoff. Also reactive for connector reconfiguration requests.</li>
+<li><strong>Ambiguous</strong> — ask: "Are you looking for a scan of what's broken across the store, or do you have a specific issue in mind?"</li>
+</ul>
+
+<hr />
+
+<h2 id="rules">Rules</h2>
+
+<ul>
+<li><strong>No client-side data joins.</strong> Each Noibu source on its own terms.</li>
+<li><strong>Don't overstate impact.</strong> "Present in X sessions", not "blocking X users". No revenue projections or revLost figures.</li>
+<li><strong>Plain language.</strong> Translate Noibu labels; keep identifiers in code style.</li>
+<li><strong>Suppress citation sections.</strong></li>
+<li><strong>First visible output is the result, never narration.</strong> No preambles, filler, or "let me pull X".</li>
+<li><strong>Never narrate internals.</strong> No tool names, query parameters, API state values, filter logic, or fallback decisions. Retries happen silently.</li>
+<li><strong>Pause only at designated points.</strong> Reactive: once after the closing offer widget. Proactive: after findings widget. Open-ended questions only; never AskUserQuestion modals.</li>
+<li><strong>After every <code>show_widget</code> call, output one line only.</strong> Proactive: "Select an option on a card above to get started." Reactive (closing offer): "Select an option above, or choose another issue to fix." No summary, no recap, nothing else.</li>
+<li><strong>Page criticality is internal only.</strong> Checkout &gt; Cart &gt; PDP &gt; Collection &gt; Home &gt; Other. Never a labeled field.</li>
+<li><strong>Name third-party services specifically.</strong> Stack trace says Klaviyo, GTM, Shop Pay → use that name.</li>
+<li><strong>Never render a widget from memory.</strong> If resuming from a compacted conversation, re-read this SKILL.md before any output.</li>
+</ul>
+
+<hr />
+
+<h1 id="proactive-mode">Proactive mode</h1>
+
+<p><strong>First action — before TodoList, before any queries:</strong> send "Scanning [domain] for the top technical errors and performance issues — this may take a moment."</p>
+
+<h2 id="tasks">Tasks</h2>
+
+<ol>
+<li>Scan errors</li>
+<li>Scan performance</li>
+<li>Rank findings and render widget</li>
+<li>Deep-dive <em>(added when operator picks a finding)</em></li>
+</ol>
+
+<h2 id="step-p1-scan-for-errors">Step P1: Scan for errors</h2>
+
+<p><strong>Before fetching any errors:</strong> read <code>references/platforms/[platform].md</code> (fall back to <code>generic.md</code>). Extract the merchant code paths, platform paths, and telemetry paths. These are the patterns used to classify frames — do not skip this step.</p>
+
+<p>Two passes in parallel.</p>
+
+<p><strong>Pass 1 — Fixable errors:</strong>
+Use an error search query — <strong>not the pre-ranked priority list</strong> — so you control the candidate pool.</p>
+
+<p>Search the last 7 days of errors, sorted by occurrence count highest first, 30 per page, active states only (new, open, in-progress). <strong>Exclude at query time:</strong> HTTP errors (4XX/5XX), network/connection errors (status 0, ERR_NETWORK), and "Script error" type. Metadata only — no stack traces in this call.</p>
+
+<p><strong>Always fetch up to 3 pages.</strong> Process each page before fetching the next — use the pagination cursor from the response to request subsequent pages. Stop early only if you already have 2 or more fixable candidates. After 3 pages or when no more pages are available, proceed with whatever you found.</p>
+
+<p>For each candidate on each page, apply filters:
+1. <strong>Recency</strong> — at least one occurrence in the last 48 hours. If not → skip.
+2. <strong>Volume</strong> — more than 10 occurrences in the 7-day window. If not → skip.</p>
+
+<p>For each survivor, fetch the full error detail individually to get the JavaScript stack trace frames. Classify using the paths extracted from the platform file:
+- <strong>No frames</strong> → skip.
+- <strong>All frames match platform or telemetry paths</strong> → skip.
+- <strong>At least one frame matches a merchant path</strong> → keep as fixable candidate.</p>
+
+<p>Before extracting top 2: <strong>deduplicate</strong> — if two candidates share the same primary file and error message/type, keep only the higher-scoring one and note the other ID as a related issue. Second slot goes to the next distinct error.</p>
+
+<p><strong>Pass 2 — Vendor errors:</strong>
+Use the same search — last 7 days, sorted by occurrence count, 30 per page. Apply 48h recency and &gt;10 volume floor. For each survivor, fetch the full error detail individually and classify frames against the platform file. Extract top 2 vendor candidates by score.</p>
+
+<p><strong>Classification</strong> — use the platform file already loaded above.
+- <strong>Fixable</strong> — at least one frame in merchant-owned code paths.
+- <strong>Platform</strong> — frames only in core platform infrastructure (Shopify CDN scripts, monorail, checkout, shopifysvc.com); or any HTTP error (4XX/5XX) with no JS stack trace; or any network/connection failure (status 0, ERR_NETWORK, request aborted) with no JS stack trace. Discarded regardless of endpoint. No exceptions.
+- <strong>Telemetry</strong> — frames in known analytics/pixel/beacon scripts (see platform file). Discard silently.
+- <strong>Vendor</strong> — third-party frames that aren't telemetry, including <code>*.shopifyapps.com</code> and Shopify product endpoints with their own support channel (Shop app, Shop Pay).</p>
+
+<p>Discard platform and telemetry. <strong>Classification is mechanical — no judgment calls.</strong></p>
+
+<p><strong>Score:</strong> <code>occurrences (7-day total) × criticality_weight</code>
+Weights: Checkout=5, Cart=4, PDP=3, Collection=2, Home=1, Other=0.5</p>
+
+<h2 id="step-p2-scan-for-performance">Step P2: Scan for performance</h2>
+
+<p>Fetch CWV (LCP, INP, CLS) across all page groups. Filter to pages with at least one metric outside the Good band (see <code>references/performance.md</code>).</p>
+
+<p><strong>Score:</strong> <code>traffic_weight × severity_score</code> — traffic_weight normalized (highest=1.0); severity: Poor=3pts, Needs Improvement=1pt per metric.</p>
+
+<p>Take top 2. Capture: page/group, worst metric + p75 value, band, traffic volume.</p>
+
+<h2 id="step-p3-rank-findings-and-render-widget">Step P3: Rank findings and render widget</h2>
+
+<p>Rank all findings by score × criticality weight (ties by page criticality).</p>
+
+<p>Load <code>show_widget</code> via ToolSearch (<code>select:mcp__visualize__show_widget</code>). Call with <code>title: "tech_findings"</code> and loading messages <code>["Scanning for errors...", "Checking performance...", "Ranking findings..."]</code>.</p>
+
+<p>Badge styles: Active <code>background:#FCEBEB;color:#A32D2D</code> · Re-emerging <code>background:#FAEEDA;color:#854F0B</code> · Improving <code>background:#EAF3DE;color:#3B6D11</code></p>
+
+<p>sendPrompt formats:
+- Fixable → <code>/tech-diagnosis fix #[issue-id] on [domain]</code>
+- Vendor → <code>/tech-diagnosis share with vendor #[issue-id] on [domain]</code>
+- Performance → <code>/tech-diagnosis fix [LCP|INP|CLS] on [page-url] for [domain]</code></p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="p">&lt;</span><span class="nt">h2</span> <span class="na">style</span><span class="o">=</span><span class="s">"position:absolute;width:1px;height:1px;overflow:hidden;"</span><span class="p">&gt;</span>Tech findings for [domain] — last 30 days<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:flex;flex-direction:column;gap:24px;padding:4px;"</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 10px;"</span><span class="p">&gt;</span>Issues you can fix<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+    [Repeat for each fixable error, up to 2:]
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:10px;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"background:var(--color-background-secondary);padding:8px 20px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.06em;"</span><span class="p">&gt;</span>[Error type]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;[badge inline style]"</span><span class="p">&gt;</span>[Active|Re-emerging|Improving]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"background:var(--color-background-primary);padding:20px;"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:15px;font-weight:500;margin:0 0 8px;color:var(--color-text-primary);"</span><span class="p">&gt;</span>[Plain-English title]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;color:var(--color-text-secondary);line-height:1.6;margin:0 0 12px;"</span><span class="p">&gt;</span>[1–2 sentences: what's wrong, where, who's affected]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:13px;color:var(--color-text-secondary);margin:0 0 16px;"</span><span class="p">&gt;</span>[number] occurrences · last seen [date] · [pages] · [browser/OS]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:flex;align-items:center;gap:16px;"</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('/tech-diagnosis fix #[issue-id] on [domain]')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"padding:6px 14px;font-size:13px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;cursor:pointer;"</span><span class="p">&gt;</span>Get fix ↗<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('Ignore issue #[issue-id] on [domain]')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"padding:6px 14px;font-size:13px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;cursor:pointer;"</span><span class="p">&gt;</span>Ignore<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    [If no fixable errors:]
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px 20px;"</span><span class="p">&gt;&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;color:var(--color-text-secondary);margin:0;"</span><span class="p">&gt;</span>No active errors found that you can fix directly.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 10px;"</span><span class="p">&gt;</span>Performance<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+    [Repeat for each performance finding, up to 2:]
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:10px;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"background:var(--color-background-secondary);padding:8px 20px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.06em;"</span><span class="p">&gt;</span>[LCP|INP|CLS]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;[badge inline style]"</span><span class="p">&gt;</span>[Active|Re-emerging|Improving]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"background:var(--color-background-primary);padding:20px;"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:15px;font-weight:500;margin:0 0 8px;color:var(--color-text-primary);"</span><span class="p">&gt;</span>[Plain-English title]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;color:var(--color-text-secondary);line-height:1.6;margin:0 0 12px;"</span><span class="p">&gt;</span>[1–2 sentences: what's slow, where, how bad]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+        [Benchmark bar — flex values and marker per metric:
+          LCP: green=25/yellow=15/red=60, scale 0–10s, labels "2.5s" "4.0s", marker=value/10*100%
+          INP: green=20/yellow=30/red=50, scale 0–1000ms, labels "200ms" "500ms", marker=value/1000*100%
+          CLS: green=10/yellow=15/red=25, scale 0–0.5, labels "0.1" "0.25", marker=value/0.5*100%
+          Cap marker at 95%]
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"margin-bottom:16px;"</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:flex;align-items:center;gap:12px;margin-bottom:4px;"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:20px;font-weight:500;color:var(--color-text-primary);min-width:48px;"</span><span class="p">&gt;</span>[p75 value]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"flex:1;position:relative;height:24px;"</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:flex;height:100%;border-radius:5px;overflow:hidden;"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"flex:[green-flex];background:#D1FAE5;display:flex;align-items:center;justify-content:center;"</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:10px;color:#065F46;"</span><span class="p">&gt;</span>✓<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"width:1px;background:white;"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"flex:[yellow-flex];background:#FEF3C7;display:flex;align-items:center;justify-content:center;"</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:10px;color:#92400E;"</span><span class="p">&gt;</span>!<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"width:1px;background:white;"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"flex:[red-flex];background:#FEE2E2;display:flex;align-items:center;justify-content:center;"</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:10px;color:#991B1B;"</span><span class="p">&gt;</span>✕<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"position:absolute;top:-3px;left:[marker-position];transform:translateX(-50%);width:2.5px;height:30px;background:var(--color-text-primary);border-radius:2px;"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:flex;padding-left:60px;"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"flex:[green-flex];"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:10px;color:var(--color-text-tertiary);transform:translateX(-50%);"</span><span class="p">&gt;</span>[threshold-1]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"flex:[yellow-flex];"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:10px;color:var(--color-text-tertiary);transform:translateX(-50%);"</span><span class="p">&gt;</span>[threshold-2]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"flex:[red-flex];"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:13px;color:var(--color-text-secondary);margin:0 0 16px;"</span><span class="p">&gt;</span>[traffic volume · page group · device]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('/tech-diagnosis fix [LCP|INP|CLS] on [page-url] for [domain]')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"padding:6px 14px;font-size:13px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;cursor:pointer;"</span><span class="p">&gt;</span>Get fix ↗<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    [If no performance issues:]
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px 20px;"</span><span class="p">&gt;&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;color:var(--color-text-secondary);margin:0;"</span><span class="p">&gt;</span>No significant performance issues found.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+  [If vendor errors exist:]
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 10px;"</span><span class="p">&gt;</span>Vendor issues<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+    [Repeat for each vendor error, up to 2:]
+    <span class="p">&lt;</span><span class="nt">details</span> <span class="na">style</span><span class="o">=</span><span class="s">"border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:10px;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">summary</span> <span class="na">style</span><span class="o">=</span><span class="s">"background:var(--color-background-secondary);padding:8px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.06em;"</span><span class="p">&gt;</span>[Vendor name] — [Error type]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"details-toggle"</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:12px;font-weight:500;color:var(--color-text-secondary);"</span><span class="p">&gt;</span>Show details<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"background:var(--color-background-primary);padding:20px;border-top:0.5px solid var(--color-border-tertiary);"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:15px;font-weight:500;margin:0 0 8px;color:var(--color-text-primary);"</span><span class="p">&gt;</span>[Plain-English title]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;color:var(--color-text-secondary);line-height:1.6;margin:0 0 12px;"</span><span class="p">&gt;</span>[1–2 sentences: what's happening, which vendor, impact]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:13px;color:var(--color-text-secondary);margin:0 0 16px;"</span><span class="p">&gt;</span>[occurrence count · vendor name · pages affected]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:flex;align-items:center;gap:16px;"</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('/tech-diagnosis share with vendor #[issue-id] on [domain]')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"padding:6px 14px;font-size:13px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;cursor:pointer;"</span><span class="p">&gt;</span>Share with vendor ↗<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('Ignore issue #[issue-id] on [domain]')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"padding:6px 14px;font-size:13px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;cursor:pointer;"</span><span class="p">&gt;</span>Ignore<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">details</span><span class="p">&gt;</span>
+
+    [If no vendor errors:]
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px 20px;"</span><span class="p">&gt;&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;color:var(--color-text-secondary);margin:0;"</span><span class="p">&gt;</span>No third-party app errors detected.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"border-top:0.5px solid var(--color-border-tertiary);padding-top:16px;"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('Schedule recurring tech scan for [domain]')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"padding:9px 20px;font-size:14px;font-weight:500;color:var(--color-background-primary);background:var(--color-text-primary);border:0.5px solid var(--color-text-primary);border-radius:var(--border-radius-md);cursor:pointer;"</span><span class="p">&gt;</span>Set up automations ↗<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'details'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'toggle'</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">lbl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">el</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.details-toggle'</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">lbl</span><span class="p">)</span><span class="w"> </span><span class="nx">lbl</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">el</span><span class="p">.</span><span class="nx">open</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'Hide details'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'Show details'</span><span class="p">;</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="fix-triggered">Fix (triggered)</h2>
+
+<p>Triggered by a "Get fix" button click or <code>/tech-diagnosis fix … on [domain]</code>.</p>
+
+<p>Add "Deep-dive" task, mark <code>in_progress</code>. Enter reactive flow from Step 2 (domain, platform, window already resolved).</p>
+
+<hr />
+
+<h2 id="share-with-vendor-triggered">Share with vendor (triggered)</h2>
+
+<p>Triggered by "Share with vendor" button or <code>/tech-diagnosis share with vendor #[id] on [domain]</code>.</p>
+
+<p>Fetch error detail. Generate a copyable vendor-facing summary (what, which pages, occurrence count, browser/OS breakdown).</p>
+
+<p><strong>Do not use <code>references/share.md</code>, do not read or write the <code>share</code> config key, and do not ask the operator where to send it.</strong> Just present the summary as copyable text, then ask in one line: "Want me to send this via email or Slack?" — but only if those connectors are already active in the session. If neither is connected, output the summary only. No preferences are saved.</p>
+
+<hr />
+
+<h2 id="ignore-issue-triggered">Ignore issue (triggered)</h2>
+
+<p>Triggered by "Ignore" button or "Ignore issue #[id] on [domain]".</p>
+
+<p>Extract issue ID. Call <code>noibu_update_issue</code> to close/ignore. Confirm: "Issue #[id] marked as ignored." No further output.</p>
+
+<hr />
+
+<h2 id="schedule-scan-triggered">Schedule scan (triggered)</h2>
+
+<p>Triggered by "Schedule recurring tech scan for [domain]".</p>
+
+<p>Read <code>references/schedule-widget.md</code> and render it as a <code>show_widget</code>. No prose before or after.</p>
+
+<hr />
+
+<h1 id="reactive-mode">Reactive mode</h1>
+
+<h2 id="connector-check-runs-once-before-diagnosis">Connector check (runs once before diagnosis)</h2>
+
+<p>Silently check which tools are available in the current session: GitHub, Claude in Chrome, and (if platform is Shopify) Shopify.</p>
+
+<p>If any are missing, send <strong>one combined message</strong> and wait for a single reply before continuing — do not step through them one at a time:</p>
+
+<blockquote>
+  <p>"Before I start — connecting <strong>[list of missing connectors]</strong> would give more accurate results. [One-line benefit per connector, e.g. 'GitHub lets me point to the exact file and line to fix. Chrome lets me run live page tests.'] Want to connect any of these, or should I go ahead without them?"</p>
+</blockquote>
+
+<ul>
+<li>If they want to connect something: call <code>suggest_connectors</code> for each (GitHub: <code>fe983ccb-92c7-4df1-85af-b1c3340b89bb</code>; Shopify: <code>80917cb7-3071-4fca-b053-a4262d356c60</code>; Chrome: direct them to Settings → Customize). Wait for confirmation, then proceed.</li>
+<li>If they skip or say go ahead: proceed immediately, no follow-up.</li>
+</ul>
+
+<p>If all tools are already available, proceed immediately with no message.</p>
+
+<h2 id="tasks-2">Tasks</h2>
+
+<ul>
+<li>Understanding the issue</li>
+<li>Measure the impact</li>
+<li>Trace the cause</li>
+<li>Recommend a fix</li>
+<li>Optional handoff <em>(conditional)</em></li>
+</ul>
+
+<h2 id="step-1-identify-the-signal">Step 1: Identify the signal</h2>
+
+<p>Translate the prompt to symptom, scope, and context. If clear, fetch immediately — don't narrate it back. If ambiguous, ask one clarifying question.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Prompt</th>
+  <th>Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>"Why is LCP poor on checkout?"</td>
+  <td>Performance — LCP — checkout</td>
+</tr>
+<tr>
+  <td>"What's causing errors on Safari mobile?"</td>
+  <td>Errors — Safari mobile</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="step-2-fetch-focused-data">Step 2: Fetch focused data</h2>
+
+<p>Targeted queries only — no broad surveys. Run in parallel where possible.
+- <strong>Errors</strong> — priority issues matching scope; full detail for top 1–2. If this issue had related issues noted during proactive deduplication, fetch those too. Surface in the fix: "This fix should also resolve issue #[id] — same root cause, different trigger path."
+- <strong>Performance</strong> — CWV at p75 for affected URLs/page group, by device and browser.
+- <strong>Combined</strong> — both, scoped to the relevant page/segment.</p>
+
+<h2 id="step-3-render-summary">Step 3: Render Summary</h2>
+
+<p>For each finding:
+1. Finding title as <code>##</code> heading
+2. 2–3 sentence narrative: impact only — who's affected, how many, what they experience, trend. No error codes or endpoint names.
+3. Impacted-sessions widget: two metric cards (session count + % of total) + line/area chart.
+4. Top pages affected: 3–5 row table (URL + sessions)</p>
+
+<p>Post-processing: see <code>references/errors.md</code> (errors) and <code>references/performance.md</code> (performance). Rank by severity → page criticality → sessions. Cap at 3–5 findings.</p>
+
+<h2 id="step-4-trace-the-cause">Step 4: Trace the cause</h2>
+
+<ul>
+<li><strong>Noibu AI diagnosis</strong> — use Why/Impact as the basis for the cause narrative.</li>
+<li><strong>Live page inspection</strong> — prefer Chrome (apply device emulation for worst segment) → fall back to web_fetch <code>https://{domain}{path}</code> (construct from resolved domain + Noibu paths, no need to ask) → pattern-based only. web_fetch is for fetching store URLs, not WebSearch. After fetching, extract only <code>&lt;script&gt;</code> <code>src</code> and <code>crossorigin</code> — discard full HTML immediately. For INP without Chrome, fetch clicked selectors from Noibu.</li>
+<li><strong>GitHub enrichment</strong> — search for the affected element, fetch ~20 lines context.</li>
+<li><strong>Platform enrichment</strong> — query store data to confirm/refute hypothesis.</li>
+</ul>
+
+<p>If any enrichment source errors, skip it immediately and continue — treat as unavailable, no retries.</p>
+
+<p>See <code>references/errors.md</code> and <code>references/performance.md</code> for guidance.</p>
+
+<p><strong>Render cause:</strong> open with "From here on, I'm reasoning over the data rather than reporting it…". Commit to the primary cause; note alternatives in one sentence.</p>
+
+<h2 id="step-5-closing-offer">Step 5: Closing offer</h2>
+
+<p>Determine the fix internally but <strong>do not render it yet</strong>. Commit to the most likely fix; note alternatives in one sentence. Load <code>show_widget</code> (<code>title: "next_steps"</code>, loading: <code>["What's next..."]</code>). Nothing renders after the widget.</p>
+
+<p><strong>Button visibility:</strong>
+- <strong>"Apply the fix automatically"</strong> — always shown. If GitHub tools are not active in the session, clicking it triggers GitHub setup. If fix is not a code change, show disabled with explanation.
+- <strong>"Show me the fix"</strong> — always.
+- <strong>"Open a ticket"</strong> — hide only if all ticket connectors explicitly declined.
+- <strong>"Share findings"</strong> — always.</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-primary);padding:20px;"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:13px;font-weight:500;color:var(--color-text-primary);margin:0 0 16px;"</span><span class="p">&gt;</span>What would you like to do next?<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  [If fix is not a code change → disabled:]
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:block;width:100%;padding:12px 16px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:8px;opacity:0.5;cursor:not-allowed;"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;font-weight:500;color:var(--color-text-tertiary);margin:0 0 4px;"</span><span class="p">&gt;</span>Apply the fix automatically<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:12px;color:var(--color-text-tertiary);margin:0;"</span><span class="p">&gt;</span>The fix for this issue isn't a code change — there's no file to edit automatically.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  [All other cases → active. Label: "Apply the fix automatically"]
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('Apply the fix automatically')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:block;width:100%;padding:12px 16px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;margin-bottom:8px;"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:14px;font-weight:500;color:var(--color-text-primary);margin:0 0 3px;"</span><span class="p">&gt;</span>[Label] ↗<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-size:12px;color:var(--color-text-tertiary);margin:0;"</span><span class="p">&gt;</span>[low|medium|high] risk · test on preview before publishing<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('Show me the fix')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:block;width:100%;text-align:left;padding:12px 16px;font-size:14px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;margin-bottom:8px;"</span><span class="p">&gt;</span>Show me the fix ↗<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  [If ticket connectors not all skipped. Label: 0→"Open a ticket"; 1→"Open a ticket in [connector] — [team]"; 2+→"Open a ticket in [first] <span class="err">&amp;</span> [n] more"]
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('Open a ticket')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:block;width:100%;text-align:left;padding:12px 16px;font-size:14px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;margin-bottom:8px;"</span><span class="p">&gt;</span>[Label] ↗<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  [Label: 0→"Share findings"; 1→"Share findings to [destination]"; 2+→"Share findings to [first] <span class="err">&amp;</span> [n] more"]
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"sendPrompt('Share findings')"</span> <span class="na">style</span><span class="o">=</span><span class="s">"display:block;width:100%;text-align:left;padding:12px 16px;font-size:14px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;"</span><span class="p">&gt;</span>Share findings ↗<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>When "Show me the fix" is clicked</strong> — render fix only (no repeating Summary or Cause), then show the closing offer again.</p>
+
+<h3 id="output-structure">Output structure</h3>
+
+<pre><code>## [Finding title]
+
+### Summary
+[2–3 sentences — impact only. No error codes or endpoint names.]
+[Impacted-sessions widget: session count + % of total + chart]
+**Top pages affected:** 3–5 row table
+
+### What's likely causing it
+*From here on, I'm reasoning over the data rather than reporting it...*
+[1–2 sentences — hypothesis only. Start from why.]
+
+[Closing offer widget]
+"Select an option above, or choose another issue to fix."
+
+--- after "Show me the fix" ---
+
+### How to fix it
+[Specific change only. Code or config, testing note, alternative pointer.]
+
+### Technical details  [on request or via share widget]
+</code></pre>
+
+<h2 id="step-6-handoff-conditional">Step 6: Handoff <em>(conditional)</em></h2>
+
+<p>See <code>references/ticket.md</code> for ticket flow. See <code>references/share.md</code> for share widget.</p>
+
+<hr />
+
+<h2 id="configuration">Configuration</h2>
+
+<p>There is no config file. All connector statuses are detected at runtime by checking tool availability. Ticket and share preferences are asked per session via <code>AskUserQuestion</code>. Scheduled task prompts capture repo and ticket details at setup time for automated runs.</p>
+
+</div>
+
+                </div>
+
+                <div class="api-page-turn">
+                    
+                    <a class="api-page-btn api-page-prev" href="../../../ecommerce/skills/store-pulse/references/blocks/top-products.html">
+                        <span class="api-page-label">&lt; cd ../</span>
+                        <span class="api-page-title">Pulse Top Products</span>
+                    </a>
+                    
+                    
+                    <a class="api-page-btn api-page-next" href="../../../ecommerce/skills/tech-diagnosis/references/errors.html">
+                        <span class="api-page-label">cd ./next &gt;</span>
+                        <span class="api-page-title">Tech Errors</span>
+                    </a>
+                    
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="api-footer">
+        <div class="api-container">
+            <p class="api-footer-copy">&copy; 2026 <a href="https://github.com/bayzed123/SmartGenDocs">Sayad Md Bayezid Hosan & SmartGen Platform</a> &middot; Built with SmartGen Docs &middot; <a href="https://github.com/bayeziddev/smartGenDocs" target="_blank" rel="noopener">GitHub</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        function openSidebar() { sidebar.classList.add('open'); sidebarOverlay.classList.add('visible'); }
+        function closeSidebar() { sidebar.classList.remove('open'); sidebarOverlay.classList.remove('visible'); }
+        menuToggle.addEventListener('click', openSidebar);
+        sidebarClose.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        document.querySelectorAll('.api-section-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => toggle.closest('.api-section').classList.toggle('expanded'));
+        });
+
+        (function () {
+            const fill = document.getElementById('api-progress-fill');
+            const article = document.querySelector('.api-content');
+            const header = document.getElementById('api-header');
+            if (!fill || !article) return;
+            function update() {
+                const rect = article.getBoundingClientRect();
+                const total = rect.height - window.innerHeight + rect.top + window.scrollY;
+                const scrolled = window.scrollY - (rect.top + window.scrollY) + window.innerHeight * 0.5;
+                const pct = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+                fill.style.width = pct + '%';
+                if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
+            }
+            document.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+        })();
+
+        (function () {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const items = document.querySelectorAll('.api-content > *');
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                items.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+                });
+            }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+            items.forEach(el => io.observe(el));
+        })();
+
+        document.querySelectorAll('.api-content pre').forEach(block => {
+            const button = document.createElement('button');
+            button.className = 'copy-code-btn';
+            button.innerHTML = '<span>Copy</span>';
+            button.addEventListener('click', () => {
+                const codeEl = block.querySelector('code');
+                const code = codeEl ? codeEl.textContent : block.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.querySelector('span').textContent = 'Copied';
+                    setTimeout(() => { button.querySelector('span').textContent = 'Copy'; }, 2000);
+                });
+            });
+            block.style.position = 'relative';
+            block.appendChild(button);
+        });
+    </script>
+    
+<script>
+(function () {
+    const normalize = (pathname) => pathname.replace(/\/$/, '').replace(/\/index\.html$/, '');
+    const currentPath = normalize(window.location.pathname);
+    const links = document.querySelectorAll('[data-nav-link]');
+
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const linkPath = normalize(new URL(href, window.location.href).pathname);
+        if (linkPath !== currentPath) return;
+
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+
+        const section = link.closest('[data-nav-section]');
+        if (section) {
+            section.classList.add('expanded');
+            const submenu = section.querySelector('[data-nav-submenu]');
+            if (submenu) submenu.classList.add('expanded');
+        }
+    });
+})();
+</script>
+    
+    
+<script>
+(function () {
+    const THEME_KEY = 'smartgen-theme';
+    const THEMES = [{"label": "Day", "swatch_bg": "#F5F7F5", "swatch_fg": "#22C55E", "value": "light"}, {"label": "Night", "swatch_bg": "#0B0F0C", "swatch_fg": "#4ADE80", "value": "dark"}];
+
+    const themeSwitcher = document.getElementById('theme-switcher');
+    if (!themeSwitcher || !THEMES.length) return;
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeMenu = document.getElementById('theme-menu');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || THEMES[0].value;
+    }
+
+    function applyTheme(value, { persist = true } = {}) {
+        if (value === THEMES[0].value) {
+            document.documentElement.removeAttribute('data-theme');
+        } else {
+            document.documentElement.setAttribute('data-theme', value);
+        }
+        if (persist) {
+            try { localStorage.setItem(THEME_KEY, value); } catch (e) { /* ignore */ }
+        }
+        renderThemeMenu();
+    }
+
+    function renderThemeMenu() {
+        const current = getCurrentTheme();
+        themeMenu.innerHTML = THEMES.map(t => `
+            <button type="button" class="theme-option" role="menuitemradio"
+                    aria-checked="${t.value === current}" data-theme-value="${t.value}">
+                <span class="theme-swatch" style="--swatch-bg:${t.swatch_bg};--swatch-fg:${t.swatch_fg}"></span>
+                <span class="theme-option-label">${t.label}</span>
+                <svg class="theme-check icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            </button>
+        `).join('');
+    }
+
+    function openThemeMenu() {
+        themeMenu.hidden = false;
+        themeToggle.setAttribute('aria-expanded', 'true');
+        const active = themeMenu.querySelector('[aria-checked="true"]');
+        (active || themeMenu.querySelector('.theme-option'))?.focus();
+    }
+
+    function closeThemeMenu({ refocusTrigger = false } = {}) {
+        themeMenu.hidden = true;
+        themeToggle.setAttribute('aria-expanded', 'false');
+        if (refocusTrigger) themeToggle.focus();
+    }
+
+    renderThemeMenu();
+
+    themeToggle.addEventListener('click', () => {
+        themeMenu.hidden ? openThemeMenu() : closeThemeMenu();
+    });
+
+    themeMenu.addEventListener('click', (e) => {
+        const option = e.target.closest('.theme-option');
+        if (!option) return;
+        applyTheme(option.dataset.themeValue);
+        closeThemeMenu({ refocusTrigger: true });
+    });
+
+    themeMenu.addEventListener('keydown', (e) => {
+        const options = Array.from(themeMenu.querySelectorAll('.theme-option'));
+        const currentIndex = options.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            options[(currentIndex + 1) % options.length].focus();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            options[(currentIndex - 1 + options.length) % options.length].focus();
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            closeThemeMenu({ refocusTrigger: true });
+        } else if (e.key === 'Tab') {
+            closeThemeMenu();
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!themeMenu.hidden && !themeSwitcher.contains(e.target)) closeThemeMenu();
+    });
+})();
+</script>
+        
+<div class="style-switcher" id="style-switcher">
+    <button class="style-switcher-btn" id="style-switcher-toggle" type="button"
+            aria-haspopup="true" aria-expanded="false" aria-controls="style-switcher-menu"
+            aria-label="Switch site style">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21a9 9 0 1 1 0-18c4.97 0 9 3.582 9 8 0 2.21-1.79 3-4 3h-2.2a1.8 1.8 0 0 0-1.026 3.278A1.8 1.8 0 0 1 12.774 21H12Z"/>
+            <circle cx="7.2" cy="12" r="1.15" fill="currentColor" stroke="none"/>
+            <circle cx="9.8" cy="7.4" r="1.15" fill="currentColor" stroke="none"/>
+            <circle cx="15" cy="7.4" r="1.15" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="style-switcher-label">Styles</span>
+    </button>
+    <div class="style-switcher-menu" id="style-switcher-menu" role="menu" aria-label="Site style" hidden></div>
+</div>
+
+<style>
+    .style-switcher {
+        position: fixed;
+        left: 18px;
+        bottom: 18px;
+        z-index: 9999;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .style-switcher-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(23, 23, 30, 0.92);
+        color: #F4F4F7;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.28), 0 1px 2px rgba(0,0,0,0.2);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .style-switcher-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 26px rgba(0,0,0,0.34), 0 1px 2px rgba(0,0,0,0.24);
+        background: rgba(34, 34, 44, 0.95);
+    }
+    .style-switcher-btn:focus-visible {
+        outline: 2px solid #7C5CFF;
+        outline-offset: 2px;
+    }
+    .style-switcher-btn svg { flex: none; }
+    .style-switcher-menu {
+        position: absolute;
+        left: 0;
+        bottom: calc(100% + 10px);
+        min-width: 240px;
+        max-width: min(320px, calc(100vw - 36px));
+        max-height: min(440px, calc(100vh - 100px));
+        overflow-y: auto;
+        padding: 6px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(20, 20, 26, 0.97);
+        box-shadow: 0 18px 44px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.28);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .style-switcher-menu-title {
+        padding: 8px 10px 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #9A9AAE;
+    }
+    .style-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 9px 10px;
+        border: 0;
+        border-radius: 9px;
+        background: transparent;
+        color: #F4F4F7;
+        font-size: 13.5px;
+        text-align: left;
+        cursor: pointer;
+        transition: background 0.12s ease;
+    }
+    .style-option:hover,
+    .style-option:focus-visible {
+        background: rgba(255,255,255,0.08);
+        outline: none;
+    }
+    .style-option[aria-current="true"] {
+        background: rgba(124, 92, 255, 0.22);
+    }
+    .style-option-dot {
+        flex: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--dot, #7C5CFF);
+        box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+    }
+    .style-option-text { flex: 1; min-width: 0; }
+    .style-option-name {
+        display: block;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .style-option-desc {
+        display: block;
+        margin-top: 1px;
+        font-size: 11.5px;
+        color: #9A9AAE;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .style-option-check {
+        flex: none;
+        width: 16px;
+        height: 16px;
+        color: #A78BFA;
+        visibility: hidden;
+    }
+    .style-option[aria-current="true"] .style-option-check { visibility: visible; }
+
+    @media (max-width: 640px) {
+        .style-switcher { left: 12px; bottom: 12px; }
+        .style-switcher-label { display: none; }
+        .style-switcher-btn { padding: 12px; border-radius: 50%; }
+    }
+</style>
+
+<script>
+(function () {
+    var STYLES = [
+        { value: 'default',   label: 'Premium (Original)',        desc: 'The classic SmartGen Docs look', dot: '#4A3AE3' },
+        { value: 'book',      label: 'Book / Writer Docs',         desc: 'Reader-first, page-turn layout', dot: '#4A3AE3' },
+        { value: 'education', label: 'Education / Course',         desc: 'Lesson tracker, course sidebar',  dot: '#2563EB' },
+        { value: 'techblog',  label: 'Tech Blog / Magazine',       desc: 'Editorial, drop-cap articles',    dot: '#C81E3A' },
+        { value: 'agency',    label: 'Agency / Service Portal',    desc: 'Client-facing, gradient hero',    dot: '#0EA5A5' },
+        { value: 'medicine',  label: 'Medicine Docs',              desc: 'Clinical reference, print-ready', dot: '#0B5FA5' },
+        { value: 'apiplay',   label: 'Utility / API Playground',   desc: 'Terminal-style, monospace',       dot: '#16A34A' }
+    ];
+
+    // The root site is the configured primary theme. Alternate themes live
+    // under /styles/<theme>, including the primary theme's own variant.
+    var PRIMARY_STYLE = "apiplay";
+    if (PRIMARY_STYLE === 'premium') PRIMARY_STYLE = 'default';
+    var STYLE_NAMES = STYLES.map(function (s) { return s.value; });
+
+    var switcher = document.getElementById('style-switcher');
+    if (!switcher) return;
+
+    var toggle = document.getElementById('style-switcher-toggle');
+    var menu = document.getElementById('style-switcher-menu');
+
+    function currentStyleAndSubpath() {
+        var path = window.location.pathname || '/';
+        var marker = '/styles/';
+        var markerIndex = path.indexOf(marker);
+
+        if (markerIndex !== -1) {
+            var remainder = path.slice(markerIndex + marker.length);
+            var parts = remainder.split('/');
+            var variant = parts.shift();
+            if (STYLE_NAMES.indexOf(variant) !== -1) {
+                var subpath = '/' + parts.join('/');
+                if (subpath === '/') subpath = '/index.html';
+                return { style: variant, subpath: subpath };
+            }
+        }
+
+        return {
+            style: PRIMARY_STYLE,
+            subpath: path === '/' || path === '' ? '/index.html' : path
+        };
+    }
+
+    function hrefFor(target, subpath) {
+        if (target === PRIMARY_STYLE) return subpath;
+        return '/styles/' + target + subpath;
+    }
+
+    function renderMenu() {
+        var current = currentStyleAndSubpath();
+        var html = '<div class="style-switcher-menu-title">Switch site style</div>';
+        html += STYLES.map(function (s) {
+            var isCurrent = s.value === current.style;
+            return (
+                '<button type="button" class="style-option" role="menuitemradio" ' +
+                'aria-checked="' + isCurrent + '" aria-current="' + isCurrent + '" ' +
+                'data-style="' + s.value + '" style="--dot:' + s.dot + '">' +
+                '<span class="style-option-dot"></span>' +
+                '<span class="style-option-text">' +
+                '<span class="style-option-name">' + s.label + '</span>' +
+                '<span class="style-option-desc">' + s.desc + '</span>' +
+                '</span>' +
+                '<svg class="style-option-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>' +
+                '</button>'
+            );
+        }).join('');
+        menu.innerHTML = html;
+    }
+
+    function openMenu() {
+        renderMenu();
+        menu.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+        var active = menu.querySelector('[aria-checked="true"]');
+        (active || menu.querySelector('.style-option')).focus();
+    }
+
+    function closeMenu(opts) {
+        menu.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        if (opts && opts.refocusTrigger) toggle.focus();
+    }
+
+    toggle.addEventListener('click', function () {
+        menu.hidden ? openMenu() : closeMenu();
+    });
+
+    menu.addEventListener('click', function (e) {
+        var option = e.target.closest('.style-option');
+        if (!option) return;
+        var target = option.dataset.style;
+            var current = currentStyleAndSubpath();
+            if (target === current.style) { closeMenu({ refocusTrigger: true }); return; }
+            window.location.href = hrefFor(target, current.subpath);
+    });
+
+    menu.addEventListener('keydown', function (e) {
+        var options = Array.prototype.slice.call(menu.querySelectorAll('.style-option'));
+        var i = options.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            options[(i + 1) % options.length].focus();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            options[(i - 1 + options.length) % options.length].focus();
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            closeMenu({ refocusTrigger: true });
+        } else if (e.key === 'Tab') {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!menu.hidden && !switcher.contains(e.target)) closeMenu();
+    });
+})();
+</script>
+</body>
+</html>
