@@ -1,70 +1,40 @@
+# Smartgen skill Developer Docs
 
-# <img src="https://raw.githubusercontent.com/bayzed123/SmartGenDocs/main/logo.png" width="48" align="center"> SmartGen Docs
+Official developer documentation and API reference for the Smartgen NexusLeads B2B lead discovery, verification, enrichment, outreach-draft, and Google Sheets export platform.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
-[![Gemini 3.5 Flash](https://img.shields.io/badge/AI-Gemini%203.5%20Flash-orange.svg)](https://ai.google.dev/)
+This documentation is authored in Markdown and built with [SmartGen Docs](https://docs.smartgentools.com/). The site is designed to be deployed as a static GitHub Pages project and can be moved to a custom documentation domain later.
 
-**SmartGen Docs** is an autonomous, zero-configuration documentation platform that leverages AI to transform public GitHub repositories into professional documentation sites instantly. Built with a GitOps mindset, it automates the entire lifecycle from repository scanning to live deployment.
+## What is included
 
----
-![live Web site For Check][SmartDocs](https://bayzed123.github.io/SmartGenDocs/#)
-## 🚀 How to Add Documentation
+The `docs/` directory covers the platform architecture, lead lifecycle, authentication, account and BYOK APIs, discovery, enrichment, export, usage, pricing, security, Google Sheets setup, paid activation, environment bindings, data model, troubleshooting, and contribution rules. `smartgen.yml` defines the branded navigation and theme. `.github/workflows/deploy-docs.yml` builds and deploys the site on pushes to `main` or through a manual workflow run.
 
-Generating high-quality docs for any public repository is as simple as uploading a link.
-
-### 1. Prepare the Repository Link
-The system expects a standard public GitHub URL:
-`https://github.com/owner/repository`
-
-### 2. Upload to `input_links/`
-- Navigate to the `input_links/` directory.
-- Create a new text file (e.g., `project-link.txt`).
-- Paste your GitHub URL into the file and commit the changes.
-
-### 3. Automated GitOps Pipeline
-Once you push your change, the **SmartGen Docs Engine** automatically:
-- **Validates** the URL and checks for duplicates.
-- **Scans** the repository using **Gemini 3.5 Flash**.
-- **Generates** 4 unique live HTML pages:
-  - **Overview**: Core value and project goals.
-  - **Architecture**: Technical design and components.
-  - **Deployment Guide**: Step-by-step hosting instructions.
-  - **How to Use**: Practical examples and CLI guides.
-- **Deploys** the updates directly to your live website.
-
----
-## 🔍 Health Check
-
-<!-- START_LINK_CHECKER -->
-<!-- END_LINK_CHECKER -->
-## 🛠 System Features
-
-| Feature | Description |
-| :--- | :--- |
-| **Zero Configuration** | No setup files required in the target repository. |
-| **Instant Live** | Changes are committed directly to the `main` branch for immediate updates. |
-| **Separate URLs** | Each documentation category has its own unique, shareable URL. |
-| **Smart Validation** | Automatic deduplication and invalid link filtering. |
-
----
-
-## 📂 Project Structure
+## Local build
 
 ```bash
-SmartGenDocs/
-├── input_links/      # 📥 Upload repo links here to trigger scan
-├── docs/             # 📄 Auto-generated Live HTML & Markdown
-├── index.html        # 🌐 Premium Landing Page UI
-├── generate_docs.py  # 🧠 AI Engine (Python + Gemini 3.5 Flash)
-└── .github/          # ⚙️ GitOps Workflow (GitHub Actions)
+python3 -m venv .venv
+. .venv/bin/activate
+pip install smartgen-docs
+smartgen-docs serve
 ```
 
----
+Build the static output with:
 
-## 👨‍💻 Developer
-Developed with ❤️ by **[Sayad Md Bayezid Hosan](https://www.sayadbayezid.com)**.
+```bash
+smartgen-docs build
+```
 
----
-![Home](https://i.ibb.co/7tJwYzJ7/smartgen-compressed-15.jpg)
-**SmartGen Docs** - *Empowering Open Source with AI-Driven Documentation.*
+The generated site is written to `site/`. The source repository deliberately does not contain runtime API keys, service-account JSON, bearer tokens, Cloudflare secrets, or GitHub secret values.
+
+## Deployment
+
+Enable GitHub Pages with the **GitHub Actions** source in repository settings. The included workflow uses the official Pages artifact and deployment actions. It requires no custom repository secret for the documentation build.
+
+## Related links
+
+- [Live NexusLeads platform](https://smartgentools.com)
+- [SmartGen Docs](https://docs.smartgentools.com/)
+- [Founder website](https://sayadbayezid.com)
+- [Source repository](https://github.com/bayzed123/SmartGenDocs)
+
+## License
+Add the product's chosen license before publishing the repository as open source. Until then, treat this documentation source as proprietary project material.
