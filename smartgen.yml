@@ -69,64 +69,57 @@ nav:
       - Usage and Pricing: api/usage-pricing.md
       - Errors: api/errors.md
   - Ecommerce:
-      - Build Business Context:
-          - SKILL: ecommerce/skills/build-business-context/SKILL.md
-          - Ref - Interview Questions: ecommerce/skills/build-business-context/references/interview-questions.md
-          - Ref - MD Template: ecommerce/skills/build-business-context/references/md-template.md
-      - Checkout Analysis:
-          - SKILL: ecommerce/skills/checkout-analysis/SKILL.md
-          - Ref - Export PDF: ecommerce/skills/checkout-analysis/references/export-pdf.md
-          - Ref - Live Dashboard: ecommerce/skills/checkout-analysis/references/live-dashboard.md
-          - Ref - Queries: ecommerce/skills/checkout-analysis/references/queries.md
-          - Ref - Schedule Widget: ecommerce/skills/checkout-analysis/references/schedule-widget.md
-          - Ref - Triage Board: ecommerce/skills/checkout-analysis/references/triage-board.md
-      - Product Analysis:
-          - SKILL: ecommerce/skills/product-analysis/SKILL.md
-          - Ref - Export PDF: ecommerce/skills/product-analysis/references/export-pdf.md
-          - Ref - Live Dashboard: ecommerce/skills/product-analysis/references/live-dashboard.md
-          - Ref - Queries: ecommerce/skills/product-analysis/references/queries.md
-          - Ref - Schedule Widget: ecommerce/skills/product-analysis/references/schedule-widget.md
-          - Ref - Triage Board: ecommerce/skills/product-analysis/references/triage-board.md
-      - Querying Noibu Data:
-          - SKILL: ecommerce/skills/querying-noibu-data/SKILL.md
-          - Ref - Console URLs: ecommerce/skills/querying-noibu-data/references/console-urls.md
-          - Ref - Errors: ecommerce/skills/querying-noibu-data/references/errors.md
-          - Ref - Funnel Template: ecommerce/skills/querying-noibu-data/references/funnel-template.html
-          - Ref - Funnel Visualization: ecommerce/skills/querying-noibu-data/references/funnel-visualization.md
-          - Ref - Integrations: ecommerce/skills/querying-noibu-data/references/integrations.md
-          - Ref - Journeys and Replay: ecommerce/skills/querying-noibu-data/references/journeys-and-replay.md
-          - Ref - Page Visits: ecommerce/skills/querying-noibu-data/references/page-visits.md
-          - Ref - Sessions: ecommerce/skills/querying-noibu-data/references/sessions.md
-      - Segment Analysis:
-          - SKILL: ecommerce/skills/segment-analysis/SKILL.md
-          - Ref - Export PDF: ecommerce/skills/segment-analysis/references/export-pdf.md
-          - Ref - Live Dashboard: ecommerce/skills/segment-analysis/references/live-dashboard.md
-          - Ref - Queries: ecommerce/skills/segment-analysis/references/queries.md
-          - Ref - Schedule Widget: ecommerce/skills/segment-analysis/references/schedule-widget.md
-          - Ref - Triage Board: ecommerce/skills/segment-analysis/references/triage-board.md
-      - Store Pulse:
-          - SKILL: ecommerce/skills/store-pulse/SKILL.md
-          - Ref - Inline Snapshot: ecommerce/skills/store-pulse/references/inline-snapshot.md
-          - Ref - Live Dashboard: ecommerce/skills/store-pulse/references/live-dashboard.md
-          - Ref - Schedule: ecommerce/skills/store-pulse/references/schedule.md
-          - Block - Channel Performance: ecommerce/skills/store-pulse/references/blocks/channel-performance.md
-          - Block - Core KPIs: ecommerce/skills/store-pulse/references/blocks/core-kpis.md
-          - Block - Paid Performance: ecommerce/skills/store-pulse/references/blocks/paid-performance.md
-          - Block - Purchase Funnel: ecommerce/skills/store-pulse/references/blocks/purchase-funnel.md
-          - Block - Top Products: ecommerce/skills/store-pulse/references/blocks/top-products.md
-      - Tech Diagnosis:
-          - SKILL: ecommerce/skills/tech-diagnosis/SKILL.md
-          - Ref - Errors: ecommerce/skills/tech-diagnosis/references/errors.md
-          - Ref - First Run Setup: ecommerce/skills/tech-diagnosis/references/first-run-setup.md
-          - Ref - Performance: ecommerce/skills/tech-diagnosis/references/performance.md
-          - Ref - Schedule Widget: ecommerce/skills/tech-diagnosis/references/schedule-widget.md
-          - Ref - Share: ecommerce/skills/tech-diagnosis/references/share.md
-          - Ref - Ticket: ecommerce/skills/tech-diagnosis/references/ticket.md
-          - Platform - Bigcommerce: ecommerce/skills/tech-diagnosis/references/platforms/bigcommerce.md
-          - Platform - Generic: ecommerce/skills/tech-diagnosis/references/platforms/generic.md
-          - Platform - Magento: ecommerce/skills/tech-diagnosis/references/platforms/magento.md
-          - Platform - Shopify: ecommerce/skills/tech-diagnosis/references/platforms/shopify.md
-          - Platform - Woocommerce: ecommerce/skills/tech-diagnosis/references/platforms/woocommerce.md
+      - Build Context SKILL: ecommerce/skills/build-business-context/SKILL.md
+      - Build Context Interview Qs: ecommerce/skills/build-business-context/references/interview-questions.md
+      - Build Context MD Template: ecommerce/skills/build-business-context/references/md-template.md
+      - Checkout SKILL: ecommerce/skills/checkout-analysis/SKILL.md
+      - Checkout Export PDF: ecommerce/skills/checkout-analysis/references/export-pdf.md
+      - Checkout Live Dashboard: ecommerce/skills/checkout-analysis/references/live-dashboard.md
+      - Checkout Queries: ecommerce/skills/checkout-analysis/references/queries.md
+      - Checkout Schedule Widget: ecommerce/skills/checkout-analysis/references/schedule-widget.md
+      - Checkout Triage Board: ecommerce/skills/checkout-analysis/references/triage-board.md
+      - Product SKILL: ecommerce/skills/product-analysis/SKILL.md
+      - Product Export PDF: ecommerce/skills/product-analysis/references/export-pdf.md
+      - Product Live Dashboard: ecommerce/skills/product-analysis/references/live-dashboard.md
+      - Product Queries: ecommerce/skills/product-analysis/references/queries.md
+      - Product Schedule Widget: ecommerce/skills/product-analysis/references/schedule-widget.md
+      - Product Triage Board: ecommerce/skills/product-analysis/references/triage-board.md
+      - Noibu SKILL: ecommerce/skills/querying-noibu-data/SKILL.md
+      - Noibu Console URLs: ecommerce/skills/querying-noibu-data/references/console-urls.md
+      - Noibu Errors: ecommerce/skills/querying-noibu-data/references/errors.md
+      - Noibu Funnel Template: ecommerce/skills/querying-noibu-data/references/funnel-template.html
+      - Noibu Funnel Visualization: ecommerce/skills/querying-noibu-data/references/funnel-visualization.md
+      - Noibu Integrations: ecommerce/skills/querying-noibu-data/references/integrations.md
+      - Noibu Journeys & Replay: ecommerce/skills/querying-noibu-data/references/journeys-and-replay.md
+      - Noibu Page Visits: ecommerce/skills/querying-noibu-data/references/page-visits.md
+      - Noibu Sessions: ecommerce/skills/querying-noibu-data/references/sessions.md
+      - Segment SKILL: ecommerce/skills/segment-analysis/SKILL.md
+      - Segment Export PDF: ecommerce/skills/segment-analysis/references/export-pdf.md
+      - Segment Live Dashboard: ecommerce/skills/segment-analysis/references/live-dashboard.md
+      - Segment Queries: ecommerce/skills/segment-analysis/references/queries.md
+      - Segment Schedule Widget: ecommerce/skills/segment-analysis/references/schedule-widget.md
+      - Segment Triage Board: ecommerce/skills/segment-analysis/references/triage-board.md
+      - Store Pulse SKILL: ecommerce/skills/store-pulse/SKILL.md
+      - Pulse Inline Snapshot: ecommerce/skills/store-pulse/references/inline-snapshot.md
+      - Pulse Live Dashboard: ecommerce/skills/store-pulse/references/live-dashboard.md
+      - Pulse Schedule: ecommerce/skills/store-pulse/references/schedule.md
+      - Pulse Channel Performance: ecommerce/skills/store-pulse/references/blocks/channel-performance.md
+      - Pulse Core KPIs: ecommerce/skills/store-pulse/references/blocks/core-kpis.md
+      - Pulse Paid Performance: ecommerce/skills/store-pulse/references/blocks/paid-performance.md
+      - Pulse Purchase Funnel: ecommerce/skills/store-pulse/references/blocks/purchase-funnel.md
+      - Pulse Top Products: ecommerce/skills/store-pulse/references/blocks/top-products.md
+      - Tech Diagnosis SKILL: ecommerce/skills/tech-diagnosis/SKILL.md
+      - Tech Errors: ecommerce/skills/tech-diagnosis/references/errors.md
+      - Tech First Run Setup: ecommerce/skills/tech-diagnosis/references/first-run-setup.md
+      - Tech Performance: ecommerce/skills/tech-diagnosis/references/performance.md
+      - Tech Schedule Widget: ecommerce/skills/tech-diagnosis/references/schedule-widget.md
+      - Tech Share: ecommerce/skills/tech-diagnosis/references/share.md
+      - Tech Ticket: ecommerce/skills/tech-diagnosis/references/ticket.md
+      - Platform Bigcommerce: ecommerce/skills/tech-diagnosis/references/platforms/bigcommerce.md
+      - Platform Generic: ecommerce/skills/tech-diagnosis/references/platforms/generic.md
+      - Platform Magento: ecommerce/skills/tech-diagnosis/references/platforms/magento.md
+      - Platform Shopify: ecommerce/skills/tech-diagnosis/references/platforms/shopify.md
+      - Platform Woocommerce: ecommerce/skills/tech-diagnosis/references/platforms/woocommerce.md
   - Barcode Tools:
       - Overview: barcodetools/index.md
       - Documentation: barcodetools/docomation.md
