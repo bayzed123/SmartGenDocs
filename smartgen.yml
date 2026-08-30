@@ -68,6 +68,8 @@ nav:
       - Enrichment and Export: api/data-pipeline.md
       - Usage and Pricing: api/usage-pricing.md
       - Errors: api/errors.md
+  - ecommerce: skills/build-business-context
+/SKILL.md
   - Barcode Tools:
       - Overview: barcodetools/index.md
       - Documentation: barcodetools/docomation.md
